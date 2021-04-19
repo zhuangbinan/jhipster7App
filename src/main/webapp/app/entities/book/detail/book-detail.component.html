@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="book">
+      <h2 data-cy="bookDetailsHeading"><span jhiTranslate="jhipster7App.book.detail.title">Book</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ book.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.book.title">Title</span></dt>
+        <dd>
+          <span>{{ book.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.book.price">Price</span></dt>
+        <dd>
+          <span>{{ book.price }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.book.publisherName">Publisher Name</span></dt>
+        <dd>
+          <span>{{ book.publisherName }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.book.publisherDate">Publisher Date</span></dt>
+        <dd>
+          <span>{{ book.publisherDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.book.author">Author</span></dt>
+        <dd>
+          <div *ngIf="book.author">
+            <a [routerLink]="['/author', book.author?.id, 'view']">{{ book.author?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

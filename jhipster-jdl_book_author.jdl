@@ -1,0 +1,19 @@
+entity Book{
+	title String,
+    price BigDecimal,
+    publisherName String,
+    publisherDate Instant
+}
+
+entity Author{
+	name String,
+    birthDate Instant
+}
+
+relationship OneToMany
+    Author to Book
+}
+
+paginate Book, Author with pagination
+service Book, Author with serviceClass
+filter Book, Author

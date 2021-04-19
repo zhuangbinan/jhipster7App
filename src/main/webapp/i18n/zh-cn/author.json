@@ -1,0 +1,26 @@
+{
+  "jhipster7App": {
+    "author": {
+      "home": {
+        "title": "Authors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Author",
+        "createOrEditLabel": "创建或编辑 Author",
+        "notFound": "No Authors found"
+      },
+      "created": "Author {{ param }} 创建成功",
+      "updated": "Author {{ param }} 更新成功",
+      "deleted": "Author {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Author {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Author"
+      },
+      "id": "ID",
+      "name": "Name",
+      "birthDate": "Birth Date",
+      "book": "Book"
+    }
+  }
+}
