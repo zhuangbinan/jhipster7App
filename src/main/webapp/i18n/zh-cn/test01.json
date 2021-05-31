@@ -1,0 +1,24 @@
+{
+  "jhipster7App": {
+    "test01": {
+      "home": {
+        "title": "Test 01 S",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Test 01",
+        "createOrEditLabel": "创建或编辑 Test 01",
+        "notFound": "No Test 01 S found"
+      },
+      "created": "Test 01 {{ param }} 创建成功",
+      "updated": "Test 01 {{ param }} 更新成功",
+      "deleted": "Test 01 {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Test 01 {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Test 01"
+      },
+      "id": "ID",
+      "jobCareerDesc": "Job Career Desc"
+    }
+  }
+}

@@ -17,11 +17,40 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210414083445_added_entity_Book.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210414083446_added_entity_Author.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210517092722_added_entity_CommunityImages.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210518005828_added_entity_CommunityImageGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210518014944_added_entity_Test01.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210518015837_added_entity_CommunityLeader.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210518055816_added_entity_Community.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210518055817_added_entity_CommunityNotice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073915_added_entity_Company.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073916_added_entity_Buildings.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073917_added_entity_HomelandStation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073918_added_entity_RoomAddr.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073919_added_entity_TuYaCmd.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073920_added_entity_TuYaDevice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073921_added_entity_Visitor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073922_added_entity_WamoliFaceLibrary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073923_added_entity_WamoliUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073924_added_entity_WamoliUserLocation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210531021844_added_entity_CompanyDept.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210531021845_added_entity_CompanyPost.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <!--<include file="config/liquibase/changelog/20210414083446_added_entity_constraints_Author.xml" relativeToChangelogFile="false"/>-->
+    <include file="config/liquibase/changelog/20210517092722_added_entity_constraints_CommunityImages.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210518015837_added_entity_constraints_CommunityLeader.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210518055817_added_entity_constraints_CommunityNotice.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210414083445_added_entity_constraints_Book.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210415001131_added_column_Book.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210419093932-1_added_column-isbn_forBook.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210419094931_drop_column_isbn_Book.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073916_added_entity_constraints_Buildings.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073917_added_entity_constraints_HomelandStation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073918_added_entity_constraints_RoomAddr.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073919_added_entity_constraints_TuYaCmd.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073920_added_entity_constraints_TuYaDevice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073921_added_entity_constraints_Visitor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073922_added_entity_constraints_WamoliFaceLibrary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073923_added_entity_constraints_WamoliUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210528073924_added_entity_constraints_WamoliUserLocation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210531021845_added_entity_constraints_CompanyPost.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

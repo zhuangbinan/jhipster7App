@@ -1,0 +1,149 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-room-addr-heading" data-cy="RoomAddrCreateUpdateHeading" jhiTranslate="jhipster7App.roomAddr.home.createOrEditLabel">
+        Create or edit a Room Addr
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.roomAddr.roomNum"
+            for="field_roomNum"
+            [ngbTooltip]="'jhipster7App.roomAddr.help.roomNum' | translate"
+            >Room Num</label
+          >
+          <input type="text" class="form-control" name="roomNum" id="field_roomNum" data-cy="roomNum" formControlName="roomNum" />
+          <div *ngIf="editForm.get('roomNum')!.invalid && (editForm.get('roomNum')!.dirty || editForm.get('roomNum')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('roomNum')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.roomAddr.unit"
+            for="field_unit"
+            [ngbTooltip]="'jhipster7App.roomAddr.help.unit' | translate"
+            >Unit</label
+          >
+          <input type="text" class="form-control" name="unit" id="field_unit" data-cy="unit" formControlName="unit" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.roomAddr.roomType"
+            for="field_roomType"
+            [ngbTooltip]="'jhipster7App.roomAddr.help.roomType' | translate"
+            >Room Type</label
+          >
+          <input type="text" class="form-control" name="roomType" id="field_roomType" data-cy="roomType" formControlName="roomType" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.roomAddr.roomArea"
+            for="field_roomArea"
+            [ngbTooltip]="'jhipster7App.roomAddr.help.roomArea' | translate"
+            >Room Area</label
+          >
+          <input type="number" class="form-control" name="roomArea" id="field_roomArea" data-cy="roomArea" formControlName="roomArea" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.roomAddr.used"
+            for="field_used"
+            [ngbTooltip]="'jhipster7App.roomAddr.help.used' | translate"
+            >Used</label
+          >
+          <input type="checkbox" class="form-check" name="used" id="field_used" data-cy="used" formControlName="used" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.roomAddr.autoControl"
+            for="field_autoControl"
+            [ngbTooltip]="'jhipster7App.roomAddr.help.autoControl' | translate"
+            >Auto Control</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="autoControl"
+            id="field_autoControl"
+            data-cy="autoControl"
+            formControlName="autoControl"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.roomAddr.longCode"
+            for="field_longCode"
+            [ngbTooltip]="'jhipster7App.roomAddr.help.longCode' | translate"
+            >Long Code</label
+          >
+          <input type="text" class="form-control" name="longCode" id="field_longCode" data-cy="longCode" formControlName="longCode" />
+          <div *ngIf="editForm.get('longCode')!.invalid && (editForm.get('longCode')!.dirty || editForm.get('longCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('longCode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.roomAddr.buildings" for="field_buildings">Buildings</label>
+          <select class="form-control" id="field_buildings" data-cy="buildings" name="buildings" formControlName="buildings">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="buildingsOption.id === editForm.get('buildings')!.value?.id ? editForm.get('buildings')!.value : buildingsOption"
+              *ngFor="let buildingsOption of buildingsSharedCollection; trackBy: trackBuildingsById"
+            >
+              {{ buildingsOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

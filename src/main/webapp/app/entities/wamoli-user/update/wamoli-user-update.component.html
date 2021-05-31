@@ -1,0 +1,259 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-wamoli-user-heading"
+        data-cy="WamoliUserCreateUpdateHeading"
+        jhiTranslate="jhipster7App.wamoliUser.home.createOrEditLabel"
+      >
+        Create or edit a Wamoli User
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.userName"
+            for="field_userName"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.userName' | translate"
+            >User Name</label
+          >
+          <input type="text" class="form-control" name="userName" id="field_userName" data-cy="userName" formControlName="userName" />
+          <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('userName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.gender"
+            for="field_gender"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.gender' | translate"
+            >Gender</label
+          >
+          <input type="text" class="form-control" name="gender" id="field_gender" data-cy="gender" formControlName="gender" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.phoneNum"
+            for="field_phoneNum"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.phoneNum' | translate"
+            >Phone Num</label
+          >
+          <input type="text" class="form-control" name="phoneNum" id="field_phoneNum" data-cy="phoneNum" formControlName="phoneNum" />
+          <div *ngIf="editForm.get('phoneNum')!.invalid && (editForm.get('phoneNum')!.dirty || editForm.get('phoneNum')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('phoneNum')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.email"
+            for="field_email"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.email' | translate"
+            >Email</label
+          >
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.unitAddr"
+            for="field_unitAddr"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.unitAddr' | translate"
+            >Unit Addr</label
+          >
+          <input type="text" class="form-control" name="unitAddr" id="field_unitAddr" data-cy="unitAddr" formControlName="unitAddr" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.roomAddr"
+            for="field_roomAddr"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.roomAddr' | translate"
+            >Room Addr</label
+          >
+          <input type="number" class="form-control" name="roomAddr" id="field_roomAddr" data-cy="roomAddr" formControlName="roomAddr" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.idCardNum"
+            for="field_idCardNum"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.idCardNum' | translate"
+            >Id Card Num</label
+          >
+          <input type="text" class="form-control" name="idCardNum" id="field_idCardNum" data-cy="idCardNum" formControlName="idCardNum" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.idCardType"
+            for="field_idCardType"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.idCardType' | translate"
+            >Id Card Type</label
+          >
+          <select class="form-control" name="idCardType" formControlName="idCardType" id="field_idCardType" data-cy="idCardType">
+            <option [ngValue]="null">{{ 'jhipster7App.CertificateType.null' | translate }}</option>
+            <option value="IDCARD">{{ 'jhipster7App.CertificateType.IDCARD' | translate }}</option>
+            <option value="DRIVINGLICENSE">{{ 'jhipster7App.CertificateType.DRIVINGLICENSE' | translate }}</option>
+            <option value="PASSPORT">{{ 'jhipster7App.CertificateType.PASSPORT' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.userType"
+            for="field_userType"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.userType' | translate"
+            >User Type</label
+          >
+          <select class="form-control" name="userType" formControlName="userType" id="field_userType" data-cy="userType">
+            <option [ngValue]="null">{{ 'jhipster7App.UserType.null' | translate }}</option>
+            <option value="OWNER">{{ 'jhipster7App.UserType.OWNER' | translate }}</option>
+            <option value="MANAGER">{{ 'jhipster7App.UserType.MANAGER' | translate }}</option>
+            <option value="MEMBER">{{ 'jhipster7App.UserType.MEMBER' | translate }}</option>
+            <option value="TOURIST">{{ 'jhipster7App.UserType.TOURIST' | translate }}</option>
+            <option value="LONELY">{{ 'jhipster7App.UserType.LONELY' | translate }}</option>
+            <option value="TENANT">{{ 'jhipster7App.UserType.TENANT' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.wamoliUser.enable"
+            for="field_enable"
+            [ngbTooltip]="'jhipster7App.wamoliUser.help.enable' | translate"
+            >Enable</label
+          >
+          <input type="checkbox" class="form-check" name="enable" id="field_enable" data-cy="enable" formControlName="enable" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.wamoliUser.isManager" for="field_isManager">Is Manager</label>
+          <input type="checkbox" class="form-check" name="isManager" id="field_isManager" data-cy="isManager" formControlName="isManager" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.wamoliUser.lastModifiedBy" for="field_lastModifiedBy"
+            >Last Modified By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.wamoliUser.lastModifiedDate" for="field_lastModifiedDate"
+            >Last Modified Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.wamoliUser.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="jhipster7App.wamoliUser.roomAddr" for="field_roomAddrs">Room Addr</label>
+          <select class="form-control" id="field_roomAddrs" data-cy="roomAddr" multiple name="roomAddrs" formControlName="roomAddrs">
+            <option
+              [ngValue]="getSelectedRoomAddr(roomAddrOption, editForm.get('roomAddrs')!.value)"
+              *ngFor="let roomAddrOption of roomAddrsSharedCollection; trackBy: trackRoomAddrById"
+            >
+              {{ roomAddrOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="jhipster7App.wamoliUser.companyDept" for="field_companyDepts">Company Dept</label>
+          <select
+            class="form-control"
+            id="field_companyDepts"
+            data-cy="companyDept"
+            multiple
+            name="companyDepts"
+            formControlName="companyDepts"
+          >
+            <option
+              [ngValue]="getSelectedCompanyDept(companyDeptOption, editForm.get('companyDepts')!.value)"
+              *ngFor="let companyDeptOption of companyDeptsSharedCollection; trackBy: trackCompanyDeptById"
+            >
+              {{ companyDeptOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

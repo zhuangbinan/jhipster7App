@@ -1,0 +1,155 @@
+<div>
+  <h2 id="page-heading" data-cy="CommunityLeaderHeading">
+    <span jhiTranslate="jhipster7App.communityLeader.home.title">Community Leaders</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipster7App.communityLeader.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-community-leader"
+        [routerLink]="['/community-leader/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipster7App.communityLeader.home.createLabel"> Create a new Community Leader </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="communityLeaders?.length === 0">
+    <span jhiTranslate="jhipster7App.communityLeader.home.notFound">No communityLeaders found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="communityLeaders && communityLeaders.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="avatar">
+            <span jhiTranslate="jhipster7App.communityLeader.avatar">Avatar</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="realName">
+            <span jhiTranslate="jhipster7App.communityLeader.realName">Real Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tel">
+            <span jhiTranslate="jhipster7App.communityLeader.tel">Tel</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="jobTitle">
+            <span jhiTranslate="jhipster7App.communityLeader.jobTitle">Job Title</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="jobDesc">
+            <span jhiTranslate="jhipster7App.communityLeader.jobDesc">Job Desc</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="jobCareerDesc">
+            <span jhiTranslate="jhipster7App.communityLeader.jobCareerDesc">Job Career Desc</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="enable">
+            <span jhiTranslate="jhipster7App.communityLeader.enable">Enable</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="delFlag">
+            <span jhiTranslate="jhipster7App.communityLeader.delFlag">Del Flag</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="orderNum">
+            <span jhiTranslate="jhipster7App.communityLeader.orderNum">Order Num</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifyDate">
+            <span jhiTranslate="jhipster7App.communityLeader.lastModifyDate">Last Modify Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifyBy">
+            <span jhiTranslate="jhipster7App.communityLeader.lastModifyBy">Last Modify By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="community.id">
+            <span jhiTranslate="jhipster7App.communityLeader.community">Community</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let communityLeader of communityLeaders; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/community-leader', communityLeader.id, 'view']">{{ communityLeader.id }}</a>
+          </td>
+          <td>
+            <a *ngIf="communityLeader.avatar" (click)="openFile(communityLeader.avatar, communityLeader.avatarContentType)">
+              <img
+                [src]="'data:' + communityLeader.avatarContentType + ';base64,' + communityLeader.avatar"
+                style="max-height: 30px"
+                alt="communityLeader image"
+              />
+            </a>
+            <span *ngIf="communityLeader.avatar">{{ communityLeader.avatarContentType }}, {{ byteSize(communityLeader.avatar) }}</span>
+          </td>
+          <td>{{ communityLeader.realName }}</td>
+          <td>{{ communityLeader.tel }}</td>
+          <td>{{ communityLeader.jobTitle }}</td>
+          <td>{{ communityLeader.jobDesc }}</td>
+          <td>{{ communityLeader.jobCareerDesc }}</td>
+          <td>{{ communityLeader.enable }}</td>
+          <td>{{ communityLeader.delFlag }}</td>
+          <td>{{ communityLeader.orderNum }}</td>
+          <td>{{ communityLeader.lastModifyDate | formatMediumDatetime }}</td>
+          <td>{{ communityLeader.lastModifyBy }}</td>
+          <td>
+            <div *ngIf="communityLeader.community">
+              <a [routerLink]="['/community', communityLeader.community?.id, 'view']">{{ communityLeader.community?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/community-leader', communityLeader.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/community-leader', communityLeader.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(communityLeader)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="communityLeaders && communityLeaders.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

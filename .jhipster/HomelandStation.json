@@ -1,0 +1,90 @@
+{
+  "name": "HomelandStation",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "小区名称",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "longCode",
+      "fieldType": "String",
+      "javadoc": "编码",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String",
+      "javadoc": "小区地址"
+    },
+    {
+      "fieldName": "livingPopulation",
+      "fieldType": "Integer",
+      "javadoc": "小区入住人数"
+    },
+    {
+      "fieldName": "buildingCount",
+      "fieldType": "Integer",
+      "javadoc": "小区楼栋"
+    },
+    {
+      "fieldName": "entranceCount",
+      "fieldType": "Integer",
+      "javadoc": "小区入口数"
+    },
+    {
+      "fieldName": "logo",
+      "fieldType": "byte[]",
+      "javadoc": "小区图片",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["maxbytes"],
+      "fieldValidateRulesMaxbytes": "512000"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "String",
+      "javadoc": "经度",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "32"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "String",
+      "javadoc": "纬度",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "32"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "buildings",
+      "otherEntityRelationshipName": "homelandStation",
+      "relationshipName": "buildings"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "community",
+      "otherEntityRelationshipName": "homelandStation",
+      "relationshipName": "community"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "company",
+      "otherEntityRelationshipName": "homelandStation",
+      "relationshipName": "company"
+    }
+  ],
+  "javadoc": "小区站点",
+  "entityTableName": "wamoli_homeland_station",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210528073917"
+}

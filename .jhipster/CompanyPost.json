@@ -1,0 +1,65 @@
+{
+  "name": "CompanyPost",
+  "fields": [
+    {
+      "fieldName": "postCode",
+      "fieldType": "String",
+      "javadoc": "岗位英文缩写 如 CEO CTO HR"
+    },
+    {
+      "fieldName": "postName",
+      "fieldType": "String",
+      "javadoc": "岗位名称"
+    },
+    {
+      "fieldName": "orderNum",
+      "fieldType": "Integer",
+      "javadoc": "排序号"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String",
+      "javadoc": "备注"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean",
+      "javadoc": "是否可用"
+    },
+    {
+      "fieldName": "createBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifyBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifyDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "companyDept",
+      "otherEntityRelationshipName": "companyPost",
+      "relationshipName": "companyDept"
+    }
+  ],
+  "javadoc": "物业公司岗位",
+  "entityTableName": "wamoli_company_post",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210531021845"
+}

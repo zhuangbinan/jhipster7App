@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="companyPost">
+      <h2 data-cy="companyPostDetailsHeading"><span jhiTranslate="jhipster7App.companyPost.detail.title">Company Post</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ companyPost.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyPost.postCode" [ngbTooltip]="'jhipster7App.companyPost.help.postCode' | translate"
+            >Post Code</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyPost.postCode }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyPost.postName" [ngbTooltip]="'jhipster7App.companyPost.help.postName' | translate"
+            >Post Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyPost.postName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyPost.orderNum" [ngbTooltip]="'jhipster7App.companyPost.help.orderNum' | translate"
+            >Order Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyPost.orderNum }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyPost.remark" [ngbTooltip]="'jhipster7App.companyPost.help.remark' | translate"
+            >Remark</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyPost.remark }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyPost.enable" [ngbTooltip]="'jhipster7App.companyPost.help.enable' | translate"
+            >Enable</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyPost.enable }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyPost.createBy">Create By</span></dt>
+        <dd>
+          <span>{{ companyPost.createBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyPost.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ companyPost.createDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyPost.lastModifyBy">Last Modify By</span></dt>
+        <dd>
+          <span>{{ companyPost.lastModifyBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyPost.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+          <span>{{ companyPost.lastModifyDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyPost.companyDept">Company Dept</span></dt>
+        <dd>
+          <div *ngIf="companyPost.companyDept">
+            <a [routerLink]="['/company-dept', companyPost.companyDept?.id, 'view']">{{ companyPost.companyDept?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/company-post', companyPost.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+{
+  "jhipster7App": {
+    "homelandStation": {
+      "home": {
+        "title": "Homeland Stations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Homeland Station",
+        "createOrEditLabel": "Create or edit a Homeland Station",
+        "notFound": "No Homeland Stations found"
+      },
+      "created": "A new Homeland Station is created with identifier {{ param }}",
+      "updated": "A Homeland Station is updated with identifier {{ param }}",
+      "deleted": "A Homeland Station is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Homeland Station {{ id }}?"
+      },
+      "detail": {
+        "title": "Homeland Station"
+      },
+      "id": "ID",
+      "name": "Name",
+      "longCode": "Long Code",
+      "address": "Address",
+      "livingPopulation": "Living Population",
+      "buildingCount": "Building Count",
+      "entranceCount": "Entrance Count",
+      "logo": "Logo",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "buildings": "Buildings",
+      "community": "Community",
+      "company": "Company",
+      "help": {
+        "name": "小区名称",
+        "longCode": "编码",
+        "address": "小区地址",
+        "livingPopulation": "小区入住人数",
+        "buildingCount": "小区楼栋",
+        "entranceCount": "小区入口数",
+        "logo": "小区图片",
+        "longitude": "经度",
+        "latitude": "纬度"
+      }
+    }
+  }
+}

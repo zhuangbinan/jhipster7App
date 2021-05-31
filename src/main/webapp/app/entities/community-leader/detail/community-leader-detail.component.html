@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="communityLeader">
+      <h2 data-cy="communityLeaderDetailsHeading">
+        <span jhiTranslate="jhipster7App.communityLeader.detail.title">Community Leader</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ communityLeader.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.communityLeader.avatar" [ngbTooltip]="'jhipster7App.communityLeader.help.avatar' | translate"
+            >Avatar</span
+          >
+        </dt>
+        <dd>
+          <div *ngIf="communityLeader.avatar">
+            <a (click)="openFile(communityLeader.avatar, communityLeader.avatarContentType)">
+              <img
+                [src]="'data:' + communityLeader.avatarContentType + ';base64,' + communityLeader.avatar"
+                style="max-width: 100%"
+                alt="communityLeader image"
+              />
+            </a>
+            {{ communityLeader.avatarContentType }}, {{ byteSize(communityLeader.avatar) }}
+          </div>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.communityLeader.realName" [ngbTooltip]="'jhipster7App.communityLeader.help.realName' | translate"
+            >Real Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ communityLeader.realName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.communityLeader.tel" [ngbTooltip]="'jhipster7App.communityLeader.help.tel' | translate"
+            >Tel</span
+          >
+        </dt>
+        <dd>
+          <span>{{ communityLeader.tel }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.communityLeader.jobTitle" [ngbTooltip]="'jhipster7App.communityLeader.help.jobTitle' | translate"
+            >Job Title</span
+          >
+        </dt>
+        <dd>
+          <span>{{ communityLeader.jobTitle }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.communityLeader.jobDesc" [ngbTooltip]="'jhipster7App.communityLeader.help.jobDesc' | translate"
+            >Job Desc</span
+          >
+        </dt>
+        <dd>
+          <span>{{ communityLeader.jobDesc }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.communityLeader.jobCareerDesc"
+            [ngbTooltip]="'jhipster7App.communityLeader.help.jobCareerDesc' | translate"
+            >Job Career Desc</span
+          >
+        </dt>
+        <dd>
+          <span>{{ communityLeader.jobCareerDesc }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityLeader.enable">Enable</span></dt>
+        <dd>
+          <span>{{ communityLeader.enable }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityLeader.delFlag">Del Flag</span></dt>
+        <dd>
+          <span>{{ communityLeader.delFlag }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityLeader.orderNum">Order Num</span></dt>
+        <dd>
+          <span>{{ communityLeader.orderNum }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityLeader.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+          <span>{{ communityLeader.lastModifyDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityLeader.lastModifyBy">Last Modify By</span></dt>
+        <dd>
+          <span>{{ communityLeader.lastModifyBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityLeader.community">Community</span></dt>
+        <dd>
+          <div *ngIf="communityLeader.community">
+            <a [routerLink]="['/community', communityLeader.community?.id, 'view']">{{ communityLeader.community?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/community-leader', communityLeader.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

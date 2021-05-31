@@ -1,0 +1,170 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-community-images-heading"
+        data-cy="CommunityImagesCreateUpdateHeading"
+        jhiTranslate="jhipster7App.communityImages.home.createOrEditLabel"
+      >
+        Create or edit a Community Images
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityImages.imgContent" for="field_imgContent"
+            >Img Content</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('imgContentContentType')!.value + ';base64,' + editForm.get('imgContent')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('imgContent')!.value"
+              alt="communityImages image"
+            />
+            <div *ngIf="editForm.get('imgContent')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left"
+                >{{ editForm.get('imgContentContentType')!.value }}, {{ byteSize(editForm.get('imgContent')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('imgContent', 'imgContentContentType', 'file_imgContent')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_imgContent"
+              data-cy="imgContent"
+              (change)="setFileData($event, 'imgContent', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="imgContent"
+            id="field_imgContent"
+            data-cy="imgContent"
+            formControlName="imgContent"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="imgContentContentType"
+            id="field_imgContentContentType"
+            formControlName="imgContentContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.communityImages.imgTitle"
+            for="field_imgTitle"
+            [ngbTooltip]="'jhipster7App.communityImages.help.imgTitle' | translate"
+            >Img Title</label
+          >
+          <input type="text" class="form-control" name="imgTitle" id="field_imgTitle" data-cy="imgTitle" formControlName="imgTitle" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.communityImages.imgDesc"
+            for="field_imgDesc"
+            [ngbTooltip]="'jhipster7App.communityImages.help.imgDesc' | translate"
+            >Img Desc</label
+          >
+          <input type="text" class="form-control" name="imgDesc" id="field_imgDesc" data-cy="imgDesc" formControlName="imgDesc" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityImages.orderNum" for="field_orderNum">Order Num</label>
+          <input type="number" class="form-control" name="orderNum" id="field_orderNum" data-cy="orderNum" formControlName="orderNum" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityImages.lastModifyDate" for="field_lastModifyDate"
+            >Last Modify Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifyDate"
+              data-cy="lastModifyDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifyDate"
+              formControlName="lastModifyDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityImages.lastModifyBy" for="field_lastModifyBy"
+            >Last Modify By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifyBy"
+            id="field_lastModifyBy"
+            data-cy="lastModifyBy"
+            formControlName="lastModifyBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityImages.communityImageGroup" for="field_communityImageGroup"
+            >Community Image Group</label
+          >
+          <select
+            class="form-control"
+            id="field_communityImageGroup"
+            data-cy="communityImageGroup"
+            name="communityImageGroup"
+            formControlName="communityImageGroup"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                communityImageGroupOption.id === editForm.get('communityImageGroup')!.value?.id
+                  ? editForm.get('communityImageGroup')!.value
+                  : communityImageGroupOption
+              "
+              *ngFor="let communityImageGroupOption of communityImageGroupsSharedCollection; trackBy: trackCommunityImageGroupById"
+            >
+              {{ communityImageGroupOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

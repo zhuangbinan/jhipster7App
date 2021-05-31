@@ -1,0 +1,38 @@
+{
+  "jhipster7App": {
+    "tuYaCmd": {
+      "home": {
+        "title": "Tu Ya Cmds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tu Ya Cmd",
+        "createOrEditLabel": "Create or edit a Tu Ya Cmd",
+        "notFound": "No Tu Ya Cmds found"
+      },
+      "created": "A new Tu Ya Cmd is created with identifier {{ param }}",
+      "updated": "A Tu Ya Cmd is updated with identifier {{ param }}",
+      "deleted": "A Tu Ya Cmd is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tu Ya Cmd {{ id }}?"
+      },
+      "detail": {
+        "title": "Tu Ya Cmd"
+      },
+      "id": "ID",
+      "cmdName": "Cmd Name",
+      "cmdCode": "Cmd Code",
+      "value": "Value",
+      "cmdType": "Cmd Type",
+      "createTime": "Create Time",
+      "enable": "Enable",
+      "tuYaDevice": "Tu Ya Device",
+      "help": {
+        "cmdName": "名称",
+        "cmdCode": "命令code",
+        "value": "值",
+        "cmdType": "类型",
+        "createTime": "创建时间",
+        "enable": "是否有效"
+      }
+    }
+  }
+}

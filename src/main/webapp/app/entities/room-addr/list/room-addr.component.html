@@ -1,0 +1,126 @@
+<div>
+  <h2 id="page-heading" data-cy="RoomAddrHeading">
+    <span jhiTranslate="jhipster7App.roomAddr.home.title">Room Addrs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipster7App.roomAddr.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-room-addr"
+        [routerLink]="['/room-addr/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipster7App.roomAddr.home.createLabel"> Create a new Room Addr </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="roomAddrs?.length === 0">
+    <span jhiTranslate="jhipster7App.roomAddr.home.notFound">No roomAddrs found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="roomAddrs && roomAddrs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="roomNum">
+            <span jhiTranslate="jhipster7App.roomAddr.roomNum">Room Num</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="unit"><span jhiTranslate="jhipster7App.roomAddr.unit">Unit</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="roomType">
+            <span jhiTranslate="jhipster7App.roomAddr.roomType">Room Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="roomArea">
+            <span jhiTranslate="jhipster7App.roomAddr.roomArea">Room Area</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="used"><span jhiTranslate="jhipster7App.roomAddr.used">Used</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="autoControl">
+            <span jhiTranslate="jhipster7App.roomAddr.autoControl">Auto Control</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="longCode">
+            <span jhiTranslate="jhipster7App.roomAddr.longCode">Long Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="buildings.id">
+            <span jhiTranslate="jhipster7App.roomAddr.buildings">Buildings</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let roomAddr of roomAddrs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/room-addr', roomAddr.id, 'view']">{{ roomAddr.id }}</a>
+          </td>
+          <td>{{ roomAddr.roomNum }}</td>
+          <td>{{ roomAddr.unit }}</td>
+          <td>{{ roomAddr.roomType }}</td>
+          <td>{{ roomAddr.roomArea }}</td>
+          <td>{{ roomAddr.used }}</td>
+          <td>{{ roomAddr.autoControl }}</td>
+          <td>{{ roomAddr.longCode }}</td>
+          <td>
+            <div *ngIf="roomAddr.buildings">
+              <a [routerLink]="['/buildings', roomAddr.buildings?.id, 'view']">{{ roomAddr.buildings?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/room-addr', roomAddr.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/room-addr', roomAddr.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(roomAddr)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="roomAddrs && roomAddrs.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

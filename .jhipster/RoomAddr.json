@@ -1,0 +1,74 @@
+{
+  "name": "RoomAddr",
+  "fields": [
+    {
+      "fieldName": "roomNum",
+      "fieldType": "String",
+      "javadoc": "门牌名称",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String",
+      "javadoc": "单元"
+    },
+    {
+      "fieldName": "roomType",
+      "fieldType": "String",
+      "javadoc": "户型"
+    },
+    {
+      "fieldName": "roomArea",
+      "fieldType": "Float",
+      "javadoc": "面积"
+    },
+    {
+      "fieldName": "used",
+      "fieldType": "Boolean",
+      "javadoc": "是否入住"
+    },
+    {
+      "fieldName": "autoControl",
+      "fieldType": "Boolean",
+      "javadoc": "是否启用自动控制"
+    },
+    {
+      "fieldName": "longCode",
+      "fieldType": "String",
+      "javadoc": "编码",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "visitor",
+      "otherEntityRelationshipName": "roomAddr",
+      "relationshipName": "visitor"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "buildings",
+      "otherEntityRelationshipName": "roomAddr",
+      "relationshipName": "buildings"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "wamoliUser",
+      "otherEntityRelationshipName": "roomAddr",
+      "relationshipName": "wamoliUser",
+      "ownerSide": false
+    }
+  ],
+  "javadoc": "门牌地址",
+  "entityTableName": "wamoli_room_addr",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210528073918"
+}

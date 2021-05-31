@@ -1,0 +1,41 @@
+{
+  "jhipster7App": {
+    "tuYaDevice": {
+      "home": {
+        "title": "Tu Ya Devices",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tu Ya Device",
+        "createOrEditLabel": "Create or edit a Tu Ya Device",
+        "notFound": "No Tu Ya Devices found"
+      },
+      "created": "A new Tu Ya Device is created with identifier {{ param }}",
+      "updated": "A Tu Ya Device is updated with identifier {{ param }}",
+      "deleted": "A Tu Ya Device is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tu Ya Device {{ id }}?"
+      },
+      "detail": {
+        "title": "Tu Ya Device"
+      },
+      "id": "ID",
+      "deviceName": "Device Name",
+      "longCode": "Long Code",
+      "tyDeviceId": "Ty Device Id",
+      "deviceType": "Device Type",
+      "cmdCode": "Cmd Code",
+      "createTime": "Create Time",
+      "enable": "Enable",
+      "tuYaCmd": "Tu Ya Cmd",
+      "roomAddr": "Room Addr",
+      "help": {
+        "deviceName": "设备名称",
+        "longCode": "设备编号longCode",
+        "tyDeviceId": "tuya设备ID",
+        "deviceType": "设备类型 0-网关 1-通断启 2-开关 3-温湿度燃气 4-报警器",
+        "cmdCode": "命令编码",
+        "createTime": "创建时间",
+        "enable": "是否有效"
+      }
+    }
+  }
+}

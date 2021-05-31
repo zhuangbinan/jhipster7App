@@ -1,0 +1,31 @@
+{
+  "jhipster7App": {
+    "communityImageGroup": {
+      "home": {
+        "title": "Community Image Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Community Image Group",
+        "createOrEditLabel": "创建或编辑 Community Image Group",
+        "notFound": "No Community Image Groups found"
+      },
+      "created": "Community Image Group {{ param }} 创建成功",
+      "updated": "Community Image Group {{ param }} 更新成功",
+      "deleted": "Community Image Group {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Community Image Group {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Community Image Group"
+      },
+      "id": "ID",
+      "imgGroupName": "Img Group Name",
+      "orderNum": "Order Num",
+      "lastModifyDate": "Last Modify Date",
+      "lastModifyBy": "Last Modify By",
+      "communityImages": "Community Images",
+      "help": {
+        "imgGroupName": "图片组名"
+      }
+    }
+  }
+}

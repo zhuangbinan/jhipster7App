@@ -1,0 +1,42 @@
+{
+  "jhipster7App": {
+    "roomAddr": {
+      "home": {
+        "title": "Room Addrs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Room Addr",
+        "createOrEditLabel": "创建或编辑 Room Addr",
+        "notFound": "No Room Addrs found"
+      },
+      "created": "Room Addr {{ param }} 创建成功",
+      "updated": "Room Addr {{ param }} 更新成功",
+      "deleted": "Room Addr {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Room Addr {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Room Addr"
+      },
+      "id": "ID",
+      "roomNum": "Room Num",
+      "unit": "Unit",
+      "roomType": "Room Type",
+      "roomArea": "Room Area",
+      "used": "Used",
+      "autoControl": "Auto Control",
+      "longCode": "Long Code",
+      "visitor": "Visitor",
+      "buildings": "Buildings",
+      "wamoliUser": "Wamoli User",
+      "help": {
+        "roomNum": "门牌名称",
+        "unit": "单元",
+        "roomType": "户型",
+        "roomArea": "面积",
+        "used": "是否入住",
+        "autoControl": "是否启用自动控制",
+        "longCode": "编码"
+      }
+    }
+  }
+}

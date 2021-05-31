@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="roomAddr">
+      <h2 data-cy="roomAddrDetailsHeading"><span jhiTranslate="jhipster7App.roomAddr.detail.title">Room Addr</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ roomAddr.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.roomAddr.roomNum" [ngbTooltip]="'jhipster7App.roomAddr.help.roomNum' | translate">Room Num</span>
+        </dt>
+        <dd>
+          <span>{{ roomAddr.roomNum }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.roomAddr.unit" [ngbTooltip]="'jhipster7App.roomAddr.help.unit' | translate">Unit</span></dt>
+        <dd>
+          <span>{{ roomAddr.unit }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.roomAddr.roomType" [ngbTooltip]="'jhipster7App.roomAddr.help.roomType' | translate"
+            >Room Type</span
+          >
+        </dt>
+        <dd>
+          <span>{{ roomAddr.roomType }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.roomAddr.roomArea" [ngbTooltip]="'jhipster7App.roomAddr.help.roomArea' | translate"
+            >Room Area</span
+          >
+        </dt>
+        <dd>
+          <span>{{ roomAddr.roomArea }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.roomAddr.used" [ngbTooltip]="'jhipster7App.roomAddr.help.used' | translate">Used</span></dt>
+        <dd>
+          <span>{{ roomAddr.used }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.roomAddr.autoControl" [ngbTooltip]="'jhipster7App.roomAddr.help.autoControl' | translate"
+            >Auto Control</span
+          >
+        </dt>
+        <dd>
+          <span>{{ roomAddr.autoControl }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.roomAddr.longCode" [ngbTooltip]="'jhipster7App.roomAddr.help.longCode' | translate"
+            >Long Code</span
+          >
+        </dt>
+        <dd>
+          <span>{{ roomAddr.longCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.roomAddr.buildings">Buildings</span></dt>
+        <dd>
+          <div *ngIf="roomAddr.buildings">
+            <a [routerLink]="['/buildings', roomAddr.buildings?.id, 'view']">{{ roomAddr.buildings?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/room-addr', roomAddr.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

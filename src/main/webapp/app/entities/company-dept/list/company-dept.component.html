@@ -1,0 +1,144 @@
+<div>
+  <h2 id="page-heading" data-cy="CompanyDeptHeading">
+    <span jhiTranslate="jhipster7App.companyDept.home.title">Company Depts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipster7App.companyDept.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-company-dept"
+        [routerLink]="['/company-dept/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipster7App.companyDept.home.createLabel"> Create a new Company Dept </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="companyDepts?.length === 0">
+    <span jhiTranslate="jhipster7App.companyDept.home.notFound">No companyDepts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="companyDepts && companyDepts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="parentId">
+            <span jhiTranslate="jhipster7App.companyDept.parentId">Parent Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ancestors">
+            <span jhiTranslate="jhipster7App.companyDept.ancestors">Ancestors</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="deptName">
+            <span jhiTranslate="jhipster7App.companyDept.deptName">Dept Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="orderNum">
+            <span jhiTranslate="jhipster7App.companyDept.orderNum">Order Num</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="leaderName">
+            <span jhiTranslate="jhipster7App.companyDept.leaderName">Leader Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tel"><span jhiTranslate="jhipster7App.companyDept.tel">Tel</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="email">
+            <span jhiTranslate="jhipster7App.companyDept.email">Email</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="enable">
+            <span jhiTranslate="jhipster7App.companyDept.enable">Enable</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="delFlag">
+            <span jhiTranslate="jhipster7App.companyDept.delFlag">Del Flag</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createBy">
+            <span jhiTranslate="jhipster7App.companyDept.createBy">Create By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createDate">
+            <span jhiTranslate="jhipster7App.companyDept.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifyBy">
+            <span jhiTranslate="jhipster7App.companyDept.lastModifyBy">Last Modify By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifyDate">
+            <span jhiTranslate="jhipster7App.companyDept.lastModifyDate">Last Modify Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let companyDept of companyDepts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/company-dept', companyDept.id, 'view']">{{ companyDept.id }}</a>
+          </td>
+          <td>{{ companyDept.parentId }}</td>
+          <td>{{ companyDept.ancestors }}</td>
+          <td>{{ companyDept.deptName }}</td>
+          <td>{{ companyDept.orderNum }}</td>
+          <td>{{ companyDept.leaderName }}</td>
+          <td>{{ companyDept.tel }}</td>
+          <td>{{ companyDept.email }}</td>
+          <td>{{ companyDept.enable }}</td>
+          <td>{{ companyDept.delFlag }}</td>
+          <td>{{ companyDept.createBy }}</td>
+          <td>{{ companyDept.createDate | formatMediumDatetime }}</td>
+          <td>{{ companyDept.lastModifyBy }}</td>
+          <td>{{ companyDept.lastModifyDate | formatMediumDatetime }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/company-dept', companyDept.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/company-dept', companyDept.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(companyDept)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="companyDepts && companyDepts.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

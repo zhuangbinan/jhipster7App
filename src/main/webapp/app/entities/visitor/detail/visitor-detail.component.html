@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="visitor">
+      <h2 data-cy="visitorDetailsHeading"><span jhiTranslate="jhipster7App.visitor.detail.title">Visitor</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ visitor.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.visitor.name" [ngbTooltip]="'jhipster7App.visitor.help.name' | translate">Name</span></dt>
+        <dd>
+          <span>{{ visitor.name }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.visitor.phoneNum" [ngbTooltip]="'jhipster7App.visitor.help.phoneNum' | translate"
+            >Phone Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ visitor.phoneNum }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.visitor.carPlateNum" [ngbTooltip]="'jhipster7App.visitor.help.carPlateNum' | translate"
+            >Car Plate Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ visitor.carPlateNum }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.visitor.startTime" [ngbTooltip]="'jhipster7App.visitor.help.startTime' | translate"
+            >Start Time</span
+          >
+        </dt>
+        <dd>
+          <span>{{ visitor.startTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.visitor.endTime" [ngbTooltip]="'jhipster7App.visitor.help.endTime' | translate">End Time</span>
+        </dt>
+        <dd>
+          <span>{{ visitor.endTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.visitor.passwd" [ngbTooltip]="'jhipster7App.visitor.help.passwd' | translate">Passwd</span>
+        </dt>
+        <dd>
+          <span>{{ visitor.passwd }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.visitor.faceImage" [ngbTooltip]="'jhipster7App.visitor.help.faceImage' | translate"
+            >Face Image</span
+          >
+        </dt>
+        <dd>
+          <div *ngIf="visitor.faceImage">
+            <a (click)="openFile(visitor.faceImage, visitor.faceImageContentType)">
+              <img
+                [src]="'data:' + visitor.faceImageContentType + ';base64,' + visitor.faceImage"
+                style="max-width: 100%"
+                alt="visitor image"
+              />
+            </a>
+            {{ visitor.faceImageContentType }}, {{ byteSize(visitor.faceImage) }}
+          </div>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.visitor.whichEntrance" [ngbTooltip]="'jhipster7App.visitor.help.whichEntrance' | translate"
+            >Which Entrance</span
+          >
+        </dt>
+        <dd>
+          <span>{{ visitor.whichEntrance }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.visitor.roomAddr">Room Addr</span></dt>
+        <dd>
+          <div *ngIf="visitor.roomAddr">
+            <a [routerLink]="['/room-addr', visitor.roomAddr?.id, 'view']">{{ visitor.roomAddr?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/visitor', visitor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+{
+  "jhipster7App": {
+    "companyDept": {
+      "home": {
+        "title": "Company Depts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Company Dept",
+        "createOrEditLabel": "创建或编辑 Company Dept",
+        "notFound": "No Company Depts found"
+      },
+      "created": "Company Dept {{ param }} 创建成功",
+      "updated": "Company Dept {{ param }} 更新成功",
+      "deleted": "Company Dept {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Company Dept {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Company Dept"
+      },
+      "id": "ID",
+      "parentId": "Parent Id",
+      "ancestors": "Ancestors",
+      "deptName": "Dept Name",
+      "orderNum": "Order Num",
+      "leaderName": "Leader Name",
+      "tel": "Tel",
+      "email": "Email",
+      "enable": "Enable",
+      "delFlag": "Del Flag",
+      "createBy": "Create By",
+      "createDate": "Create Date",
+      "lastModifyBy": "Last Modify By",
+      "lastModifyDate": "Last Modify Date",
+      "companyPost": "Company Post",
+      "wamoliUser": "Wamoli User",
+      "help": {
+        "parentId": "父部门id",
+        "ancestors": "祖级列表",
+        "deptName": "部门名称",
+        "orderNum": "排序号",
+        "leaderName": "负责人名字",
+        "tel": "电话号码",
+        "email": "email",
+        "enable": "是否可用",
+        "delFlag": "逻辑删除标识"
+      }
+    }
+  }
+}

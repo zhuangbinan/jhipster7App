@@ -1,0 +1,92 @@
+{
+  "name": "CompanyDept",
+  "fields": [
+    {
+      "fieldName": "parentId",
+      "fieldType": "Long",
+      "javadoc": "父部门id"
+    },
+    {
+      "fieldName": "ancestors",
+      "fieldType": "String",
+      "javadoc": "祖级列表"
+    },
+    {
+      "fieldName": "deptName",
+      "fieldType": "String",
+      "javadoc": "部门名称"
+    },
+    {
+      "fieldName": "orderNum",
+      "fieldType": "Integer",
+      "javadoc": "排序号"
+    },
+    {
+      "fieldName": "leaderName",
+      "fieldType": "String",
+      "javadoc": "负责人名字"
+    },
+    {
+      "fieldName": "tel",
+      "fieldType": "String",
+      "javadoc": "电话号码"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "javadoc": "email"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean",
+      "javadoc": "是否可用"
+    },
+    {
+      "fieldName": "delFlag",
+      "fieldType": "Boolean",
+      "javadoc": "逻辑删除标识"
+    },
+    {
+      "fieldName": "createBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifyBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifyDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "companyPost",
+      "otherEntityRelationshipName": "companyDept",
+      "relationshipName": "companyPost"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "wamoliUser",
+      "otherEntityRelationshipName": "companyDept",
+      "relationshipName": "wamoliUser",
+      "ownerSide": false
+    }
+  ],
+  "javadoc": "物业公司部门",
+  "entityTableName": "wamoli_company_dept",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210531021844"
+}

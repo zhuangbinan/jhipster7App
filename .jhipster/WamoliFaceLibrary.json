@@ -1,0 +1,30 @@
+{
+  "name": "WamoliFaceLibrary",
+  "fields": [
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "wamoliUser",
+      "otherEntityRelationshipName": "wamoliFaceLibrary",
+      "relationshipName": "wamoliUser",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "wamoli_face_library",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210528073922"
+}

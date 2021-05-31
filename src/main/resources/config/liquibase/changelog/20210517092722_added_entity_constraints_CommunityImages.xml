@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity CommunityImages.
+    -->
+    <changeSet id="20210517092722-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="community_image_group_id"
+                                 baseTableName="wamoli_community_images"
+                                 constraintName="fk_wamoli_community_images__community_image_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_community_image_group"/>
+    </changeSet>
+</databaseChangeLog>

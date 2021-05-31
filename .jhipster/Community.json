@@ -1,0 +1,114 @@
+{
+  "name": "Community",
+  "fields": [
+    {
+      "fieldName": "cname",
+      "fieldType": "String",
+      "javadoc": "名称"
+    },
+    {
+      "fieldName": "managerName",
+      "fieldType": "String",
+      "javadoc": "负责人姓名"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String",
+      "javadoc": "地址"
+    },
+    {
+      "fieldName": "tel",
+      "fieldType": "String",
+      "javadoc": "电话号码"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "javadoc": "邮箱"
+    },
+    {
+      "fieldName": "officeHours",
+      "fieldType": "String",
+      "javadoc": "办公时间"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "javadoc": "社区描述"
+    },
+    {
+      "fieldName": "source",
+      "fieldType": "String",
+      "javadoc": "来源"
+    },
+    {
+      "fieldName": "parentId",
+      "fieldType": "Long",
+      "javadoc": "父级ID 为了分管办公室级别"
+    },
+    {
+      "fieldName": "ancestors",
+      "fieldType": "String",
+      "javadoc": "祖籍 示例 0,100"
+    },
+    {
+      "fieldName": "longCode",
+      "fieldType": "String",
+      "javadoc": "编码"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean",
+      "javadoc": "是否可用"
+    },
+    {
+      "fieldName": "delFlag",
+      "fieldType": "Boolean",
+      "javadoc": "逻辑删除标识"
+    },
+    {
+      "fieldName": "orderNum",
+      "fieldType": "Integer",
+      "javadoc": "排序号"
+    },
+    {
+      "fieldName": "lastModifyDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifyBy",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "communityNotice",
+      "otherEntityRelationshipName": "community",
+      "relationshipName": "communityNotice"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "communityLeader",
+      "otherEntityRelationshipName": "community",
+      "relationshipName": "communityLeader"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "homelandStation",
+      "otherEntityRelationshipName": "community",
+      "relationshipName": "homelandStation"
+    }
+  ],
+  "entityTableName": "wamoli_community",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210518055816",
+  "javadoc": "社区居委会"
+}

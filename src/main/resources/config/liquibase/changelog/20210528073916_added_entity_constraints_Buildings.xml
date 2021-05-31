@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Buildings.
+    -->
+    <changeSet id="20210528073916-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="homeland_station_id"
+                                 baseTableName="wamoli_buildings"
+                                 constraintName="fk_wamoli_buildings__homeland_station_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_homeland_station"/>
+    </changeSet>
+</databaseChangeLog>

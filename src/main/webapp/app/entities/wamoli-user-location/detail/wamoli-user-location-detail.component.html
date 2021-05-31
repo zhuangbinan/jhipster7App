@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="wamoliUserLocation">
+      <h2 data-cy="wamoliUserLocationDetailsHeading">
+        <span jhiTranslate="jhipster7App.wamoliUserLocation.detail.title">Wamoli User Location</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ wamoliUserLocation.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUserLocation.state" [ngbTooltip]="'jhipster7App.wamoliUserLocation.help.state' | translate"
+            >State</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUserLocation.state }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.wamoliUserLocation.cardNum"
+            [ngbTooltip]="'jhipster7App.wamoliUserLocation.help.cardNum' | translate"
+            >Card Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUserLocation.cardNum }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.wamoliUserLocation.expireTime"
+            [ngbTooltip]="'jhipster7App.wamoliUserLocation.help.expireTime' | translate"
+            >Expire Time</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUserLocation.expireTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.wamoliUserLocation.delayTime"
+            [ngbTooltip]="'jhipster7App.wamoliUserLocation.help.delayTime' | translate"
+            >Delay Time</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUserLocation.delayTime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUserLocation.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ wamoliUserLocation.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUserLocation.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+          <span>{{ wamoliUserLocation.lastModifiedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUserLocation.wamoliUser">Wamoli User</span></dt>
+        <dd>
+          <div *ngIf="wamoliUserLocation.wamoliUser">
+            <a [routerLink]="['/wamoli-user', wamoliUserLocation.wamoliUser?.id, 'view']">{{ wamoliUserLocation.wamoliUser?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/wamoli-user-location', wamoliUserLocation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tuYaDevice">
+      <h2 data-cy="tuYaDeviceDetailsHeading"><span jhiTranslate="jhipster7App.tuYaDevice.detail.title">Tu Ya Device</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tuYaDevice.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaDevice.deviceName" [ngbTooltip]="'jhipster7App.tuYaDevice.help.deviceName' | translate"
+            >Device Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ tuYaDevice.deviceName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaDevice.longCode" [ngbTooltip]="'jhipster7App.tuYaDevice.help.longCode' | translate"
+            >Long Code</span
+          >
+        </dt>
+        <dd>
+          <span>{{ tuYaDevice.longCode }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaDevice.tyDeviceId" [ngbTooltip]="'jhipster7App.tuYaDevice.help.tyDeviceId' | translate"
+            >Ty Device Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ tuYaDevice.tyDeviceId }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaDevice.deviceType" [ngbTooltip]="'jhipster7App.tuYaDevice.help.deviceType' | translate"
+            >Device Type</span
+          >
+        </dt>
+        <dd>
+          <span>{{ tuYaDevice.deviceType }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaDevice.cmdCode" [ngbTooltip]="'jhipster7App.tuYaDevice.help.cmdCode' | translate"
+            >Cmd Code</span
+          >
+        </dt>
+        <dd>
+          <span>{{ tuYaDevice.cmdCode }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaDevice.createTime" [ngbTooltip]="'jhipster7App.tuYaDevice.help.createTime' | translate"
+            >Create Time</span
+          >
+        </dt>
+        <dd>
+          <span>{{ tuYaDevice.createTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaDevice.enable" [ngbTooltip]="'jhipster7App.tuYaDevice.help.enable' | translate">Enable</span>
+        </dt>
+        <dd>
+          <span>{{ tuYaDevice.enable }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.tuYaDevice.roomAddr">Room Addr</span></dt>
+        <dd>
+          <div *ngIf="tuYaDevice.roomAddr">
+            <a [routerLink]="['/room-addr', tuYaDevice.roomAddr?.id, 'view']">{{ tuYaDevice.roomAddr?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tu-ya-device', tuYaDevice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

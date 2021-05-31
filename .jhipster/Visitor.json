@@ -1,0 +1,71 @@
+{
+  "name": "Visitor",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "姓名",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phoneNum",
+      "fieldType": "String",
+      "javadoc": "电话",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "carPlateNum",
+      "fieldType": "String",
+      "javadoc": "车牌号码"
+    },
+    {
+      "fieldName": "startTime",
+      "fieldType": "Instant",
+      "javadoc": "生效时间",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endTime",
+      "fieldType": "Instant",
+      "javadoc": "失效时间",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "passwd",
+      "fieldType": "String",
+      "javadoc": "密码密钥"
+    },
+    {
+      "fieldName": "faceImage",
+      "fieldType": "byte[]",
+      "javadoc": "人脸",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["maxbytes"],
+      "fieldValidateRulesMaxbytes": "512000"
+    },
+    {
+      "fieldName": "whichEntrance",
+      "fieldType": "String",
+      "javadoc": "远程开启选择的门,进小区或楼栋入口"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "roomAddr",
+      "otherEntityRelationshipName": "visitor",
+      "relationshipName": "roomAddr"
+    }
+  ],
+  "javadoc": "访客信息",
+  "entityTableName": "wamoli_visitor",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210528073921"
+}

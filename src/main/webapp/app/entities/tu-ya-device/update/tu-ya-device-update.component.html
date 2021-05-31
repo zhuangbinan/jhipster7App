@@ -1,0 +1,171 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-tu-ya-device-heading"
+        data-cy="TuYaDeviceCreateUpdateHeading"
+        jhiTranslate="jhipster7App.tuYaDevice.home.createOrEditLabel"
+      >
+        Create or edit a Tu Ya Device
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaDevice.deviceName"
+            for="field_deviceName"
+            [ngbTooltip]="'jhipster7App.tuYaDevice.help.deviceName' | translate"
+            >Device Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="deviceName"
+            id="field_deviceName"
+            data-cy="deviceName"
+            formControlName="deviceName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaDevice.longCode"
+            for="field_longCode"
+            [ngbTooltip]="'jhipster7App.tuYaDevice.help.longCode' | translate"
+            >Long Code</label
+          >
+          <input type="number" class="form-control" name="longCode" id="field_longCode" data-cy="longCode" formControlName="longCode" />
+          <div *ngIf="editForm.get('longCode')!.invalid && (editForm.get('longCode')!.dirty || editForm.get('longCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('longCode')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaDevice.tyDeviceId"
+            for="field_tyDeviceId"
+            [ngbTooltip]="'jhipster7App.tuYaDevice.help.tyDeviceId' | translate"
+            >Ty Device Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="tyDeviceId"
+            id="field_tyDeviceId"
+            data-cy="tyDeviceId"
+            formControlName="tyDeviceId"
+          />
+          <div
+            *ngIf="editForm.get('tyDeviceId')!.invalid && (editForm.get('tyDeviceId')!.dirty || editForm.get('tyDeviceId')!.touched)"
+          ></div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaDevice.deviceType"
+            for="field_deviceType"
+            [ngbTooltip]="'jhipster7App.tuYaDevice.help.deviceType' | translate"
+            >Device Type</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="deviceType"
+            id="field_deviceType"
+            data-cy="deviceType"
+            formControlName="deviceType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaDevice.cmdCode"
+            for="field_cmdCode"
+            [ngbTooltip]="'jhipster7App.tuYaDevice.help.cmdCode' | translate"
+            >Cmd Code</label
+          >
+          <input type="text" class="form-control" name="cmdCode" id="field_cmdCode" data-cy="cmdCode" formControlName="cmdCode" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaDevice.createTime"
+            for="field_createTime"
+            [ngbTooltip]="'jhipster7App.tuYaDevice.help.createTime' | translate"
+            >Create Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createTime"
+              data-cy="createTime"
+              type="datetime-local"
+              class="form-control"
+              name="createTime"
+              formControlName="createTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaDevice.enable"
+            for="field_enable"
+            [ngbTooltip]="'jhipster7App.tuYaDevice.help.enable' | translate"
+            >Enable</label
+          >
+          <input type="checkbox" class="form-check" name="enable" id="field_enable" data-cy="enable" formControlName="enable" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.tuYaDevice.roomAddr" for="field_roomAddr">Room Addr</label>
+          <select class="form-control" id="field_roomAddr" data-cy="roomAddr" name="roomAddr" formControlName="roomAddr">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="roomAddrOption.id === editForm.get('roomAddr')!.value?.id ? editForm.get('roomAddr')!.value : roomAddrOption"
+              *ngFor="let roomAddrOption of roomAddrsSharedCollection; trackBy: trackRoomAddrById"
+            >
+              {{ roomAddrOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,251 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-visitor-heading" data-cy="VisitorCreateUpdateHeading" jhiTranslate="jhipster7App.visitor.home.createOrEditLabel">
+        Create or edit a Visitor
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.visitor.name"
+            for="field_name"
+            [ngbTooltip]="'jhipster7App.visitor.help.name' | translate"
+            >Name</label
+          >
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.visitor.phoneNum"
+            for="field_phoneNum"
+            [ngbTooltip]="'jhipster7App.visitor.help.phoneNum' | translate"
+            >Phone Num</label
+          >
+          <input type="text" class="form-control" name="phoneNum" id="field_phoneNum" data-cy="phoneNum" formControlName="phoneNum" />
+          <div *ngIf="editForm.get('phoneNum')!.invalid && (editForm.get('phoneNum')!.dirty || editForm.get('phoneNum')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('phoneNum')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.visitor.carPlateNum"
+            for="field_carPlateNum"
+            [ngbTooltip]="'jhipster7App.visitor.help.carPlateNum' | translate"
+            >Car Plate Num</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="carPlateNum"
+            id="field_carPlateNum"
+            data-cy="carPlateNum"
+            formControlName="carPlateNum"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.visitor.startTime"
+            for="field_startTime"
+            [ngbTooltip]="'jhipster7App.visitor.help.startTime' | translate"
+            >Start Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startTime"
+              data-cy="startTime"
+              type="datetime-local"
+              class="form-control"
+              name="startTime"
+              formControlName="startTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('startTime')!.invalid && (editForm.get('startTime')!.dirty || editForm.get('startTime')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('startTime')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('startTime')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.visitor.endTime"
+            for="field_endTime"
+            [ngbTooltip]="'jhipster7App.visitor.help.endTime' | translate"
+            >End Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_endTime"
+              data-cy="endTime"
+              type="datetime-local"
+              class="form-control"
+              name="endTime"
+              formControlName="endTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('endTime')!.invalid && (editForm.get('endTime')!.dirty || editForm.get('endTime')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('endTime')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('endTime')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.visitor.passwd"
+            for="field_passwd"
+            [ngbTooltip]="'jhipster7App.visitor.help.passwd' | translate"
+            >Passwd</label
+          >
+          <input type="text" class="form-control" name="passwd" id="field_passwd" data-cy="passwd" formControlName="passwd" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.visitor.faceImage"
+            for="field_faceImage"
+            [ngbTooltip]="'jhipster7App.visitor.help.faceImage' | translate"
+            >Face Image</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('faceImageContentType')!.value + ';base64,' + editForm.get('faceImage')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('faceImage')!.value"
+              alt="visitor image"
+            />
+            <div *ngIf="editForm.get('faceImage')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left"
+                >{{ editForm.get('faceImageContentType')!.value }}, {{ byteSize(editForm.get('faceImage')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('faceImage', 'faceImageContentType', 'file_faceImage')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_faceImage"
+              data-cy="faceImage"
+              (change)="setFileData($event, 'faceImage', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="faceImage" id="field_faceImage" data-cy="faceImage" formControlName="faceImage" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="faceImageContentType"
+            id="field_faceImageContentType"
+            formControlName="faceImageContentType"
+          />
+          <div *ngIf="editForm.get('faceImage')!.invalid && (editForm.get('faceImage')!.dirty || editForm.get('faceImage')!.touched)"></div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.visitor.whichEntrance"
+            for="field_whichEntrance"
+            [ngbTooltip]="'jhipster7App.visitor.help.whichEntrance' | translate"
+            >Which Entrance</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="whichEntrance"
+            id="field_whichEntrance"
+            data-cy="whichEntrance"
+            formControlName="whichEntrance"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.visitor.roomAddr" for="field_roomAddr">Room Addr</label>
+          <select class="form-control" id="field_roomAddr" data-cy="roomAddr" name="roomAddr" formControlName="roomAddr">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="roomAddrOption.id === editForm.get('roomAddr')!.value?.id ? editForm.get('roomAddr')!.value : roomAddrOption"
+              *ngFor="let roomAddrOption of roomAddrsSharedCollection; trackBy: trackRoomAddrById"
+            >
+              {{ roomAddrOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

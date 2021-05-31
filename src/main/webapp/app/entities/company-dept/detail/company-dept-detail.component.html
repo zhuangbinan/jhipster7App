@@ -1,0 +1,110 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="companyDept">
+      <h2 data-cy="companyDeptDetailsHeading"><span jhiTranslate="jhipster7App.companyDept.detail.title">Company Dept</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ companyDept.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyDept.parentId" [ngbTooltip]="'jhipster7App.companyDept.help.parentId' | translate"
+            >Parent Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyDept.parentId }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyDept.ancestors" [ngbTooltip]="'jhipster7App.companyDept.help.ancestors' | translate"
+            >Ancestors</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyDept.ancestors }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyDept.deptName" [ngbTooltip]="'jhipster7App.companyDept.help.deptName' | translate"
+            >Dept Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyDept.deptName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyDept.orderNum" [ngbTooltip]="'jhipster7App.companyDept.help.orderNum' | translate"
+            >Order Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyDept.orderNum }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyDept.leaderName" [ngbTooltip]="'jhipster7App.companyDept.help.leaderName' | translate"
+            >Leader Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyDept.leaderName }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyDept.tel" [ngbTooltip]="'jhipster7App.companyDept.help.tel' | translate">Tel</span></dt>
+        <dd>
+          <span>{{ companyDept.tel }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyDept.email" [ngbTooltip]="'jhipster7App.companyDept.help.email' | translate">Email</span>
+        </dt>
+        <dd>
+          <span>{{ companyDept.email }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyDept.enable" [ngbTooltip]="'jhipster7App.companyDept.help.enable' | translate"
+            >Enable</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyDept.enable }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyDept.delFlag" [ngbTooltip]="'jhipster7App.companyDept.help.delFlag' | translate"
+            >Del Flag</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyDept.delFlag }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyDept.createBy">Create By</span></dt>
+        <dd>
+          <span>{{ companyDept.createBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyDept.createDate">Create Date</span></dt>
+        <dd>
+          <span>{{ companyDept.createDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyDept.lastModifyBy">Last Modify By</span></dt>
+        <dd>
+          <span>{{ companyDept.lastModifyBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyDept.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+          <span>{{ companyDept.lastModifyDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/company-dept', companyDept.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

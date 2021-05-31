@@ -1,0 +1,21 @@
+{
+  "fields": [
+    {
+      "fieldName": "jobCareerDesc",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceClass",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": true,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Test01",
+  "changelogDate": "20210518014944",
+  "entityTableName": "test_01",
+  "fluentMethods": true,
+  "embedded": false,
+  "applications": "*"
+}

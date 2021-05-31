@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity TuYaCmd.
+    -->
+    <changeSet id="20210528073919-1" author="jhipster">
+        <createTable tableName="tu_ya_cmd">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="cmd_name" type="varchar(255)" remarks="名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="cmd_code" type="varchar(255)" remarks="命令code">
+                <constraints nullable="true" />
+            </column>
+            <column name="value" type="boolean" remarks="值">
+                <constraints nullable="true" />
+            </column>
+            <column name="cmd_type" type="varchar(255)" remarks="类型">
+                <constraints nullable="true" />
+            </column>
+            <column name="create_time" type="${datetimeType}" remarks="创建时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="enable" type="boolean" remarks="是否有效">
+                <constraints nullable="true" />
+            </column>
+            <column name="tu_ya_device_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="tu_ya_cmd" columnName="create_time" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210528073919-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/tu_ya_cmd.csv"
+                  separator=";"
+                  tableName="tu_ya_cmd">
+            <column name="id" type="numeric"/>
+            <column name="cmd_name" type="string"/>
+            <column name="cmd_code" type="string"/>
+            <column name="value" type="boolean"/>
+            <column name="cmd_type" type="string"/>
+            <column name="create_time" type="${datetimeType}"/>
+            <column name="enable" type="boolean"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

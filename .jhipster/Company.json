@@ -1,0 +1,61 @@
+{
+  "name": "Company",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "公司名称",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "longCode",
+      "fieldType": "String",
+      "javadoc": "编码",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String",
+      "javadoc": "地址"
+    },
+    {
+      "fieldName": "tel",
+      "fieldType": "String",
+      "javadoc": "电话"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "javadoc": "邮箱"
+    },
+    {
+      "fieldName": "managerName",
+      "fieldType": "String",
+      "javadoc": "负责人"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean",
+      "javadoc": "是否生效"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "homelandStation",
+      "otherEntityRelationshipName": "company",
+      "relationshipName": "homelandStation"
+    }
+  ],
+  "javadoc": "物业公司",
+  "entityTableName": "wamoli_company",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210528073915"
+}

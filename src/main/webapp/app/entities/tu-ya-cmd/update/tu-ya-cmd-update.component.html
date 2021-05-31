@@ -1,0 +1,131 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-tu-ya-cmd-heading" data-cy="TuYaCmdCreateUpdateHeading" jhiTranslate="jhipster7App.tuYaCmd.home.createOrEditLabel">
+        Create or edit a Tu Ya Cmd
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaCmd.cmdName"
+            for="field_cmdName"
+            [ngbTooltip]="'jhipster7App.tuYaCmd.help.cmdName' | translate"
+            >Cmd Name</label
+          >
+          <input type="text" class="form-control" name="cmdName" id="field_cmdName" data-cy="cmdName" formControlName="cmdName" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaCmd.cmdCode"
+            for="field_cmdCode"
+            [ngbTooltip]="'jhipster7App.tuYaCmd.help.cmdCode' | translate"
+            >Cmd Code</label
+          >
+          <input type="text" class="form-control" name="cmdCode" id="field_cmdCode" data-cy="cmdCode" formControlName="cmdCode" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaCmd.value"
+            for="field_value"
+            [ngbTooltip]="'jhipster7App.tuYaCmd.help.value' | translate"
+            >Value</label
+          >
+          <input type="checkbox" class="form-check" name="value" id="field_value" data-cy="value" formControlName="value" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaCmd.cmdType"
+            for="field_cmdType"
+            [ngbTooltip]="'jhipster7App.tuYaCmd.help.cmdType' | translate"
+            >Cmd Type</label
+          >
+          <select class="form-control" name="cmdType" formControlName="cmdType" id="field_cmdType" data-cy="cmdType">
+            <option [ngValue]="null">{{ 'jhipster7App.CmdType.null' | translate }}</option>
+            <option value="ON">{{ 'jhipster7App.CmdType.ON' | translate }}</option>
+            <option value="OFF">{{ 'jhipster7App.CmdType.OFF' | translate }}</option>
+            <option value="TIMEON">{{ 'jhipster7App.CmdType.TIMEON' | translate }}</option>
+            <option value="TIMEOFF">{{ 'jhipster7App.CmdType.TIMEOFF' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaCmd.createTime"
+            for="field_createTime"
+            [ngbTooltip]="'jhipster7App.tuYaCmd.help.createTime' | translate"
+            >Create Time</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createTime"
+              data-cy="createTime"
+              type="datetime-local"
+              class="form-control"
+              name="createTime"
+              formControlName="createTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.tuYaCmd.enable"
+            for="field_enable"
+            [ngbTooltip]="'jhipster7App.tuYaCmd.help.enable' | translate"
+            >Enable</label
+          >
+          <input type="checkbox" class="form-check" name="enable" id="field_enable" data-cy="enable" formControlName="enable" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.tuYaCmd.tuYaDevice" for="field_tuYaDevice">Tu Ya Device</label>
+          <select class="form-control" id="field_tuYaDevice" data-cy="tuYaDevice" name="tuYaDevice" formControlName="tuYaDevice">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                tuYaDeviceOption.id === editForm.get('tuYaDevice')!.value?.id ? editForm.get('tuYaDevice')!.value : tuYaDeviceOption
+              "
+              *ngFor="let tuYaDeviceOption of tuYaDevicesSharedCollection; trackBy: trackTuYaDeviceById"
+            >
+              {{ tuYaDeviceOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

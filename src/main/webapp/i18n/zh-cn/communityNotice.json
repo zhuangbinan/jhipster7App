@@ -1,0 +1,46 @@
+{
+  "jhipster7App": {
+    "communityNotice": {
+      "home": {
+        "title": "Community Notices",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Community Notice",
+        "createOrEditLabel": "创建或编辑 Community Notice",
+        "notFound": "No Community Notices found"
+      },
+      "created": "Community Notice {{ param }} 创建成功",
+      "updated": "Community Notice {{ param }} 更新成功",
+      "deleted": "Community Notice {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Community Notice {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Community Notice"
+      },
+      "id": "ID",
+      "title": "Title",
+      "img1": "Img 1",
+      "img1Title": "Img 1 Title",
+      "content1": "Content 1",
+      "img2": "Img 2",
+      "img2Title": "Img 2 Title",
+      "content2": "Content 2",
+      "img3": "Img 3",
+      "img3Title": "Img 3 Title",
+      "content3": "Content 3",
+      "img4": "Img 4",
+      "img4Title": "Img 4 Title",
+      "content4": "Content 4",
+      "img5": "Img 5",
+      "img5Title": "Img 5 Title",
+      "content5": "Content 5",
+      "tail": "Tail",
+      "enable": "Enable",
+      "delFlag": "Del Flag",
+      "orderNum": "Order Num",
+      "lastModifyDate": "Last Modify Date",
+      "lastModifyBy": "Last Modify By",
+      "community": "Community"
+    }
+  }
+}

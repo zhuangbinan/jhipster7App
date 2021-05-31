@@ -1,0 +1,70 @@
+{
+  "name": "Buildings",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "楼栋名称"
+    },
+    {
+      "fieldName": "longCode",
+      "fieldType": "String",
+      "javadoc": "编码",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "floorCount",
+      "fieldType": "Integer",
+      "javadoc": "楼栋层数"
+    },
+    {
+      "fieldName": "unites",
+      "fieldType": "Integer",
+      "javadoc": "单元数"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "String",
+      "javadoc": "经度",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "32"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "String",
+      "javadoc": "纬度",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "32"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean",
+      "javadoc": "是否启用"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "roomAddr",
+      "otherEntityRelationshipName": "buildings",
+      "relationshipName": "roomAddr"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "homelandStation",
+      "otherEntityRelationshipName": "buildings",
+      "relationshipName": "homelandStation"
+    }
+  ],
+  "javadoc": "楼栋建筑",
+  "entityTableName": "wamoli_buildings",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210528073916"
+}

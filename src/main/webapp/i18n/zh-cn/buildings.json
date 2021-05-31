@@ -1,0 +1,41 @@
+{
+  "jhipster7App": {
+    "buildings": {
+      "home": {
+        "title": "Buildings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Buildings",
+        "createOrEditLabel": "创建或编辑 Buildings",
+        "notFound": "No Buildings found"
+      },
+      "created": "Buildings {{ param }} 创建成功",
+      "updated": "Buildings {{ param }} 更新成功",
+      "deleted": "Buildings {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Buildings {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Buildings"
+      },
+      "id": "ID",
+      "name": "Name",
+      "longCode": "Long Code",
+      "floorCount": "Floor Count",
+      "unites": "Unites",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "enable": "Enable",
+      "roomAddr": "Room Addr",
+      "homelandStation": "Homeland Station",
+      "help": {
+        "name": "楼栋名称",
+        "longCode": "编码",
+        "floorCount": "楼栋层数",
+        "unites": "单元数",
+        "longitude": "经度",
+        "latitude": "纬度",
+        "enable": "是否启用"
+      }
+    }
+  }
+}

@@ -1,0 +1,132 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="wamoliUser">
+      <h2 data-cy="wamoliUserDetailsHeading"><span jhiTranslate="jhipster7App.wamoliUser.detail.title">Wamoli User</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ wamoliUser.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.userName" [ngbTooltip]="'jhipster7App.wamoliUser.help.userName' | translate"
+            >User Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUser.userName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.gender" [ngbTooltip]="'jhipster7App.wamoliUser.help.gender' | translate">Gender</span>
+        </dt>
+        <dd>
+          <span>{{ wamoliUser.gender }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.phoneNum" [ngbTooltip]="'jhipster7App.wamoliUser.help.phoneNum' | translate"
+            >Phone Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUser.phoneNum }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.email" [ngbTooltip]="'jhipster7App.wamoliUser.help.email' | translate">Email</span>
+        </dt>
+        <dd>
+          <span>{{ wamoliUser.email }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.unitAddr" [ngbTooltip]="'jhipster7App.wamoliUser.help.unitAddr' | translate"
+            >Unit Addr</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUser.unitAddr }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.roomAddr" [ngbTooltip]="'jhipster7App.wamoliUser.help.roomAddr' | translate"
+            >Room Addr</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUser.roomAddr }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.idCardNum" [ngbTooltip]="'jhipster7App.wamoliUser.help.idCardNum' | translate"
+            >Id Card Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ wamoliUser.idCardNum }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.idCardType" [ngbTooltip]="'jhipster7App.wamoliUser.help.idCardType' | translate"
+            >Id Card Type</span
+          >
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipster7App.CertificateType.' + wamoliUser.idCardType }}">{{ wamoliUser.idCardType }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.userType" [ngbTooltip]="'jhipster7App.wamoliUser.help.userType' | translate"
+            >User Type</span
+          >
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipster7App.UserType.' + wamoliUser.userType }}">{{ wamoliUser.userType }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.wamoliUser.enable" [ngbTooltip]="'jhipster7App.wamoliUser.help.enable' | translate">Enable</span>
+        </dt>
+        <dd>
+          <span>{{ wamoliUser.enable }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUser.isManager">Is Manager</span></dt>
+        <dd>
+          <span>{{ wamoliUser.isManager }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUser.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ wamoliUser.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUser.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+          <span>{{ wamoliUser.lastModifiedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUser.user">User</span></dt>
+        <dd>
+          <span>{{ wamoliUser.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUser.roomAddr">Room Addr</span></dt>
+        <dd>
+          <span *ngFor="let roomAddr of wamoliUser.roomAddrs; let last = last">
+            <a [routerLink]="['/room-addr', roomAddr?.id, 'view']">{{ roomAddr.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliUser.companyDept">Company Dept</span></dt>
+        <dd>
+          <span *ngFor="let companyDept of wamoliUser.companyDepts; let last = last">
+            <a [routerLink]="['/company-dept', companyDept?.id, 'view']">{{ companyDept.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/wamoli-user', wamoliUser.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

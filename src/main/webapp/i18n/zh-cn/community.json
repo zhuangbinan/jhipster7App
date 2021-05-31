@@ -1,0 +1,58 @@
+{
+  "jhipster7App": {
+    "community": {
+      "home": {
+        "title": "Communities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Community",
+        "createOrEditLabel": "创建或编辑 Community",
+        "notFound": "No Communities found"
+      },
+      "created": "Community {{ param }} 创建成功",
+      "updated": "Community {{ param }} 更新成功",
+      "deleted": "Community {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Community {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Community"
+      },
+      "id": "ID",
+      "cname": "Cname",
+      "managerName": "Manager Name",
+      "address": "Address",
+      "tel": "Tel",
+      "email": "Email",
+      "officeHours": "Office Hours",
+      "description": "Description",
+      "source": "Source",
+      "parentId": "Parent Id",
+      "ancestors": "Ancestors",
+      "longCode": "Long Code",
+      "enable": "Enable",
+      "delFlag": "Del Flag",
+      "orderNum": "Order Num",
+      "lastModifyDate": "Last Modify Date",
+      "lastModifyBy": "Last Modify By",
+      "communityNotice": "Community Notice",
+      "communityLeader": "Community Leader",
+      "homelandStation": "Homeland Station",
+      "help": {
+        "cname": "名称",
+        "managerName": "负责人姓名",
+        "address": "地址",
+        "tel": "电话号码",
+        "email": "邮箱",
+        "officeHours": "办公时间",
+        "description": "社区描述",
+        "source": "来源",
+        "parentId": "父级ID 为了分管办公室级别",
+        "ancestors": "祖籍 示例 0,100",
+        "longCode": "编码",
+        "enable": "是否可用",
+        "delFlag": "逻辑删除标识",
+        "orderNum": "排序号"
+      }
+    }
+  }
+}

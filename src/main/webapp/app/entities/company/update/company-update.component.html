@@ -1,0 +1,132 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-company-heading" data-cy="CompanyCreateUpdateHeading" jhiTranslate="jhipster7App.company.home.createOrEditLabel">
+        Create or edit a Company
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.company.name"
+            for="field_name"
+            [ngbTooltip]="'jhipster7App.company.help.name' | translate"
+            >Name</label
+          >
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.company.longCode"
+            for="field_longCode"
+            [ngbTooltip]="'jhipster7App.company.help.longCode' | translate"
+            >Long Code</label
+          >
+          <input type="text" class="form-control" name="longCode" id="field_longCode" data-cy="longCode" formControlName="longCode" />
+          <div *ngIf="editForm.get('longCode')!.invalid && (editForm.get('longCode')!.dirty || editForm.get('longCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('longCode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.company.address"
+            for="field_address"
+            [ngbTooltip]="'jhipster7App.company.help.address' | translate"
+            >Address</label
+          >
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.company.tel"
+            for="field_tel"
+            [ngbTooltip]="'jhipster7App.company.help.tel' | translate"
+            >Tel</label
+          >
+          <input type="text" class="form-control" name="tel" id="field_tel" data-cy="tel" formControlName="tel" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.company.email"
+            for="field_email"
+            [ngbTooltip]="'jhipster7App.company.help.email' | translate"
+            >Email</label
+          >
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.company.managerName"
+            for="field_managerName"
+            [ngbTooltip]="'jhipster7App.company.help.managerName' | translate"
+            >Manager Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="managerName"
+            id="field_managerName"
+            data-cy="managerName"
+            formControlName="managerName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.company.enable"
+            for="field_enable"
+            [ngbTooltip]="'jhipster7App.company.help.enable' | translate"
+            >Enable</label
+          >
+          <input type="checkbox" class="form-check" name="enable" id="field_enable" data-cy="enable" formControlName="enable" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

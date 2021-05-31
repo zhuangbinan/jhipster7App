@@ -1,0 +1,136 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="community">
+      <h2 data-cy="communityDetailsHeading"><span jhiTranslate="jhipster7App.community.detail.title">Community</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ community.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.cname" [ngbTooltip]="'jhipster7App.community.help.cname' | translate">Cname</span>
+        </dt>
+        <dd>
+          <span>{{ community.cname }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.managerName" [ngbTooltip]="'jhipster7App.community.help.managerName' | translate"
+            >Manager Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.managerName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.address" [ngbTooltip]="'jhipster7App.community.help.address' | translate"
+            >Address</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.community.tel" [ngbTooltip]="'jhipster7App.community.help.tel' | translate">Tel</span></dt>
+        <dd>
+          <span>{{ community.tel }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.email" [ngbTooltip]="'jhipster7App.community.help.email' | translate">Email</span>
+        </dt>
+        <dd>
+          <span>{{ community.email }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.officeHours" [ngbTooltip]="'jhipster7App.community.help.officeHours' | translate"
+            >Office Hours</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.officeHours }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.description" [ngbTooltip]="'jhipster7App.community.help.description' | translate"
+            >Description</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.description }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.source" [ngbTooltip]="'jhipster7App.community.help.source' | translate">Source</span>
+        </dt>
+        <dd>
+          <span>{{ community.source }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.parentId" [ngbTooltip]="'jhipster7App.community.help.parentId' | translate"
+            >Parent Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.parentId }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.ancestors" [ngbTooltip]="'jhipster7App.community.help.ancestors' | translate"
+            >Ancestors</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.ancestors }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.longCode" [ngbTooltip]="'jhipster7App.community.help.longCode' | translate"
+            >Long Code</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.longCode }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.enable" [ngbTooltip]="'jhipster7App.community.help.enable' | translate">Enable</span>
+        </dt>
+        <dd>
+          <span>{{ community.enable }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.delFlag" [ngbTooltip]="'jhipster7App.community.help.delFlag' | translate"
+            >Del Flag</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.delFlag }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.community.orderNum" [ngbTooltip]="'jhipster7App.community.help.orderNum' | translate"
+            >Order Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ community.orderNum }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.community.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+          <span>{{ community.lastModifyDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.community.lastModifyBy">Last Modify By</span></dt>
+        <dd>
+          <span>{{ community.lastModifyBy }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/community', community.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

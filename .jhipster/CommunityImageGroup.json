@@ -1,0 +1,42 @@
+{
+  "name": "CommunityImageGroup",
+  "fields": [
+    {
+      "fieldName": "imgGroupName",
+      "fieldType": "String",
+      "javadoc": "图片组名",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "orderNum",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastModifyDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifyBy",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "communityImages",
+      "otherEntityRelationshipName": "communityImageGroup",
+      "relationshipName": "communityImages"
+    }
+  ],
+  "javadoc": "社区居委会 图片库分组",
+  "entityTableName": "wamoli_community_image_group",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210518005828"
+}

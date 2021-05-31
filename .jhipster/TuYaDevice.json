@@ -1,0 +1,66 @@
+{
+  "name": "TuYaDevice",
+  "fields": [
+    {
+      "fieldName": "deviceName",
+      "fieldType": "String",
+      "javadoc": "设备名称"
+    },
+    {
+      "fieldName": "longCode",
+      "fieldType": "Long",
+      "javadoc": "设备编号longCode",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "tyDeviceId",
+      "fieldType": "String",
+      "javadoc": "tuya设备ID",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "deviceType",
+      "fieldType": "Integer",
+      "javadoc": "设备类型 0-网关 1-通断启 2-开关 3-温湿度燃气 4-报警器"
+    },
+    {
+      "fieldName": "cmdCode",
+      "fieldType": "String",
+      "javadoc": "命令编码"
+    },
+    {
+      "fieldName": "createTime",
+      "fieldType": "Instant",
+      "javadoc": "创建时间"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean",
+      "javadoc": "是否有效"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "tuYaCmd",
+      "otherEntityRelationshipName": "tuYaDevice",
+      "relationshipName": "tuYaCmd"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "roomAddr",
+      "otherEntityRelationshipName": "tuYaDevice",
+      "relationshipName": "roomAddr"
+    }
+  ],
+  "entityTableName": "tu_ya_device",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210528073920"
+}

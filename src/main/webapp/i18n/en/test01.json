@@ -1,0 +1,24 @@
+{
+  "jhipster7App": {
+    "test01": {
+      "home": {
+        "title": "Test 01 S",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Test 01",
+        "createOrEditLabel": "Create or edit a Test 01",
+        "notFound": "No Test 01 S found"
+      },
+      "created": "A new Test 01 is created with identifier {{ param }}",
+      "updated": "A Test 01 is updated with identifier {{ param }}",
+      "deleted": "A Test 01 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Test 01 {{ id }}?"
+      },
+      "detail": {
+        "title": "Test 01"
+      },
+      "id": "ID",
+      "jobCareerDesc": "Job Career Desc"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "jhipster7App": {
+    "UserType": {
+      "null": "",
+      "OWNER": "OWNER",
+      "MANAGER": "MANAGER",
+      "MEMBER": "MEMBER",
+      "TOURIST": "TOURIST",
+      "LONELY": "LONELY",
+      "TENANT": "TENANT"
+    }
+  }
+}

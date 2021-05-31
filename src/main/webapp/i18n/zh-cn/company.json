@@ -1,0 +1,40 @@
+{
+  "jhipster7App": {
+    "company": {
+      "home": {
+        "title": "Companies",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Company",
+        "createOrEditLabel": "创建或编辑 Company",
+        "notFound": "No Companies found"
+      },
+      "created": "Company {{ param }} 创建成功",
+      "updated": "Company {{ param }} 更新成功",
+      "deleted": "Company {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Company {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Company"
+      },
+      "id": "ID",
+      "name": "Name",
+      "longCode": "Long Code",
+      "address": "Address",
+      "tel": "Tel",
+      "email": "Email",
+      "managerName": "Manager Name",
+      "enable": "Enable",
+      "homelandStation": "Homeland Station",
+      "help": {
+        "name": "公司名称",
+        "longCode": "编码",
+        "address": "地址",
+        "tel": "电话",
+        "email": "邮箱",
+        "managerName": "负责人",
+        "enable": "是否生效"
+      }
+    }
+  }
+}

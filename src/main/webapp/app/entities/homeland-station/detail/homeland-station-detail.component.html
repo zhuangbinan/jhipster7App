@@ -1,0 +1,131 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="homelandStation">
+      <h2 data-cy="homelandStationDetailsHeading">
+        <span jhiTranslate="jhipster7App.homelandStation.detail.title">Homeland Station</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ homelandStation.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.homelandStation.name" [ngbTooltip]="'jhipster7App.homelandStation.help.name' | translate"
+            >Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ homelandStation.name }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.homelandStation.longCode" [ngbTooltip]="'jhipster7App.homelandStation.help.longCode' | translate"
+            >Long Code</span
+          >
+        </dt>
+        <dd>
+          <span>{{ homelandStation.longCode }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.homelandStation.address" [ngbTooltip]="'jhipster7App.homelandStation.help.address' | translate"
+            >Address</span
+          >
+        </dt>
+        <dd>
+          <span>{{ homelandStation.address }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.homelandStation.livingPopulation"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.livingPopulation' | translate"
+            >Living Population</span
+          >
+        </dt>
+        <dd>
+          <span>{{ homelandStation.livingPopulation }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.homelandStation.buildingCount"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.buildingCount' | translate"
+            >Building Count</span
+          >
+        </dt>
+        <dd>
+          <span>{{ homelandStation.buildingCount }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.homelandStation.entranceCount"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.entranceCount' | translate"
+            >Entrance Count</span
+          >
+        </dt>
+        <dd>
+          <span>{{ homelandStation.entranceCount }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.homelandStation.logo" [ngbTooltip]="'jhipster7App.homelandStation.help.logo' | translate"
+            >Logo</span
+          >
+        </dt>
+        <dd>
+          <div *ngIf="homelandStation.logo">
+            <a (click)="openFile(homelandStation.logo, homelandStation.logoContentType)">
+              <img
+                [src]="'data:' + homelandStation.logoContentType + ';base64,' + homelandStation.logo"
+                style="max-width: 100%"
+                alt="homelandStation image"
+              />
+            </a>
+            {{ homelandStation.logoContentType }}, {{ byteSize(homelandStation.logo) }}
+          </div>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.homelandStation.longitude"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.longitude' | translate"
+            >Longitude</span
+          >
+        </dt>
+        <dd>
+          <span>{{ homelandStation.longitude }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.homelandStation.latitude" [ngbTooltip]="'jhipster7App.homelandStation.help.latitude' | translate"
+            >Latitude</span
+          >
+        </dt>
+        <dd>
+          <span>{{ homelandStation.latitude }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.homelandStation.community">Community</span></dt>
+        <dd>
+          <div *ngIf="homelandStation.community">
+            <a [routerLink]="['/community', homelandStation.community?.id, 'view']">{{ homelandStation.community?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.homelandStation.company">Company</span></dt>
+        <dd>
+          <div *ngIf="homelandStation.company">
+            <a [routerLink]="['/company', homelandStation.company?.id, 'view']">{{ homelandStation.company?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/homeland-station', homelandStation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

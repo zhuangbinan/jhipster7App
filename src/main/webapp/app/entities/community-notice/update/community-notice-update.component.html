@@ -1,0 +1,317 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-community-notice-heading"
+        data-cy="CommunityNoticeCreateUpdateHeading"
+        jhiTranslate="jhipster7App.communityNotice.home.createOrEditLabel"
+      >
+        Create or edit a Community Notice
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img1" for="field_img1">Img 1</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('img1ContentType')!.value + ';base64,' + editForm.get('img1')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('img1')!.value"
+              alt="communityNotice image"
+            />
+            <div *ngIf="editForm.get('img1')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('img1ContentType')!.value }}, {{ byteSize(editForm.get('img1')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('img1', 'img1ContentType', 'file_img1')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_img1"
+              data-cy="img1"
+              (change)="setFileData($event, 'img1', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="img1" id="field_img1" data-cy="img1" formControlName="img1" />
+          <input type="hidden" class="form-control" name="img1ContentType" id="field_img1ContentType" formControlName="img1ContentType" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img1Title" for="field_img1Title">Img 1 Title</label>
+          <input type="text" class="form-control" name="img1Title" id="field_img1Title" data-cy="img1Title" formControlName="img1Title" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.content1" for="field_content1">Content 1</label>
+          <textarea class="form-control" name="content1" id="field_content1" data-cy="content1" formControlName="content1"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img2" for="field_img2">Img 2</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('img2ContentType')!.value + ';base64,' + editForm.get('img2')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('img2')!.value"
+              alt="communityNotice image"
+            />
+            <div *ngIf="editForm.get('img2')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('img2ContentType')!.value }}, {{ byteSize(editForm.get('img2')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('img2', 'img2ContentType', 'file_img2')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_img2"
+              data-cy="img2"
+              (change)="setFileData($event, 'img2', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="img2" id="field_img2" data-cy="img2" formControlName="img2" />
+          <input type="hidden" class="form-control" name="img2ContentType" id="field_img2ContentType" formControlName="img2ContentType" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img2Title" for="field_img2Title">Img 2 Title</label>
+          <input type="text" class="form-control" name="img2Title" id="field_img2Title" data-cy="img2Title" formControlName="img2Title" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.content2" for="field_content2">Content 2</label>
+          <textarea class="form-control" name="content2" id="field_content2" data-cy="content2" formControlName="content2"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img3" for="field_img3">Img 3</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('img3ContentType')!.value + ';base64,' + editForm.get('img3')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('img3')!.value"
+              alt="communityNotice image"
+            />
+            <div *ngIf="editForm.get('img3')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('img3ContentType')!.value }}, {{ byteSize(editForm.get('img3')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('img3', 'img3ContentType', 'file_img3')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_img3"
+              data-cy="img3"
+              (change)="setFileData($event, 'img3', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="img3" id="field_img3" data-cy="img3" formControlName="img3" />
+          <input type="hidden" class="form-control" name="img3ContentType" id="field_img3ContentType" formControlName="img3ContentType" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img3Title" for="field_img3Title">Img 3 Title</label>
+          <input type="text" class="form-control" name="img3Title" id="field_img3Title" data-cy="img3Title" formControlName="img3Title" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.content3" for="field_content3">Content 3</label>
+          <textarea class="form-control" name="content3" id="field_content3" data-cy="content3" formControlName="content3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img4" for="field_img4">Img 4</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('img4ContentType')!.value + ';base64,' + editForm.get('img4')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('img4')!.value"
+              alt="communityNotice image"
+            />
+            <div *ngIf="editForm.get('img4')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('img4ContentType')!.value }}, {{ byteSize(editForm.get('img4')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('img4', 'img4ContentType', 'file_img4')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_img4"
+              data-cy="img4"
+              (change)="setFileData($event, 'img4', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="img4" id="field_img4" data-cy="img4" formControlName="img4" />
+          <input type="hidden" class="form-control" name="img4ContentType" id="field_img4ContentType" formControlName="img4ContentType" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img4Title" for="field_img4Title">Img 4 Title</label>
+          <input type="text" class="form-control" name="img4Title" id="field_img4Title" data-cy="img4Title" formControlName="img4Title" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.content4" for="field_content4">Content 4</label>
+          <textarea class="form-control" name="content4" id="field_content4" data-cy="content4" formControlName="content4"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img5" for="field_img5">Img 5</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('img5ContentType')!.value + ';base64,' + editForm.get('img5')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('img5')!.value"
+              alt="communityNotice image"
+            />
+            <div *ngIf="editForm.get('img5')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('img5ContentType')!.value }}, {{ byteSize(editForm.get('img5')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('img5', 'img5ContentType', 'file_img5')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_img5"
+              data-cy="img5"
+              (change)="setFileData($event, 'img5', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="img5" id="field_img5" data-cy="img5" formControlName="img5" />
+          <input type="hidden" class="form-control" name="img5ContentType" id="field_img5ContentType" formControlName="img5ContentType" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.img5Title" for="field_img5Title">Img 5 Title</label>
+          <input type="text" class="form-control" name="img5Title" id="field_img5Title" data-cy="img5Title" formControlName="img5Title" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.content5" for="field_content5">Content 5</label>
+          <textarea class="form-control" name="content5" id="field_content5" data-cy="content5" formControlName="content5"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.tail" for="field_tail">Tail</label>
+          <input type="text" class="form-control" name="tail" id="field_tail" data-cy="tail" formControlName="tail" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.enable" for="field_enable">Enable</label>
+          <input type="checkbox" class="form-check" name="enable" id="field_enable" data-cy="enable" formControlName="enable" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.delFlag" for="field_delFlag">Del Flag</label>
+          <input type="checkbox" class="form-check" name="delFlag" id="field_delFlag" data-cy="delFlag" formControlName="delFlag" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.orderNum" for="field_orderNum">Order Num</label>
+          <input type="number" class="form-control" name="orderNum" id="field_orderNum" data-cy="orderNum" formControlName="orderNum" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.lastModifyDate" for="field_lastModifyDate"
+            >Last Modify Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifyDate"
+              data-cy="lastModifyDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifyDate"
+              formControlName="lastModifyDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.lastModifyBy" for="field_lastModifyBy"
+            >Last Modify By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifyBy"
+            id="field_lastModifyBy"
+            data-cy="lastModifyBy"
+            formControlName="lastModifyBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityNotice.community" for="field_community">Community</label>
+          <select class="form-control" id="field_community" data-cy="community" name="community" formControlName="community">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="communityOption.id === editForm.get('community')!.value?.id ? editForm.get('community')!.value : communityOption"
+              *ngFor="let communityOption of communitiesSharedCollection; trackBy: trackCommunityById"
+            >
+              {{ communityOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

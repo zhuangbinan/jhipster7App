@@ -1,0 +1,54 @@
+{
+  "name": "TuYaCmd",
+  "fields": [
+    {
+      "fieldName": "cmdName",
+      "fieldType": "String",
+      "javadoc": "名称"
+    },
+    {
+      "fieldName": "cmdCode",
+      "fieldType": "String",
+      "javadoc": "命令code"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "Boolean",
+      "javadoc": "值"
+    },
+    {
+      "fieldName": "cmdType",
+      "fieldType": "CmdType",
+      "javadoc": "类型",
+      "fieldValues": "ON,OFF,TIMEON,TIMEOFF"
+    },
+    {
+      "fieldName": "createTime",
+      "fieldType": "Instant",
+      "javadoc": "创建时间"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean",
+      "javadoc": "是否有效"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tuYaDevice",
+      "otherEntityRelationshipName": "tuYaCmd",
+      "relationshipName": "tuYaDevice"
+    }
+  ],
+  "entityTableName": "tu_ya_cmd",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210528073919"
+}

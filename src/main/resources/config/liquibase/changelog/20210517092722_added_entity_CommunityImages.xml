@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity CommunityImages.
+    -->
+    <changeSet id="20210517092722-1" author="jhipster">
+        <createTable tableName="wamoli_community_images" remarks="社区居委会 图片库">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="img_content" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="img_content_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="img_title" type="varchar(255)" remarks="图片名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="img_desc" type="varchar(255)" remarks="图片描述">
+                <constraints nullable="true" />
+            </column>
+            <column name="order_num" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modify_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modify_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="community_image_group_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="wamoli_community_images" columnName="last_modify_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210517092722-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/wamoli_community_images.csv"
+                  separator=";"
+                  tableName="wamoli_community_images">
+            <column name="id" type="numeric"/>
+            <column name="img_content" type="blob"/>
+            <column name="img_content_content_type" type="string"/>
+            <column name="img_title" type="string"/>
+            <column name="img_desc" type="string"/>
+            <column name="order_num" type="numeric"/>
+            <column name="last_modify_date" type="${datetimeType}"/>
+            <column name="last_modify_by" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

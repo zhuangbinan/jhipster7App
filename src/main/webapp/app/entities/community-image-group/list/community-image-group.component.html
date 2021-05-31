@@ -1,0 +1,110 @@
+<div>
+  <h2 id="page-heading" data-cy="CommunityImageGroupHeading">
+    <span jhiTranslate="jhipster7App.communityImageGroup.home.title">Community Image Groups</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipster7App.communityImageGroup.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-community-image-group"
+        [routerLink]="['/community-image-group/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipster7App.communityImageGroup.home.createLabel"> Create a new Community Image Group </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="communityImageGroups?.length === 0">
+    <span jhiTranslate="jhipster7App.communityImageGroup.home.notFound">No communityImageGroups found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="communityImageGroups && communityImageGroups.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="imgGroupName">
+            <span jhiTranslate="jhipster7App.communityImageGroup.imgGroupName">Img Group Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="orderNum">
+            <span jhiTranslate="jhipster7App.communityImageGroup.orderNum">Order Num</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifyDate">
+            <span jhiTranslate="jhipster7App.communityImageGroup.lastModifyDate">Last Modify Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifyBy">
+            <span jhiTranslate="jhipster7App.communityImageGroup.lastModifyBy">Last Modify By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let communityImageGroup of communityImageGroups; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/community-image-group', communityImageGroup.id, 'view']">{{ communityImageGroup.id }}</a>
+          </td>
+          <td>{{ communityImageGroup.imgGroupName }}</td>
+          <td>{{ communityImageGroup.orderNum }}</td>
+          <td>{{ communityImageGroup.lastModifyDate | formatMediumDatetime }}</td>
+          <td>{{ communityImageGroup.lastModifyBy }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/community-image-group', communityImageGroup.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/community-image-group', communityImageGroup.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(communityImageGroup)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="communityImageGroups && communityImageGroups.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

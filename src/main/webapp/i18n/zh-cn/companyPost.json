@@ -1,0 +1,40 @@
+{
+  "jhipster7App": {
+    "companyPost": {
+      "home": {
+        "title": "Company Posts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Company Post",
+        "createOrEditLabel": "创建或编辑 Company Post",
+        "notFound": "No Company Posts found"
+      },
+      "created": "Company Post {{ param }} 创建成功",
+      "updated": "Company Post {{ param }} 更新成功",
+      "deleted": "Company Post {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Company Post {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Company Post"
+      },
+      "id": "ID",
+      "postCode": "Post Code",
+      "postName": "Post Name",
+      "orderNum": "Order Num",
+      "remark": "Remark",
+      "enable": "Enable",
+      "createBy": "Create By",
+      "createDate": "Create Date",
+      "lastModifyBy": "Last Modify By",
+      "lastModifyDate": "Last Modify Date",
+      "companyDept": "Company Dept",
+      "help": {
+        "postCode": "岗位英文缩写 如 CEO CTO HR",
+        "postName": "岗位名称",
+        "orderNum": "排序号",
+        "remark": "备注",
+        "enable": "是否可用"
+      }
+    }
+  }
+}

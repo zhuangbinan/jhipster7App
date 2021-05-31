@@ -1,0 +1,25 @@
+{
+  "jhipster7App": {
+    "wamoliFaceLibrary": {
+      "home": {
+        "title": "Wamoli Face Libraries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Wamoli Face Library",
+        "createOrEditLabel": "创建或编辑 Wamoli Face Library",
+        "notFound": "No Wamoli Face Libraries found"
+      },
+      "created": "Wamoli Face Library {{ param }} 创建成功",
+      "updated": "Wamoli Face Library {{ param }} 更新成功",
+      "deleted": "Wamoli Face Library {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Wamoli Face Library {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Wamoli Face Library"
+      },
+      "id": "ID",
+      "content": "Content",
+      "wamoliUser": "Wamoli User"
+    }
+  }
+}

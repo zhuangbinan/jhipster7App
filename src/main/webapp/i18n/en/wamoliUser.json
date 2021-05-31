@@ -1,0 +1,51 @@
+{
+  "jhipster7App": {
+    "wamoliUser": {
+      "home": {
+        "title": "Wamoli Users",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Wamoli User",
+        "createOrEditLabel": "Create or edit a Wamoli User",
+        "notFound": "No Wamoli Users found"
+      },
+      "created": "A new Wamoli User is created with identifier {{ param }}",
+      "updated": "A Wamoli User is updated with identifier {{ param }}",
+      "deleted": "A Wamoli User is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Wamoli User {{ id }}?"
+      },
+      "detail": {
+        "title": "Wamoli User"
+      },
+      "id": "ID",
+      "userName": "User Name",
+      "gender": "Gender",
+      "phoneNum": "Phone Num",
+      "email": "Email",
+      "unitAddr": "Unit Addr",
+      "roomAddr": "Room Addr",
+      "idCardNum": "Id Card Num",
+      "idCardType": "Id Card Type",
+      "userType": "User Type",
+      "enable": "Enable",
+      "isManager": "Is Manager",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "user": "User",
+      "roomAddr": "Room Addr",
+      "companyDept": "Company Dept",
+      "help": {
+        "userName": "用户姓名",
+        "gender": "性别",
+        "phoneNum": "电话",
+        "email": "邮箱",
+        "unitAddr": "单元",
+        "roomAddr": "门牌",
+        "idCardNum": "证件号码",
+        "idCardType": "证件类型",
+        "userType": "用户类型",
+        "enable": "是否生效"
+      }
+    }
+  }
+}

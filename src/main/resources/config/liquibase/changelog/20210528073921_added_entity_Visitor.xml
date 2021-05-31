@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Visitor.
+    -->
+    <changeSet id="20210528073921-1" author="jhipster">
+        <createTable tableName="wamoli_visitor" remarks="访客信息">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)" remarks="姓名">
+                <constraints nullable="false" />
+            </column>
+            <column name="phone_num" type="varchar(255)" remarks="电话">
+                <constraints nullable="false" />
+            </column>
+            <column name="car_plate_num" type="varchar(255)" remarks="车牌号码">
+                <constraints nullable="true" />
+            </column>
+            <column name="start_time" type="${datetimeType}" remarks="生效时间">
+                <constraints nullable="false" />
+            </column>
+            <column name="end_time" type="${datetimeType}" remarks="失效时间">
+                <constraints nullable="false" />
+            </column>
+            <column name="passwd" type="varchar(255)" remarks="密码密钥">
+                <constraints nullable="true" />
+            </column>
+            <column name="face_image" type="longblob" remarks="人脸">
+                <constraints nullable="true" />
+            </column>
+            <column name="face_image_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="which_entrance" type="varchar(255)" remarks="远程开启选择的门,进小区或楼栋入口">
+                <constraints nullable="true" />
+            </column>
+            <column name="room_addr_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="wamoli_visitor" columnName="start_time" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="wamoli_visitor" columnName="end_time" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210528073921-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/wamoli_visitor.csv"
+                  separator=";"
+                  tableName="wamoli_visitor">
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="phone_num" type="string"/>
+            <column name="car_plate_num" type="string"/>
+            <column name="start_time" type="${datetimeType}"/>
+            <column name="end_time" type="${datetimeType}"/>
+            <column name="passwd" type="string"/>
+            <column name="face_image" type="blob"/>
+            <column name="face_image_content_type" type="string"/>
+            <column name="which_entrance" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

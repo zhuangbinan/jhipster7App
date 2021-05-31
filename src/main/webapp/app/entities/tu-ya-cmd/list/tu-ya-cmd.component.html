@@ -1,0 +1,126 @@
+<div>
+  <h2 id="page-heading" data-cy="TuYaCmdHeading">
+    <span jhiTranslate="jhipster7App.tuYaCmd.home.title">Tu Ya Cmds</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipster7App.tuYaCmd.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tu-ya-cmd"
+        [routerLink]="['/tu-ya-cmd/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipster7App.tuYaCmd.home.createLabel"> Create a new Tu Ya Cmd </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="tuYaCmds?.length === 0">
+    <span jhiTranslate="jhipster7App.tuYaCmd.home.notFound">No tuYaCmds found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="tuYaCmds && tuYaCmds.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="cmdName">
+            <span jhiTranslate="jhipster7App.tuYaCmd.cmdName">Cmd Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cmdCode">
+            <span jhiTranslate="jhipster7App.tuYaCmd.cmdCode">Cmd Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="value">
+            <span jhiTranslate="jhipster7App.tuYaCmd.value">Value</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cmdType">
+            <span jhiTranslate="jhipster7App.tuYaCmd.cmdType">Cmd Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createTime">
+            <span jhiTranslate="jhipster7App.tuYaCmd.createTime">Create Time</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="enable">
+            <span jhiTranslate="jhipster7App.tuYaCmd.enable">Enable</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tuYaDevice.id">
+            <span jhiTranslate="jhipster7App.tuYaCmd.tuYaDevice">Tu Ya Device</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tuYaCmd of tuYaCmds; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/tu-ya-cmd', tuYaCmd.id, 'view']">{{ tuYaCmd.id }}</a>
+          </td>
+          <td>{{ tuYaCmd.cmdName }}</td>
+          <td>{{ tuYaCmd.cmdCode }}</td>
+          <td>{{ tuYaCmd.value }}</td>
+          <td jhiTranslate="{{ 'jhipster7App.CmdType.' + tuYaCmd.cmdType }}">{{ tuYaCmd.cmdType }}</td>
+          <td>{{ tuYaCmd.createTime | formatMediumDatetime }}</td>
+          <td>{{ tuYaCmd.enable }}</td>
+          <td>
+            <div *ngIf="tuYaCmd.tuYaDevice">
+              <a [routerLink]="['/tu-ya-device', tuYaCmd.tuYaDevice?.id, 'view']">{{ tuYaCmd.tuYaDevice?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/tu-ya-cmd', tuYaCmd.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/tu-ya-cmd', tuYaCmd.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(tuYaCmd)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="tuYaCmds && tuYaCmds.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

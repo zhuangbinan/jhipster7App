@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="communityImageGroup">
+      <h2 data-cy="communityImageGroupDetailsHeading">
+        <span jhiTranslate="jhipster7App.communityImageGroup.detail.title">Community Image Group</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ communityImageGroup.id }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.communityImageGroup.imgGroupName"
+            [ngbTooltip]="'jhipster7App.communityImageGroup.help.imgGroupName' | translate"
+            >Img Group Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ communityImageGroup.imgGroupName }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityImageGroup.orderNum">Order Num</span></dt>
+        <dd>
+          <span>{{ communityImageGroup.orderNum }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityImageGroup.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+          <span>{{ communityImageGroup.lastModifyDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityImageGroup.lastModifyBy">Last Modify By</span></dt>
+        <dd>
+          <span>{{ communityImageGroup.lastModifyBy }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/community-image-group', communityImageGroup.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

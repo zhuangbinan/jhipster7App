@@ -1,0 +1,43 @@
+{
+  "jhipster7App": {
+    "communityLeader": {
+      "home": {
+        "title": "Community Leaders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Community Leader",
+        "createOrEditLabel": "Create or edit a Community Leader",
+        "notFound": "No Community Leaders found"
+      },
+      "created": "A new Community Leader is created with identifier {{ param }}",
+      "updated": "A Community Leader is updated with identifier {{ param }}",
+      "deleted": "A Community Leader is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Community Leader {{ id }}?"
+      },
+      "detail": {
+        "title": "Community Leader"
+      },
+      "id": "ID",
+      "avatar": "Avatar",
+      "realName": "Real Name",
+      "tel": "Tel",
+      "jobTitle": "Job Title",
+      "jobDesc": "Job Desc",
+      "jobCareerDesc": "Job Career Desc",
+      "enable": "Enable",
+      "delFlag": "Del Flag",
+      "orderNum": "Order Num",
+      "lastModifyDate": "Last Modify Date",
+      "lastModifyBy": "Last Modify By",
+      "community": "Community",
+      "help": {
+        "avatar": "证件照",
+        "realName": "姓名",
+        "tel": "电话号码",
+        "jobTitle": "职务",
+        "jobDesc": "职责简述",
+        "jobCareerDesc": "职业生涯简述"
+      }
+    }
+  }
+}

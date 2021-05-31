@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity CommunityLeader.
+    -->
+    <changeSet id="20210518015837-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="community_id"
+                                 baseTableName="wamoli_community_leader"
+                                 constraintName="fk_wamoli_community_leader__community_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_community"/>
+    </changeSet>
+</databaseChangeLog>

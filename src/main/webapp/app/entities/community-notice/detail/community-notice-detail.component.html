@@ -1,0 +1,169 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="communityNotice">
+      <h2 data-cy="communityNoticeDetailsHeading">
+        <span jhiTranslate="jhipster7App.communityNotice.detail.title">Community Notice</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ communityNotice.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.title">Title</span></dt>
+        <dd>
+          <span>{{ communityNotice.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img1">Img 1</span></dt>
+        <dd>
+          <div *ngIf="communityNotice.img1">
+            <a (click)="openFile(communityNotice.img1, communityNotice.img1ContentType)">
+              <img
+                [src]="'data:' + communityNotice.img1ContentType + ';base64,' + communityNotice.img1"
+                style="max-width: 100%"
+                alt="communityNotice image"
+              />
+            </a>
+            {{ communityNotice.img1ContentType }}, {{ byteSize(communityNotice.img1) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img1Title">Img 1 Title</span></dt>
+        <dd>
+          <span>{{ communityNotice.img1Title }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.content1">Content 1</span></dt>
+        <dd>
+          <span>{{ communityNotice.content1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img2">Img 2</span></dt>
+        <dd>
+          <div *ngIf="communityNotice.img2">
+            <a (click)="openFile(communityNotice.img2, communityNotice.img2ContentType)">
+              <img
+                [src]="'data:' + communityNotice.img2ContentType + ';base64,' + communityNotice.img2"
+                style="max-width: 100%"
+                alt="communityNotice image"
+              />
+            </a>
+            {{ communityNotice.img2ContentType }}, {{ byteSize(communityNotice.img2) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img2Title">Img 2 Title</span></dt>
+        <dd>
+          <span>{{ communityNotice.img2Title }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.content2">Content 2</span></dt>
+        <dd>
+          <span>{{ communityNotice.content2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img3">Img 3</span></dt>
+        <dd>
+          <div *ngIf="communityNotice.img3">
+            <a (click)="openFile(communityNotice.img3, communityNotice.img3ContentType)">
+              <img
+                [src]="'data:' + communityNotice.img3ContentType + ';base64,' + communityNotice.img3"
+                style="max-width: 100%"
+                alt="communityNotice image"
+              />
+            </a>
+            {{ communityNotice.img3ContentType }}, {{ byteSize(communityNotice.img3) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img3Title">Img 3 Title</span></dt>
+        <dd>
+          <span>{{ communityNotice.img3Title }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.content3">Content 3</span></dt>
+        <dd>
+          <span>{{ communityNotice.content3 }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img4">Img 4</span></dt>
+        <dd>
+          <div *ngIf="communityNotice.img4">
+            <a (click)="openFile(communityNotice.img4, communityNotice.img4ContentType)">
+              <img
+                [src]="'data:' + communityNotice.img4ContentType + ';base64,' + communityNotice.img4"
+                style="max-width: 100%"
+                alt="communityNotice image"
+              />
+            </a>
+            {{ communityNotice.img4ContentType }}, {{ byteSize(communityNotice.img4) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img4Title">Img 4 Title</span></dt>
+        <dd>
+          <span>{{ communityNotice.img4Title }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.content4">Content 4</span></dt>
+        <dd>
+          <span>{{ communityNotice.content4 }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img5">Img 5</span></dt>
+        <dd>
+          <div *ngIf="communityNotice.img5">
+            <a (click)="openFile(communityNotice.img5, communityNotice.img5ContentType)">
+              <img
+                [src]="'data:' + communityNotice.img5ContentType + ';base64,' + communityNotice.img5"
+                style="max-width: 100%"
+                alt="communityNotice image"
+              />
+            </a>
+            {{ communityNotice.img5ContentType }}, {{ byteSize(communityNotice.img5) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.img5Title">Img 5 Title</span></dt>
+        <dd>
+          <span>{{ communityNotice.img5Title }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.content5">Content 5</span></dt>
+        <dd>
+          <span>{{ communityNotice.content5 }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.tail">Tail</span></dt>
+        <dd>
+          <span>{{ communityNotice.tail }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.enable">Enable</span></dt>
+        <dd>
+          <span>{{ communityNotice.enable }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.delFlag">Del Flag</span></dt>
+        <dd>
+          <span>{{ communityNotice.delFlag }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.orderNum">Order Num</span></dt>
+        <dd>
+          <span>{{ communityNotice.orderNum }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.lastModifyDate">Last Modify Date</span></dt>
+        <dd>
+          <span>{{ communityNotice.lastModifyDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.lastModifyBy">Last Modify By</span></dt>
+        <dd>
+          <span>{{ communityNotice.lastModifyBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.communityNotice.community">Community</span></dt>
+        <dd>
+          <div *ngIf="communityNotice.community">
+            <a [routerLink]="['/community', communityNotice.community?.id, 'view']">{{ communityNotice.community?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/community-notice', communityNotice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

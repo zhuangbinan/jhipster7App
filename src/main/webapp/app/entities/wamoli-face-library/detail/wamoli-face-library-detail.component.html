@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="wamoliFaceLibrary">
+      <h2 data-cy="wamoliFaceLibraryDetailsHeading">
+        <span jhiTranslate="jhipster7App.wamoliFaceLibrary.detail.title">Wamoli Face Library</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ wamoliFaceLibrary.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliFaceLibrary.content">Content</span></dt>
+        <dd>
+          <span>{{ wamoliFaceLibrary.content }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.wamoliFaceLibrary.wamoliUser">Wamoli User</span></dt>
+        <dd>
+          <div *ngIf="wamoliFaceLibrary.wamoliUser">
+            <a [routerLink]="['/wamoli-user', wamoliFaceLibrary.wamoliUser?.id, 'view']">{{ wamoliFaceLibrary.wamoliUser?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/wamoli-face-library', wamoliFaceLibrary.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

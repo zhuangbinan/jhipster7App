@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="buildings">
+      <h2 data-cy="buildingsDetailsHeading"><span jhiTranslate="jhipster7App.buildings.detail.title">Buildings</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ buildings.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.buildings.name" [ngbTooltip]="'jhipster7App.buildings.help.name' | translate">Name</span></dt>
+        <dd>
+          <span>{{ buildings.name }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.buildings.longCode" [ngbTooltip]="'jhipster7App.buildings.help.longCode' | translate"
+            >Long Code</span
+          >
+        </dt>
+        <dd>
+          <span>{{ buildings.longCode }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.buildings.floorCount" [ngbTooltip]="'jhipster7App.buildings.help.floorCount' | translate"
+            >Floor Count</span
+          >
+        </dt>
+        <dd>
+          <span>{{ buildings.floorCount }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.buildings.unites" [ngbTooltip]="'jhipster7App.buildings.help.unites' | translate">Unites</span>
+        </dt>
+        <dd>
+          <span>{{ buildings.unites }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.buildings.longitude" [ngbTooltip]="'jhipster7App.buildings.help.longitude' | translate"
+            >Longitude</span
+          >
+        </dt>
+        <dd>
+          <span>{{ buildings.longitude }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.buildings.latitude" [ngbTooltip]="'jhipster7App.buildings.help.latitude' | translate"
+            >Latitude</span
+          >
+        </dt>
+        <dd>
+          <span>{{ buildings.latitude }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.buildings.enable" [ngbTooltip]="'jhipster7App.buildings.help.enable' | translate">Enable</span>
+        </dt>
+        <dd>
+          <span>{{ buildings.enable }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.buildings.homelandStation">Homeland Station</span></dt>
+        <dd>
+          <div *ngIf="buildings.homelandStation">
+            <a [routerLink]="['/homeland-station', buildings.homelandStation?.id, 'view']">{{ buildings.homelandStation?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/buildings', buildings.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

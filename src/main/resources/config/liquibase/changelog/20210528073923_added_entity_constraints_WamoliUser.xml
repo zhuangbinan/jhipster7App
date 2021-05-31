@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity WamoliUser.
+    -->
+    <changeSet id="20210528073923-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="wamoli_user"
+                                 constraintName="fk_wamoli_user__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="wamoli_user_id"
+                                 baseTableName="rel_wamoli_user__room_addr"
+                                 constraintName="fk_rel_wamoli_user__room_addr__wamoli_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="room_addr_id"
+                                 baseTableName="rel_wamoli_user__room_addr"
+                                 constraintName="fk_rel_wamoli_user__room_addr__room_addr_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_room_addr"/>
+
+        <addForeignKeyConstraint baseColumnNames="wamoli_user_id"
+                                 baseTableName="rel_wamoli_user__company_dept"
+                                 constraintName="fk_rel_wamoli_user__company_dept__wamoli_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="company_dept_id"
+                                 baseTableName="rel_wamoli_user__company_dept"
+                                 constraintName="fk_rel_wamoli_user__company_dept__company_dept_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_company_dept"/>
+    </changeSet>
+</databaseChangeLog>

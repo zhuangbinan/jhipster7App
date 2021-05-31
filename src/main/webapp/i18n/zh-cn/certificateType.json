@@ -1,0 +1,10 @@
+{
+  "jhipster7App": {
+    "CertificateType": {
+      "null": "",
+      "IDCARD": "IDCARD",
+      "DRIVINGLICENSE": "DRIVINGLICENSE",
+      "PASSPORT": "PASSPORT"
+    }
+  }
+}

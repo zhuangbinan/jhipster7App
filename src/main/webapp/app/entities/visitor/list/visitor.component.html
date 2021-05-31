@@ -1,0 +1,141 @@
+<div>
+  <h2 id="page-heading" data-cy="VisitorHeading">
+    <span jhiTranslate="jhipster7App.visitor.home.title">Visitors</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipster7App.visitor.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-visitor"
+        [routerLink]="['/visitor/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipster7App.visitor.home.createLabel"> Create a new Visitor </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="visitors?.length === 0">
+    <span jhiTranslate="jhipster7App.visitor.home.notFound">No visitors found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="visitors && visitors.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="jhipster7App.visitor.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="phoneNum">
+            <span jhiTranslate="jhipster7App.visitor.phoneNum">Phone Num</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="carPlateNum">
+            <span jhiTranslate="jhipster7App.visitor.carPlateNum">Car Plate Num</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="startTime">
+            <span jhiTranslate="jhipster7App.visitor.startTime">Start Time</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="endTime">
+            <span jhiTranslate="jhipster7App.visitor.endTime">End Time</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="passwd">
+            <span jhiTranslate="jhipster7App.visitor.passwd">Passwd</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="faceImage">
+            <span jhiTranslate="jhipster7App.visitor.faceImage">Face Image</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="whichEntrance">
+            <span jhiTranslate="jhipster7App.visitor.whichEntrance">Which Entrance</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="roomAddr.id">
+            <span jhiTranslate="jhipster7App.visitor.roomAddr">Room Addr</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let visitor of visitors; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/visitor', visitor.id, 'view']">{{ visitor.id }}</a>
+          </td>
+          <td>{{ visitor.name }}</td>
+          <td>{{ visitor.phoneNum }}</td>
+          <td>{{ visitor.carPlateNum }}</td>
+          <td>{{ visitor.startTime | formatMediumDatetime }}</td>
+          <td>{{ visitor.endTime | formatMediumDatetime }}</td>
+          <td>{{ visitor.passwd }}</td>
+          <td>
+            <a *ngIf="visitor.faceImage" (click)="openFile(visitor.faceImage, visitor.faceImageContentType)">
+              <img
+                [src]="'data:' + visitor.faceImageContentType + ';base64,' + visitor.faceImage"
+                style="max-height: 30px"
+                alt="visitor image"
+              />
+            </a>
+            <span *ngIf="visitor.faceImage">{{ visitor.faceImageContentType }}, {{ byteSize(visitor.faceImage) }}</span>
+          </td>
+          <td>{{ visitor.whichEntrance }}</td>
+          <td>
+            <div *ngIf="visitor.roomAddr">
+              <a [routerLink]="['/room-addr', visitor.roomAddr?.id, 'view']">{{ visitor.roomAddr?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/visitor', visitor.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/visitor', visitor.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(visitor)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="visitors && visitors.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

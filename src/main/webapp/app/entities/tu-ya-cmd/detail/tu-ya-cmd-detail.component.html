@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tuYaCmd">
+      <h2 data-cy="tuYaCmdDetailsHeading"><span jhiTranslate="jhipster7App.tuYaCmd.detail.title">Tu Ya Cmd</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tuYaCmd.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaCmd.cmdName" [ngbTooltip]="'jhipster7App.tuYaCmd.help.cmdName' | translate">Cmd Name</span>
+        </dt>
+        <dd>
+          <span>{{ tuYaCmd.cmdName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaCmd.cmdCode" [ngbTooltip]="'jhipster7App.tuYaCmd.help.cmdCode' | translate">Cmd Code</span>
+        </dt>
+        <dd>
+          <span>{{ tuYaCmd.cmdCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.tuYaCmd.value" [ngbTooltip]="'jhipster7App.tuYaCmd.help.value' | translate">Value</span></dt>
+        <dd>
+          <span>{{ tuYaCmd.value }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaCmd.cmdType" [ngbTooltip]="'jhipster7App.tuYaCmd.help.cmdType' | translate">Cmd Type</span>
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipster7App.CmdType.' + tuYaCmd.cmdType }}">{{ tuYaCmd.cmdType }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaCmd.createTime" [ngbTooltip]="'jhipster7App.tuYaCmd.help.createTime' | translate"
+            >Create Time</span
+          >
+        </dt>
+        <dd>
+          <span>{{ tuYaCmd.createTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.tuYaCmd.enable" [ngbTooltip]="'jhipster7App.tuYaCmd.help.enable' | translate">Enable</span>
+        </dt>
+        <dd>
+          <span>{{ tuYaCmd.enable }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.tuYaCmd.tuYaDevice">Tu Ya Device</span></dt>
+        <dd>
+          <div *ngIf="tuYaCmd.tuYaDevice">
+            <a [routerLink]="['/tu-ya-device', tuYaCmd.tuYaDevice?.id, 'view']">{{ tuYaCmd.tuYaDevice?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tu-ya-cmd', tuYaCmd.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,260 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-homeland-station-heading"
+        data-cy="HomelandStationCreateUpdateHeading"
+        jhiTranslate="jhipster7App.homelandStation.home.createOrEditLabel"
+      >
+        Create or edit a Homeland Station
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.name"
+            for="field_name"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.name' | translate"
+            >Name</label
+          >
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.longCode"
+            for="field_longCode"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.longCode' | translate"
+            >Long Code</label
+          >
+          <input type="text" class="form-control" name="longCode" id="field_longCode" data-cy="longCode" formControlName="longCode" />
+          <div *ngIf="editForm.get('longCode')!.invalid && (editForm.get('longCode')!.dirty || editForm.get('longCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('longCode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.address"
+            for="field_address"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.address' | translate"
+            >Address</label
+          >
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.livingPopulation"
+            for="field_livingPopulation"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.livingPopulation' | translate"
+            >Living Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="livingPopulation"
+            id="field_livingPopulation"
+            data-cy="livingPopulation"
+            formControlName="livingPopulation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.buildingCount"
+            for="field_buildingCount"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.buildingCount' | translate"
+            >Building Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="buildingCount"
+            id="field_buildingCount"
+            data-cy="buildingCount"
+            formControlName="buildingCount"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.entranceCount"
+            for="field_entranceCount"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.entranceCount' | translate"
+            >Entrance Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="entranceCount"
+            id="field_entranceCount"
+            data-cy="entranceCount"
+            formControlName="entranceCount"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.logo"
+            for="field_logo"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.logo' | translate"
+            >Logo</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('logoContentType')!.value + ';base64,' + editForm.get('logo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('logo')!.value"
+              alt="homelandStation image"
+            />
+            <div *ngIf="editForm.get('logo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('logoContentType')!.value }}, {{ byteSize(editForm.get('logo')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('logo', 'logoContentType', 'file_logo')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_logo"
+              data-cy="logo"
+              (change)="setFileData($event, 'logo', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="logo" id="field_logo" data-cy="logo" formControlName="logo" />
+          <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType" formControlName="logoContentType" />
+          <div *ngIf="editForm.get('logo')!.invalid && (editForm.get('logo')!.dirty || editForm.get('logo')!.touched)"></div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.longitude"
+            for="field_longitude"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.longitude' | translate"
+            >Longitude</label
+          >
+          <input type="text" class="form-control" name="longitude" id="field_longitude" data-cy="longitude" formControlName="longitude" />
+          <div *ngIf="editForm.get('longitude')!.invalid && (editForm.get('longitude')!.dirty || editForm.get('longitude')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('longitude')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('longitude')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 32 }"
+            >
+              This field cannot be longer than 32 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.homelandStation.latitude"
+            for="field_latitude"
+            [ngbTooltip]="'jhipster7App.homelandStation.help.latitude' | translate"
+            >Latitude</label
+          >
+          <input type="text" class="form-control" name="latitude" id="field_latitude" data-cy="latitude" formControlName="latitude" />
+          <div *ngIf="editForm.get('latitude')!.invalid && (editForm.get('latitude')!.dirty || editForm.get('latitude')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('latitude')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('latitude')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 32 }"
+            >
+              This field cannot be longer than 32 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.homelandStation.community" for="field_community">Community</label>
+          <select class="form-control" id="field_community" data-cy="community" name="community" formControlName="community">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="communityOption.id === editForm.get('community')!.value?.id ? editForm.get('community')!.value : communityOption"
+              *ngFor="let communityOption of communitiesSharedCollection; trackBy: trackCommunityById"
+            >
+              {{ communityOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.homelandStation.company" for="field_company">Company</label>
+          <select class="form-control" id="field_company" data-cy="company" name="company" formControlName="company">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="companyOption.id === editForm.get('company')!.value?.id ? editForm.get('company')!.value : companyOption"
+              *ngFor="let companyOption of companiesSharedCollection; trackBy: trackCompanyById"
+            >
+              {{ companyOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

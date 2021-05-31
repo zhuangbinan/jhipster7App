@@ -1,0 +1,36 @@
+{
+  "jhipster7App": {
+    "wamoliUserLocation": {
+      "home": {
+        "title": "Wamoli User Locations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Wamoli User Location",
+        "createOrEditLabel": "Create or edit a Wamoli User Location",
+        "notFound": "No Wamoli User Locations found"
+      },
+      "created": "A new Wamoli User Location is created with identifier {{ param }}",
+      "updated": "A Wamoli User Location is updated with identifier {{ param }}",
+      "deleted": "A Wamoli User Location is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Wamoli User Location {{ id }}?"
+      },
+      "detail": {
+        "title": "Wamoli User Location"
+      },
+      "id": "ID",
+      "state": "State",
+      "cardNum": "Card Num",
+      "expireTime": "Expire Time",
+      "delayTime": "Delay Time",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "wamoliUser": "Wamoli User",
+      "help": {
+        "state": "用户位置状态",
+        "cardNum": "用户唯一标识",
+        "expireTime": "过期时间",
+        "delayTime": "延期时间，单位为分钟"
+      }
+    }
+  }
+}

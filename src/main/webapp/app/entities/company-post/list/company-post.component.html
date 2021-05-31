@@ -1,0 +1,138 @@
+<div>
+  <h2 id="page-heading" data-cy="CompanyPostHeading">
+    <span jhiTranslate="jhipster7App.companyPost.home.title">Company Posts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipster7App.companyPost.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-company-post"
+        [routerLink]="['/company-post/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipster7App.companyPost.home.createLabel"> Create a new Company Post </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="companyPosts?.length === 0">
+    <span jhiTranslate="jhipster7App.companyPost.home.notFound">No companyPosts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="companyPosts && companyPosts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="postCode">
+            <span jhiTranslate="jhipster7App.companyPost.postCode">Post Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="postName">
+            <span jhiTranslate="jhipster7App.companyPost.postName">Post Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="orderNum">
+            <span jhiTranslate="jhipster7App.companyPost.orderNum">Order Num</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="remark">
+            <span jhiTranslate="jhipster7App.companyPost.remark">Remark</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="enable">
+            <span jhiTranslate="jhipster7App.companyPost.enable">Enable</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createBy">
+            <span jhiTranslate="jhipster7App.companyPost.createBy">Create By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createDate">
+            <span jhiTranslate="jhipster7App.companyPost.createDate">Create Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifyBy">
+            <span jhiTranslate="jhipster7App.companyPost.lastModifyBy">Last Modify By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifyDate">
+            <span jhiTranslate="jhipster7App.companyPost.lastModifyDate">Last Modify Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="companyDept.id">
+            <span jhiTranslate="jhipster7App.companyPost.companyDept">Company Dept</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let companyPost of companyPosts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/company-post', companyPost.id, 'view']">{{ companyPost.id }}</a>
+          </td>
+          <td>{{ companyPost.postCode }}</td>
+          <td>{{ companyPost.postName }}</td>
+          <td>{{ companyPost.orderNum }}</td>
+          <td>{{ companyPost.remark }}</td>
+          <td>{{ companyPost.enable }}</td>
+          <td>{{ companyPost.createBy }}</td>
+          <td>{{ companyPost.createDate | formatMediumDatetime }}</td>
+          <td>{{ companyPost.lastModifyBy }}</td>
+          <td>{{ companyPost.lastModifyDate | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="companyPost.companyDept">
+              <a [routerLink]="['/company-dept', companyPost.companyDept?.id, 'view']">{{ companyPost.companyDept?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/company-post', companyPost.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/company-post', companyPost.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(companyPost)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="companyPosts && companyPosts.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

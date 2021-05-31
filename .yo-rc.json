@@ -5,7 +5,7 @@
     "baseName": "jhipster7App",
     "packageName": "com.mycompany.myapp",
     "packageFolder": "com/mycompany/myapp",
-    "serverPort": 8086,
+    "serverPort": "8086",
     "serviceDiscoveryType": "eureka",
     "authenticationType": "jwt",
     "cacheProvider": "caffeine",
@@ -43,7 +43,28 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "reactive": false,
-    "entities": ["Book", "Author"],
-    "lastLiquibaseTimestamp": 1618389286000
+    "entities": [
+      "Book",
+      "Author",
+      "CommunityImages",
+      "CommunityImageGroup",
+      "Test01",
+      "CommunityLeader",
+      "Community",
+      "CommunityNotice",
+      "Company",
+      "Buildings",
+      "HomelandStation",
+      "RoomAddr",
+      "TuYaCmd",
+      "TuYaDevice",
+      "Visitor",
+      "WamoliFaceLibrary",
+      "WamoliUser",
+      "WamoliUserLocation",
+      "CompanyDept",
+      "CompanyPost"
+    ],
+    "lastLiquibaseTimestamp": 1622427525000
   }
 }

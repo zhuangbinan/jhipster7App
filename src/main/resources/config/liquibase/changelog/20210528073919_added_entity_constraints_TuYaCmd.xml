@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity TuYaCmd.
+    -->
+    <changeSet id="20210528073919-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="tu_ya_device_id"
+                                 baseTableName="tu_ya_cmd"
+                                 constraintName="fk_tu_ya_cmd__tu_ya_device_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tu_ya_device"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,202 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-community-leader-heading"
+        data-cy="CommunityLeaderCreateUpdateHeading"
+        jhiTranslate="jhipster7App.communityLeader.home.createOrEditLabel"
+      >
+        Create or edit a Community Leader
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.communityLeader.avatar"
+            for="field_avatar"
+            [ngbTooltip]="'jhipster7App.communityLeader.help.avatar' | translate"
+            >Avatar</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('avatarContentType')!.value + ';base64,' + editForm.get('avatar')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('avatar')!.value"
+              alt="communityLeader image"
+            />
+            <div *ngIf="editForm.get('avatar')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('avatarContentType')!.value }}, {{ byteSize(editForm.get('avatar')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('avatar', 'avatarContentType', 'file_avatar')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_avatar"
+              data-cy="avatar"
+              (change)="setFileData($event, 'avatar', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="avatar" id="field_avatar" data-cy="avatar" formControlName="avatar" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="avatarContentType"
+            id="field_avatarContentType"
+            formControlName="avatarContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.communityLeader.realName"
+            for="field_realName"
+            [ngbTooltip]="'jhipster7App.communityLeader.help.realName' | translate"
+            >Real Name</label
+          >
+          <input type="text" class="form-control" name="realName" id="field_realName" data-cy="realName" formControlName="realName" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.communityLeader.tel"
+            for="field_tel"
+            [ngbTooltip]="'jhipster7App.communityLeader.help.tel' | translate"
+            >Tel</label
+          >
+          <input type="text" class="form-control" name="tel" id="field_tel" data-cy="tel" formControlName="tel" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.communityLeader.jobTitle"
+            for="field_jobTitle"
+            [ngbTooltip]="'jhipster7App.communityLeader.help.jobTitle' | translate"
+            >Job Title</label
+          >
+          <input type="text" class="form-control" name="jobTitle" id="field_jobTitle" data-cy="jobTitle" formControlName="jobTitle" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.communityLeader.jobDesc"
+            for="field_jobDesc"
+            [ngbTooltip]="'jhipster7App.communityLeader.help.jobDesc' | translate"
+            >Job Desc</label
+          >
+          <input type="text" class="form-control" name="jobDesc" id="field_jobDesc" data-cy="jobDesc" formControlName="jobDesc" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="jhipster7App.communityLeader.jobCareerDesc"
+            for="field_jobCareerDesc"
+            [ngbTooltip]="'jhipster7App.communityLeader.help.jobCareerDesc' | translate"
+            >Job Career Desc</label
+          >
+          <textarea
+            class="form-control"
+            name="jobCareerDesc"
+            id="field_jobCareerDesc"
+            data-cy="jobCareerDesc"
+            formControlName="jobCareerDesc"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityLeader.enable" for="field_enable">Enable</label>
+          <input type="checkbox" class="form-check" name="enable" id="field_enable" data-cy="enable" formControlName="enable" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityLeader.delFlag" for="field_delFlag">Del Flag</label>
+          <input type="checkbox" class="form-check" name="delFlag" id="field_delFlag" data-cy="delFlag" formControlName="delFlag" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityLeader.orderNum" for="field_orderNum">Order Num</label>
+          <input type="number" class="form-control" name="orderNum" id="field_orderNum" data-cy="orderNum" formControlName="orderNum" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityLeader.lastModifyDate" for="field_lastModifyDate"
+            >Last Modify Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifyDate"
+              data-cy="lastModifyDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifyDate"
+              formControlName="lastModifyDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityLeader.lastModifyBy" for="field_lastModifyBy"
+            >Last Modify By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifyBy"
+            id="field_lastModifyBy"
+            data-cy="lastModifyBy"
+            formControlName="lastModifyBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipster7App.communityLeader.community" for="field_community">Community</label>
+          <select class="form-control" id="field_community" data-cy="community" name="community" formControlName="community">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="communityOption.id === editForm.get('community')!.value?.id ? editForm.get('community')!.value : communityOption"
+              *ngFor="let communityOption of communitiesSharedCollection; trackBy: trackCommunityById"
+            >
+              {{ communityOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+{
+  "name": "CommunityNotice",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "img1",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "img1Title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content1",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "img2",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "img2Title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content2",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "img3",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "img3Title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content3",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "img4",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "img4Title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content4",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "img5",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "img5Title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content5",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "tail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "delFlag",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "orderNum",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastModifyDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifyBy",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "community",
+      "otherEntityRelationshipName": "communityNotice",
+      "relationshipName": "community"
+    }
+  ],
+  "javadoc": "社区居委会 社区通知、公告、新闻 暂时定为 标题 图片+正文 尾部 这样的 模板格式",
+  "entityTableName": "wamoli_community_notice",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210518055817"
+}
