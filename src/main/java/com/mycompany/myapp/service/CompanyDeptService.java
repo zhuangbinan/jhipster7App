@@ -2,7 +2,11 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.CompanyDept;
 import com.mycompany.myapp.repository.CompanyDeptRepository;
+
+import java.util.List;
 import java.util.Optional;
+
+import com.mycompany.myapp.repository.DataJdbcRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -21,8 +25,11 @@ public class CompanyDeptService {
 
     private final CompanyDeptRepository companyDeptRepository;
 
-    public CompanyDeptService(CompanyDeptRepository companyDeptRepository) {
+    private final DataJdbcRepository dataJdbcRepository;
+
+    public CompanyDeptService(CompanyDeptRepository companyDeptRepository, DataJdbcRepository dataJdbcRepository) {
         this.companyDeptRepository = companyDeptRepository;
+        this.dataJdbcRepository = dataJdbcRepository;
     }
 
     /**
@@ -33,7 +40,50 @@ public class CompanyDeptService {
      */
     public CompanyDept save(CompanyDept companyDept) {
         log.debug("Request to save CompanyDept : {}", companyDept);
+        if (companyDept.getId() != null) {
+            //Id不为空时 修改
+            //查父级记录
+            Optional<CompanyDept> oldParentOpt = companyDeptRepository.findById(companyDept.getParentId());
+            //查自己的记录
+            Optional<CompanyDept> oldDeptOpt = companyDeptRepository.findById(companyDept.getId());
+            if (oldParentOpt.isPresent() && oldDeptOpt.isPresent()) {
+                CompanyDept newParentDept = oldParentOpt.get();
+                CompanyDept oldDept = oldDeptOpt.get();
+                //两者都不为空的
+                String newAncestors = newParentDept.getAncestors() + "," + newParentDept.getId();
+                String oldAncestors = oldDept.getAncestors();
+                companyDept.setAncestors(newAncestors);
+                updateDeptChildren(companyDept.getId(), newAncestors, oldAncestors);
+            }
+
+            return null;
+        }
+
+        //新增 , 先查有没有这个父ID
+        Optional<CompanyDept> optionalCompanyDept =
+            companyDeptRepository.findById(companyDept.getParentId());
+        if (optionalCompanyDept.isEmpty()) {
+            throw new IllegalArgumentException("父ID有误,不能新增部门");
+        }
+        companyDept.setAncestors(
+            optionalCompanyDept.get().getAncestors() + "," + companyDept.getParentId()
+        );
         return companyDeptRepository.save(companyDept);
+    }
+
+    /**
+     * 修改子元素关系
+     *
+     * @param id 被修改的部门ID
+     * @param newAncestors 新的父ID集合
+     * @param oldAncestors 旧的父ID集合
+     */
+    public void updateDeptChildren(Long id, String newAncestors, String oldAncestors)
+    {
+        //用被修改的部门ID 查询子部门
+        List<CompanyDept> companyDepts = dataJdbcRepository.selectChildrenDeptById(id);
+        System.out.println(companyDepts);
+
     }
 
     /**

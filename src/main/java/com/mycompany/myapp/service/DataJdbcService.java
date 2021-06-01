@@ -1,6 +1,7 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.CommunityImages;
+import com.mycompany.myapp.domain.CompanyDept;
 import com.mycompany.myapp.repository.DataJdbcRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,10 @@ public class DataJdbcService {
             return communityImagesByGroupId;
         }
         return new ArrayList<CommunityImages>();
+    }
+
+    public List<CompanyDept> selectChildrenDeptById(Long id){
+        return dataJdbcRepository.selectChildrenDeptById(id);
     }
 
 }

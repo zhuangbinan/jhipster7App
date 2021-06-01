@@ -2,12 +2,15 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.CompanyDept;
 import com.mycompany.myapp.repository.CompanyDeptRepository;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.CompanyDeptQueryService;
 import com.mycompany.myapp.service.CompanyDeptService;
 import com.mycompany.myapp.service.criteria.CompanyDeptCriteria;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -68,6 +71,9 @@ public class CompanyDeptResource {
         if (companyDept.getId() != null) {
             throw new BadRequestAlertException("A new companyDept cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        //新增部门时添加创建人和时间
+        companyDept.setCreateBy(SecurityUtils.getCurrentUserLogin().get());
+        companyDept.setCreateDate(Instant.now());
         CompanyDept result = companyDeptService.save(companyDept);
         return ResponseEntity
             .created(new URI("/api/company-depts/" + result.getId()))
@@ -101,7 +107,8 @@ public class CompanyDeptResource {
         if (!companyDeptRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
+        companyDept.setLastModifyDate(Instant.now());
+        companyDept.setLastModifyBy(SecurityUtils.getCurrentUserLogin().get());
         CompanyDept result = companyDeptService.save(companyDept);
         return ResponseEntity
             .ok()
