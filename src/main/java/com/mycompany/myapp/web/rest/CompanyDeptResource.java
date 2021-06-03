@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.CompanyDept;
+import com.mycompany.myapp.domain.TreeSelect;
 import com.mycompany.myapp.repository.CompanyDeptRepository;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.CompanyDeptQueryService;
@@ -177,6 +178,16 @@ public class CompanyDeptResource {
     public ResponseEntity<List<CompanyDept>> getAllDeptsNoArgs(){
         List<CompanyDept> allWithDelFlagIsFalse = dataJdbcService.findAllWithDelFlagIsFalse();
         return ResponseEntity.ok(allWithDelFlagIsFalse);
+    }
+
+    /**
+     * 获取部门下拉树列表
+     */
+    @GetMapping("/company-depts/treeselect")
+    public ResponseEntity<List<TreeSelect>> treeselect()
+    {
+        List<CompanyDept> allWithDelFlagIsFalse = dataJdbcService.findAllWithDelFlagIsFalse();
+        return ResponseEntity.ok().body(companyDeptService.buildDeptTreeSelect(allWithDelFlagIsFalse));
     }
 
     /**

@@ -1,15 +1,21 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.CompanyDept;
+import com.mycompany.myapp.domain.CompanyDeptExtends;
+import com.mycompany.myapp.domain.TreeSelect;
 import com.mycompany.myapp.repository.CompanyDeptRepository;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.mycompany.myapp.repository.DataJdbcRepository;
+import com.mycompany.myapp.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -201,4 +207,108 @@ public class CompanyDeptService {
         log.debug("Request to delete CompanyDept : {}", id);
         companyDeptRepository.deleteById(id);
     }
+
+
+    /*public List<TreeSelect> buildDeptTreeSelect(List<SysDept> depts)
+    {
+        List<SysDept> deptTrees = buildDeptTree(depts);
+        return deptTrees.stream().map(TreeSelect::new).collect(Collectors.toList());
+    }*/
+
+    /**
+     * 构建前端所需要下拉树结构
+     *
+     * @param depts 部门列表
+     * @return 下拉树结构列表
+     */
+    public List<TreeSelect> buildDeptTreeSelect(List<CompanyDept> depts) {
+
+        //这里要做一个转换;把List集合里的所有的部门转为继承类的集合
+
+        List<CompanyDeptExtends> extendsList = new ArrayList<>();
+        CompanyDeptExtends deptExtends ;
+        for (CompanyDept dept : depts) {
+            deptExtends = new CompanyDeptExtends();
+            BeanUtils.copyProperties(dept,deptExtends);
+            extendsList.add(deptExtends);
+        }
+
+        List<CompanyDeptExtends> deptTrees = buildDeptTree(extendsList);
+
+        return deptTrees.stream().map(TreeSelect::new).collect(Collectors.toList());
+    }
+
+    /**
+     * 构建前端所需要树结构
+     *
+     * @param deptExtends 部门列表
+     * @return 树结构列表
+     */
+    private List<CompanyDeptExtends> buildDeptTree(List<CompanyDeptExtends> deptExtends) {
+        List<CompanyDeptExtends> returnList = new ArrayList<>();
+        List<Long> tempList = new ArrayList<>();
+        for (CompanyDeptExtends dept : deptExtends)
+        {
+            tempList.add(dept.getId());
+        }
+        for (Iterator<CompanyDeptExtends> iterator = deptExtends.iterator(); iterator.hasNext();)
+        {
+            CompanyDeptExtends dept =  iterator.next();
+            // 如果是顶级节点, 遍历该父节点的所有子节点
+            if (!tempList.contains(dept.getParentId()))
+            {
+                recursionFn(deptExtends, dept);
+                returnList.add(dept);
+            }
+        }
+        if (returnList.isEmpty())
+        {
+            returnList = deptExtends;
+        }
+        return returnList;
+    }
+
+    /**
+     * 递归列表
+     */
+    private void recursionFn(List<CompanyDeptExtends> list, CompanyDeptExtends t)
+    {
+        // 得到子节点列表
+        List<CompanyDeptExtends> childList = getChildList(list, t);
+        t.setChildren(childList);
+        for (CompanyDeptExtends tChild : childList)
+        {
+            if (hasChild(list, tChild))
+            {
+                recursionFn(list, tChild);
+            }
+        }
+    }
+
+    /**
+     * 得到子节点列表
+     */
+    private List<CompanyDeptExtends> getChildList(List<CompanyDeptExtends> list, CompanyDeptExtends t)
+    {
+        List<CompanyDeptExtends> tlist = new ArrayList<>();
+        Iterator<CompanyDeptExtends> it = list.iterator();
+        while (it.hasNext())
+        {
+            CompanyDeptExtends n = it.next();
+            if (StringUtils.isNotNull(n.getParentId()) && n.getParentId().longValue() == t.getId().longValue())
+            {
+                tlist.add(n);
+            }
+        }
+        return tlist;
+    }
+
+    /**
+     * 判断是否有子节点
+     */
+    private boolean hasChild(List<CompanyDeptExtends> list, CompanyDeptExtends t)
+    {
+        return getChildList(list, t).size() > 0 ? true : false;
+    }
+
 }

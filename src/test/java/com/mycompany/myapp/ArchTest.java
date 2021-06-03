@@ -2,12 +2,26 @@ package com.mycompany.myapp;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
+import com.mycompany.myapp.domain.CompanyDept;
+import com.mycompany.myapp.domain.CompanyDeptExtends;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.importer.ImportOption;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class ArchTest {
+    @Test
+    void t2(){
+        String oldStr = "{1,2,3}";
+        String newStr = "4";
+        String substring = oldStr.substring(0 , oldStr.length() - 1);
+        String result = substring + newStr + "}";
+        System.out.println(result);
+
+    }
 
     @Test
     void t1(){
