@@ -5,12 +5,12 @@ import com.mycompany.myapp.repository.CompanyDeptRepository;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.CompanyDeptQueryService;
 import com.mycompany.myapp.service.CompanyDeptService;
+import com.mycompany.myapp.service.DataJdbcService;
 import com.mycompany.myapp.service.criteria.CompanyDeptCriteria;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -48,14 +47,17 @@ public class CompanyDeptResource {
 
     private final CompanyDeptQueryService companyDeptQueryService;
 
+    private final DataJdbcService dataJdbcService;
+
     public CompanyDeptResource(
         CompanyDeptService companyDeptService,
         CompanyDeptRepository companyDeptRepository,
-        CompanyDeptQueryService companyDeptQueryService
-    ) {
+        CompanyDeptQueryService companyDeptQueryService,
+        DataJdbcService dataJdbcService) {
         this.companyDeptService = companyDeptService;
         this.companyDeptRepository = companyDeptRepository;
         this.companyDeptQueryService = companyDeptQueryService;
+        this.dataJdbcService = dataJdbcService;
     }
 
     /**
@@ -168,6 +170,16 @@ public class CompanyDeptResource {
     }
 
     /**
+     *
+     * @return 按逻辑删除 所有部门列表 不分页
+     */
+    @GetMapping("/company-depts-noargs")
+    public ResponseEntity<List<CompanyDept>> getAllDeptsNoArgs(){
+        List<CompanyDept> allWithDelFlagIsFalse = dataJdbcService.findAllWithDelFlagIsFalse();
+        return ResponseEntity.ok(allWithDelFlagIsFalse);
+    }
+
+    /**
      * {@code GET  /company-depts/count} : count all the companyDepts.
      *
      * @param criteria the criteria which the requested entities should match.
@@ -207,4 +219,26 @@ public class CompanyDeptResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * 逻辑删除部门
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/company-depts-del/{id}")
+    public ResponseEntity logicDeleteDept(@PathVariable Long id) {
+        log.debug("REST request to logicDeleteDept CompanyDept : {}", id);
+        if (dataJdbcService.hasChildByDeptId(id))
+        {
+            return ResponseEntity.ok().body("存在下级部门,不允许删除");
+        }
+        if (dataJdbcService.checkDeptExistUser(id))
+        {
+            return ResponseEntity.ok().body("部门存在用户,不允许删除");
+        }
+        //执行删除
+        dataJdbcService.logicDeleteDept(id);
+        return ResponseEntity.ok().body("删除成功");
+    }
+
 }

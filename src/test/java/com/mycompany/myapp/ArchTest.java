@@ -10,6 +10,16 @@ import org.junit.jupiter.api.Test;
 class ArchTest {
 
     @Test
+    void t1(){
+        String str = "0,100,101,102";
+        String oldStr = "0,100,101,102";
+        String newStr = "0,100,202,102";
+        String replace = str.replace(oldStr, newStr);
+        System.out.println(replace);
+
+    }
+
+    @Test
     void servicesAndRepositoriesShouldNotDependOnWebLayer() {
         JavaClasses importedClasses = new ClassFileImporter()
             .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)

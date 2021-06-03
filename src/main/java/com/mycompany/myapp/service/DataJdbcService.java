@@ -3,6 +3,7 @@ package com.mycompany.myapp.service;
 import com.mycompany.myapp.domain.CommunityImages;
 import com.mycompany.myapp.domain.CompanyDept;
 import com.mycompany.myapp.repository.DataJdbcRepository;
+import io.jsonwebtoken.lang.Assert;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,4 +32,37 @@ public class DataJdbcService {
         return dataJdbcRepository.selectChildrenDeptById(id);
     }
 
+    /**
+     * 查找所有未被逻辑删除的部门
+     * @return
+     */
+    public List<CompanyDept> findAllWithDelFlagIsFalse(){
+        return dataJdbcRepository.findAllWithDelFlagIsFalse();
+    }
+
+    /**
+     * 逻辑删除
+     * @param id
+     */
+    public void logicDeleteDept(Long id) {
+        dataJdbcRepository.logicDeleteDept(id);
+    }
+
+    /**
+     *
+     * @param id 部门id
+     * @return 该部门是否有子部门 有为 true
+     */
+    public boolean hasChildByDeptId(Long id) {
+        return dataJdbcRepository.hasChildByDeptId(id) > 0;
+    }
+
+    /**
+     *
+     * @param id 部门id
+     * @return 该部门如果有用户返回 true
+     */
+    public boolean checkDeptExistUser(Long id) {
+        return dataJdbcRepository.checkDeptExistUser(id) > 0;
+    }
 }

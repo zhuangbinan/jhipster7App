@@ -3,6 +3,7 @@ package com.mycompany.myapp.service;
 import com.mycompany.myapp.domain.CompanyDept;
 import com.mycompany.myapp.repository.CompanyDeptRepository;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,14 +50,17 @@ public class CompanyDeptService {
             if (oldParentOpt.isPresent() && oldDeptOpt.isPresent()) {
                 CompanyDept newParentDept = oldParentOpt.get();
                 CompanyDept oldDept = oldDeptOpt.get();
-                //两者都不为空的
+                //两者都不为空的,拼出新的祖籍,
                 String newAncestors = newParentDept.getAncestors() + "," + newParentDept.getId();
+                //拿到老的祖籍
                 String oldAncestors = oldDept.getAncestors();
+                //给当前修改的部门写上新祖籍
                 companyDept.setAncestors(newAncestors);
+                //更新当前部门下子部门的祖籍
                 updateDeptChildren(companyDept.getId(), newAncestors, oldAncestors);
+                return companyDeptRepository.save(companyDept);
             }
-
-            return null;
+            throw new IllegalArgumentException("修改部门时出错,提供的部门信息有误! "+ this.getClass().getName());
         }
 
         //新增 , 先查有没有这个父ID
@@ -81,9 +85,22 @@ public class CompanyDeptService {
     public void updateDeptChildren(Long id, String newAncestors, String oldAncestors)
     {
         //用被修改的部门ID 查询子部门
-        List<CompanyDept> companyDepts = dataJdbcRepository.selectChildrenDeptById(id);
-        System.out.println(companyDepts);
-
+        List<CompanyDept> childrenDeptList = dataJdbcRepository.selectChildrenDeptById(id);
+        //如果这个集合和size大于0
+        for (CompanyDept childDept : childrenDeptList) {
+            // 子部门当前的祖籍.replace(老的祖籍,新的祖籍);
+            // 例如:
+            // [0,100,111,112].replace( [0,100,111], [0,100,102,110] )
+            // 因为第一个参数里有和调用replace方法者相同的3个元素,所以这3个元素会被替换成第二个参数
+            // 返回值为[0,100,102,110,112]
+            childDept.setAncestors(childDept.getAncestors().replace(oldAncestors,newAncestors));
+        }
+        if (childrenDeptList.size() > 0) {
+            //修改数据库的值
+            for (CompanyDept newChild : childrenDeptList) {
+                companyDeptRepository.save(newChild);
+            }
+        }
     }
 
     /**
@@ -155,6 +172,12 @@ public class CompanyDeptService {
     public Page<CompanyDept> findAll(Pageable pageable) {
         log.debug("Request to get all CompanyDepts");
         return companyDeptRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CompanyDept> findAll() {
+        log.debug("Request to get all CompanyDepts");
+        return (Page<CompanyDept>) companyDeptRepository.findAll();
     }
 
     /**
