@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.Instant;
 import java.util.*;
 
+/**
+ * 增加 子元素 继承自CompanyDept
+ */
 public class CompanyDeptExtends extends CompanyDept{
 
     private Long id;

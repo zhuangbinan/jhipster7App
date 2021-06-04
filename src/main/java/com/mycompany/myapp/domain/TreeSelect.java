@@ -37,13 +37,6 @@ public class TreeSelect implements Serializable
         this.children = dept.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
-    /*public TreeSelect(SysMenu menu)
-    {
-        this.id = menu.getMenuId();
-        this.label = menu.getMenuName();
-        this.children = menu.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
-    }*/
-
     public Long getId()
     {
         return id;
