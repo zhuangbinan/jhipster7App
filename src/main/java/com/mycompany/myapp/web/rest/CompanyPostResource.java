@@ -4,6 +4,7 @@ import com.mycompany.myapp.domain.CompanyPost;
 import com.mycompany.myapp.repository.CompanyPostRepository;
 import com.mycompany.myapp.service.CompanyPostQueryService;
 import com.mycompany.myapp.service.CompanyPostService;
+import com.mycompany.myapp.service.DataJdbcService;
 import com.mycompany.myapp.service.criteria.CompanyPostCriteria;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -45,14 +45,17 @@ public class CompanyPostResource {
 
     private final CompanyPostQueryService companyPostQueryService;
 
+    private final DataJdbcService dataJdbcService;
+
     public CompanyPostResource(
         CompanyPostService companyPostService,
         CompanyPostRepository companyPostRepository,
-        CompanyPostQueryService companyPostQueryService
-    ) {
+        CompanyPostQueryService companyPostQueryService,
+        DataJdbcService dataJdbcService) {
         this.companyPostService = companyPostService;
         this.companyPostRepository = companyPostRepository;
         this.companyPostQueryService = companyPostQueryService;
+        this.dataJdbcService = dataJdbcService;
     }
 
     /**
@@ -158,6 +161,16 @@ public class CompanyPostResource {
         Page<CompanyPost> page = companyPostQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     *
+     * @return 新增物业用户时 查询可以选择的岗位
+     */
+    @GetMapping("/company-posts/select")
+    public ResponseEntity<List<CompanyPost>> getAllCompanyPostsSelect(){
+        log.debug("REST request to getAllCompanyPostsSelect");
+        return ResponseEntity.ok(dataJdbcService.getAllCompanyPostsSelect());
     }
 
     /**

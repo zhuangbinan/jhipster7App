@@ -2,6 +2,7 @@ package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.CommunityImages;
 import com.mycompany.myapp.domain.CompanyDept;
+import com.mycompany.myapp.domain.CompanyPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,4 +61,19 @@ public class DataJdbcRepository {
         Integer integer = jdbcTemplate.queryForObject(sql, Integer.class);
         return integer != null ? integer : 0;
     }
+
+    /**
+     * 新增用户时 查询可以选择的岗位
+     * @return
+     */
+    public List<CompanyPost> getAllCompanyPostsSelect() {
+        String sql = String.format("select wcp.id,wcp.post_code,wcp.post_name,wcp.order_num from wamoli_company_post wcp where wcp.enable = '1' ");
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(CompanyPost.class));
+    }
+
+    public int updateAuthorityById(String oldName,String newName) {
+        String sql = String.format("update jhi_authority set name = '%s' where name = '%s' ", newName , oldName);
+        return jdbcTemplate.update(sql);
+    }
+
 }

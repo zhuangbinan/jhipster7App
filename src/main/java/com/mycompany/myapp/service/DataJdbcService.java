@@ -2,6 +2,7 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.CommunityImages;
 import com.mycompany.myapp.domain.CompanyDept;
+import com.mycompany.myapp.domain.CompanyPost;
 import com.mycompany.myapp.repository.DataJdbcRepository;
 import io.jsonwebtoken.lang.Assert;
 import org.springframework.stereotype.Service;
@@ -65,4 +66,19 @@ public class DataJdbcService {
     public boolean checkDeptExistUser(Long id) {
         return dataJdbcRepository.checkDeptExistUser(id) > 0;
     }
+
+    /**
+     * 管理物业员工新增用户时 选择部门
+     * @return 筛选后的部门信息集合
+     */
+    @Transactional(readOnly = true)
+    public List<CompanyPost> getAllCompanyPostsSelect() {
+        List<CompanyPost> list = dataJdbcRepository.getAllCompanyPostsSelect();
+        return list == null ? new ArrayList<>() : list;
+    }
+
+    public int updateAuthorityById(String oldName, String newName){
+        return dataJdbcRepository.updateAuthorityById(oldName,newName);
+    }
+
 }
