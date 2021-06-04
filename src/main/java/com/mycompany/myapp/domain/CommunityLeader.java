@@ -87,7 +87,7 @@ public class CommunityLeader implements Serializable {
     private String lastModifyBy;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "communityNotices", "communityLeaders", "homelandStations" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "communityLeaders", "communityNotices", "homelandStations" }, allowSetters = true)
     private Community community;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

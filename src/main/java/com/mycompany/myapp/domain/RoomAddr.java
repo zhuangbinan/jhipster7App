@@ -88,7 +88,7 @@ public class RoomAddr implements Serializable {
 
     @ManyToMany(mappedBy = "roomAddrs")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts", "companyPosts" }, allowSetters = true)
     private Set<WamoliUser> wamoliUsers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

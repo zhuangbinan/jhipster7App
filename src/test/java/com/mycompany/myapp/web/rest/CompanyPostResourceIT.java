@@ -2,24 +2,32 @@ package com.mycompany.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.myapp.IntegrationTest;
-import com.mycompany.myapp.domain.CompanyDept;
 import com.mycompany.myapp.domain.CompanyPost;
+import com.mycompany.myapp.domain.WamoliUser;
 import com.mycompany.myapp.repository.CompanyPostRepository;
+import com.mycompany.myapp.service.CompanyPostService;
 import com.mycompany.myapp.service.criteria.CompanyPostCriteria;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link CompanyPostResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class CompanyPostResourceIT {
@@ -69,6 +78,12 @@ class CompanyPostResourceIT {
 
     @Autowired
     private CompanyPostRepository companyPostRepository;
+
+    @Mock
+    private CompanyPostRepository companyPostRepositoryMock;
+
+    @Mock
+    private CompanyPostService companyPostServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -186,6 +201,24 @@ class CompanyPostResourceIT {
             .andExpect(jsonPath("$.[*].createDate").value(hasItem(DEFAULT_CREATE_DATE.toString())))
             .andExpect(jsonPath("$.[*].lastModifyBy").value(hasItem(DEFAULT_LAST_MODIFY_BY)))
             .andExpect(jsonPath("$.[*].lastModifyDate").value(hasItem(DEFAULT_LAST_MODIFY_DATE.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllCompanyPostsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(companyPostServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restCompanyPostMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(companyPostServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllCompanyPostsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(companyPostServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restCompanyPostMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(companyPostServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
@@ -881,21 +914,21 @@ class CompanyPostResourceIT {
 
     @Test
     @Transactional
-    void getAllCompanyPostsByCompanyDeptIsEqualToSomething() throws Exception {
+    void getAllCompanyPostsByWamoliUserIsEqualToSomething() throws Exception {
         // Initialize the database
         companyPostRepository.saveAndFlush(companyPost);
-        CompanyDept companyDept = CompanyDeptResourceIT.createEntity(em);
-        em.persist(companyDept);
+        WamoliUser wamoliUser = WamoliUserResourceIT.createEntity(em);
+        em.persist(wamoliUser);
         em.flush();
-        companyPost.setCompanyDept(companyDept);
+        companyPost.addWamoliUser(wamoliUser);
         companyPostRepository.saveAndFlush(companyPost);
-        Long companyDeptId = companyDept.getId();
+        Long wamoliUserId = wamoliUser.getId();
 
-        // Get all the companyPostList where companyDept equals to companyDeptId
-        defaultCompanyPostShouldBeFound("companyDeptId.equals=" + companyDeptId);
+        // Get all the companyPostList where wamoliUser equals to wamoliUserId
+        defaultCompanyPostShouldBeFound("wamoliUserId.equals=" + wamoliUserId);
 
-        // Get all the companyPostList where companyDept equals to (companyDeptId + 1)
-        defaultCompanyPostShouldNotBeFound("companyDeptId.equals=" + (companyDeptId + 1));
+        // Get all the companyPostList where wamoliUser equals to (wamoliUserId + 1)
+        defaultCompanyPostShouldNotBeFound("wamoliUserId.equals=" + (wamoliUserId + 1));
     }
 
     /**

@@ -60,9 +60,6 @@
           <th scope="col" jhiSortBy="lastModifyDate">
             <span jhiTranslate="jhipster7App.companyPost.lastModifyDate">Last Modify Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="companyDept.id">
-            <span jhiTranslate="jhipster7App.companyPost.companyDept">Company Dept</span> <fa-icon icon="sort"></fa-icon>
-          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -80,11 +77,6 @@
           <td>{{ companyPost.createDate | formatMediumDatetime }}</td>
           <td>{{ companyPost.lastModifyBy }}</td>
           <td>{{ companyPost.lastModifyDate | formatMediumDatetime }}</td>
-          <td>
-            <div *ngIf="companyPost.companyDept">
-              <a [routerLink]="['/company-dept', companyPost.companyDept?.id, 'view']">{{ companyPost.companyDept?.id }}</a>
-            </div>
-          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

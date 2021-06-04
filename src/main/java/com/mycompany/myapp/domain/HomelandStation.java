@@ -106,7 +106,7 @@ public class HomelandStation implements Serializable {
     private Set<Buildings> buildings = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "communityNotices", "communityLeaders", "homelandStations" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "communityLeaders", "communityNotices", "homelandStations" }, allowSetters = true)
     private Community community;
 
     @ManyToOne

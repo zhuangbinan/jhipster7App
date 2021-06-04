@@ -1,6 +1,6 @@
 import * as dayjs from 'dayjs';
-import { ICommunityNotice } from 'app/entities/community-notice/community-notice.model';
 import { ICommunityLeader } from 'app/entities/community-leader/community-leader.model';
+import { ICommunityNotice } from 'app/entities/community-notice/community-notice.model';
 import { IHomelandStation } from 'app/entities/homeland-station/homeland-station.model';
 
 export interface ICommunity {
@@ -21,8 +21,8 @@ export interface ICommunity {
   orderNum?: number | null;
   lastModifyDate?: dayjs.Dayjs | null;
   lastModifyBy?: string | null;
-  communityNotices?: ICommunityNotice[] | null;
   communityLeaders?: ICommunityLeader[] | null;
+  communityNotices?: ICommunityNotice[] | null;
   homelandStations?: IHomelandStation[] | null;
 }
 
@@ -45,8 +45,8 @@ export class Community implements ICommunity {
     public orderNum?: number | null,
     public lastModifyDate?: dayjs.Dayjs | null,
     public lastModifyBy?: string | null,
-    public communityNotices?: ICommunityNotice[] | null,
     public communityLeaders?: ICommunityLeader[] | null,
+    public communityNotices?: ICommunityNotice[] | null,
     public homelandStations?: IHomelandStation[] | null
   ) {
     this.enable = this.enable ?? false;

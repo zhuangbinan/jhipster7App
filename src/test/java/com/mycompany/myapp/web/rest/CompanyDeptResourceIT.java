@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.CompanyDept;
-import com.mycompany.myapp.domain.CompanyPost;
 import com.mycompany.myapp.domain.WamoliUser;
 import com.mycompany.myapp.repository.CompanyDeptRepository;
 import com.mycompany.myapp.service.criteria.CompanyDeptCriteria;
@@ -1223,25 +1222,6 @@ class CompanyDeptResourceIT {
 
         // Get all the companyDeptList where lastModifyDate is null
         defaultCompanyDeptShouldNotBeFound("lastModifyDate.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllCompanyDeptsByCompanyPostIsEqualToSomething() throws Exception {
-        // Initialize the database
-        companyDeptRepository.saveAndFlush(companyDept);
-        CompanyPost companyPost = CompanyPostResourceIT.createEntity(em);
-        em.persist(companyPost);
-        em.flush();
-        companyDept.addCompanyPost(companyPost);
-        companyDeptRepository.saveAndFlush(companyDept);
-        Long companyPostId = companyPost.getId();
-
-        // Get all the companyDeptList where companyPost equals to companyPostId
-        defaultCompanyDeptShouldBeFound("companyPostId.equals=" + companyPostId);
-
-        // Get all the companyDeptList where companyPost equals to (companyPostId + 1)
-        defaultCompanyDeptShouldNotBeFound("companyPostId.equals=" + (companyPostId + 1));
     }
 
     @Test

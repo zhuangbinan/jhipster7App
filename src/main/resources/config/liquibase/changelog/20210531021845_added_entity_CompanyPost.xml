@@ -41,13 +41,24 @@
             <column name="last_modify_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="company_dept_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="wamoli_company_post" columnName="create_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="wamoli_company_post" columnName="last_modify_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="20210531021845-1-relations" author="jhipster">
+
+        <createTable tableName="rel_wamoli_company_post__wamoli_user">
+            <column name="wamoli_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wamoli_company_post_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="wamoli_company_post_id, wamoli_user_id" tableName="rel_wamoli_company_post__wamoli_user"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

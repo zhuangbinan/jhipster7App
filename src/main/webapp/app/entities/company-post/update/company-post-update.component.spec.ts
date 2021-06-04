@@ -9,8 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { CompanyPostService } from '../service/company-post.service';
 import { ICompanyPost, CompanyPost } from '../company-post.model';
-import { ICompanyDept } from 'app/entities/company-dept/company-dept.model';
-import { CompanyDeptService } from 'app/entities/company-dept/service/company-dept.service';
+import { IWamoliUser } from 'app/entities/wamoli-user/wamoli-user.model';
+import { WamoliUserService } from 'app/entities/wamoli-user/service/wamoli-user.service';
 
 import { CompanyPostUpdateComponent } from './company-post-update.component';
 
@@ -20,7 +20,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<CompanyPostUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let companyPostService: CompanyPostService;
-    let companyDeptService: CompanyDeptService;
+    let wamoliUserService: WamoliUserService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -34,44 +34,41 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(CompanyPostUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       companyPostService = TestBed.inject(CompanyPostService);
-      companyDeptService = TestBed.inject(CompanyDeptService);
+      wamoliUserService = TestBed.inject(WamoliUserService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call CompanyDept query and add missing value', () => {
+      it('Should call WamoliUser query and add missing value', () => {
         const companyPost: ICompanyPost = { id: 456 };
-        const companyDept: ICompanyDept = { id: 31277 };
-        companyPost.companyDept = companyDept;
+        const wamoliUsers: IWamoliUser[] = [{ id: 56017 }];
+        companyPost.wamoliUsers = wamoliUsers;
 
-        const companyDeptCollection: ICompanyDept[] = [{ id: 51357 }];
-        spyOn(companyDeptService, 'query').and.returnValue(of(new HttpResponse({ body: companyDeptCollection })));
-        const additionalCompanyDepts = [companyDept];
-        const expectedCollection: ICompanyDept[] = [...additionalCompanyDepts, ...companyDeptCollection];
-        spyOn(companyDeptService, 'addCompanyDeptToCollectionIfMissing').and.returnValue(expectedCollection);
+        const wamoliUserCollection: IWamoliUser[] = [{ id: 77967 }];
+        spyOn(wamoliUserService, 'query').and.returnValue(of(new HttpResponse({ body: wamoliUserCollection })));
+        const additionalWamoliUsers = [...wamoliUsers];
+        const expectedCollection: IWamoliUser[] = [...additionalWamoliUsers, ...wamoliUserCollection];
+        spyOn(wamoliUserService, 'addWamoliUserToCollectionIfMissing').and.returnValue(expectedCollection);
 
         activatedRoute.data = of({ companyPost });
         comp.ngOnInit();
 
-        expect(companyDeptService.query).toHaveBeenCalled();
-        expect(companyDeptService.addCompanyDeptToCollectionIfMissing).toHaveBeenCalledWith(
-          companyDeptCollection,
-          ...additionalCompanyDepts
-        );
-        expect(comp.companyDeptsSharedCollection).toEqual(expectedCollection);
+        expect(wamoliUserService.query).toHaveBeenCalled();
+        expect(wamoliUserService.addWamoliUserToCollectionIfMissing).toHaveBeenCalledWith(wamoliUserCollection, ...additionalWamoliUsers);
+        expect(comp.wamoliUsersSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
         const companyPost: ICompanyPost = { id: 456 };
-        const companyDept: ICompanyDept = { id: 51184 };
-        companyPost.companyDept = companyDept;
+        const wamoliUsers: IWamoliUser = { id: 72709 };
+        companyPost.wamoliUsers = [wamoliUsers];
 
         activatedRoute.data = of({ companyPost });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(companyPost));
-        expect(comp.companyDeptsSharedCollection).toContain(companyDept);
+        expect(comp.wamoliUsersSharedCollection).toContain(wamoliUsers);
       });
     });
 
@@ -140,11 +137,39 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
-      describe('trackCompanyDeptById', () => {
-        it('Should return tracked CompanyDept primary key', () => {
+      describe('trackWamoliUserById', () => {
+        it('Should return tracked WamoliUser primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackCompanyDeptById(0, entity);
+          const trackResult = comp.trackWamoliUserById(0, entity);
           expect(trackResult).toEqual(entity.id);
+        });
+      });
+    });
+
+    describe('Getting selected relationships', () => {
+      describe('getSelectedWamoliUser', () => {
+        it('Should return option if no WamoliUser is selected', () => {
+          const option = { id: 123 };
+          const result = comp.getSelectedWamoliUser(option);
+          expect(result === option).toEqual(true);
+        });
+
+        it('Should return selected WamoliUser for according option', () => {
+          const option = { id: 123 };
+          const selected = { id: 123 };
+          const selected2 = { id: 456 };
+          const result = comp.getSelectedWamoliUser(option, [selected2, selected]);
+          expect(result === selected).toEqual(true);
+          expect(result === selected2).toEqual(false);
+          expect(result === option).toEqual(false);
+        });
+
+        it('Should return option if this WamoliUser is not selected', () => {
+          const option = { id: 123 };
+          const selected = { id: 456 };
+          const result = comp.getSelectedWamoliUser(option, [selected]);
+          expect(result === option).toEqual(true);
+          expect(result === selected).toEqual(false);
         });
       });
     });

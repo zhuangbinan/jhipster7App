@@ -61,7 +61,7 @@ public class WamoliUserLocation implements Serializable {
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
 
-    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts", "companyPosts" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private WamoliUser wamoliUser;

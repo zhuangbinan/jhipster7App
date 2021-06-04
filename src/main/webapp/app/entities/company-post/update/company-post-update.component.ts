@@ -10,8 +10,8 @@ import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { ICompanyPost, CompanyPost } from '../company-post.model';
 import { CompanyPostService } from '../service/company-post.service';
-import { ICompanyDept } from 'app/entities/company-dept/company-dept.model';
-import { CompanyDeptService } from 'app/entities/company-dept/service/company-dept.service';
+import { IWamoliUser } from 'app/entities/wamoli-user/wamoli-user.model';
+import { WamoliUserService } from 'app/entities/wamoli-user/service/wamoli-user.service';
 
 @Component({
   selector: 'jhi-company-post-update',
@@ -20,7 +20,7 @@ import { CompanyDeptService } from 'app/entities/company-dept/service/company-de
 export class CompanyPostUpdateComponent implements OnInit {
   isSaving = false;
 
-  companyDeptsSharedCollection: ICompanyDept[] = [];
+  wamoliUsersSharedCollection: IWamoliUser[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -33,12 +33,12 @@ export class CompanyPostUpdateComponent implements OnInit {
     createDate: [],
     lastModifyBy: [],
     lastModifyDate: [],
-    companyDept: [],
+    wamoliUsers: [],
   });
 
   constructor(
     protected companyPostService: CompanyPostService,
-    protected companyDeptService: CompanyDeptService,
+    protected wamoliUserService: WamoliUserService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -71,8 +71,19 @@ export class CompanyPostUpdateComponent implements OnInit {
     }
   }
 
-  trackCompanyDeptById(index: number, item: ICompanyDept): number {
+  trackWamoliUserById(index: number, item: IWamoliUser): number {
     return item.id!;
+  }
+
+  getSelectedWamoliUser(option: IWamoliUser, selectedVals?: IWamoliUser[]): IWamoliUser {
+    if (selectedVals) {
+      for (const selectedVal of selectedVals) {
+        if (option.id === selectedVal.id) {
+          return selectedVal;
+        }
+      }
+    }
+    return option;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICompanyPost>>): void {
@@ -106,25 +117,25 @@ export class CompanyPostUpdateComponent implements OnInit {
       createDate: companyPost.createDate ? companyPost.createDate.format(DATE_TIME_FORMAT) : null,
       lastModifyBy: companyPost.lastModifyBy,
       lastModifyDate: companyPost.lastModifyDate ? companyPost.lastModifyDate.format(DATE_TIME_FORMAT) : null,
-      companyDept: companyPost.companyDept,
+      wamoliUsers: companyPost.wamoliUsers,
     });
 
-    this.companyDeptsSharedCollection = this.companyDeptService.addCompanyDeptToCollectionIfMissing(
-      this.companyDeptsSharedCollection,
-      companyPost.companyDept
+    this.wamoliUsersSharedCollection = this.wamoliUserService.addWamoliUserToCollectionIfMissing(
+      this.wamoliUsersSharedCollection,
+      ...(companyPost.wamoliUsers ?? [])
     );
   }
 
   protected loadRelationshipsOptions(): void {
-    this.companyDeptService
+    this.wamoliUserService
       .query()
-      .pipe(map((res: HttpResponse<ICompanyDept[]>) => res.body ?? []))
+      .pipe(map((res: HttpResponse<IWamoliUser[]>) => res.body ?? []))
       .pipe(
-        map((companyDepts: ICompanyDept[]) =>
-          this.companyDeptService.addCompanyDeptToCollectionIfMissing(companyDepts, this.editForm.get('companyDept')!.value)
+        map((wamoliUsers: IWamoliUser[]) =>
+          this.wamoliUserService.addWamoliUserToCollectionIfMissing(wamoliUsers, ...(this.editForm.get('wamoliUsers')!.value ?? []))
         )
       )
-      .subscribe((companyDepts: ICompanyDept[]) => (this.companyDeptsSharedCollection = companyDepts));
+      .subscribe((wamoliUsers: IWamoliUser[]) => (this.wamoliUsersSharedCollection = wamoliUsers));
   }
 
   protected createFromForm(): ICompanyPost {
@@ -142,7 +153,7 @@ export class CompanyPostUpdateComponent implements OnInit {
       lastModifyDate: this.editForm.get(['lastModifyDate'])!.value
         ? dayjs(this.editForm.get(['lastModifyDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      companyDept: this.editForm.get(['companyDept'])!.value,
+      wamoliUsers: this.editForm.get(['wamoliUsers'])!.value,
     };
   }
 }

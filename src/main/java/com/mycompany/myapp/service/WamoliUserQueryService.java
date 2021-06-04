@@ -144,6 +144,15 @@ public class WamoliUserQueryService extends QueryService<WamoliUser> {
                         )
                     );
             }
+            if (criteria.getCompanyPostId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getCompanyPostId(),
+                            root -> root.join(WamoliUser_.companyPosts, JoinType.LEFT).get(CompanyPost_.id)
+                        )
+                    );
+            }
         }
         return specification;
     }

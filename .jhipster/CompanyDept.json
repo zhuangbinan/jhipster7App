@@ -65,12 +65,6 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "companyPost",
-      "otherEntityRelationshipName": "companyDept",
-      "relationshipName": "companyPost"
-    },
-    {
       "relationshipType": "many-to-many",
       "otherEntityName": "wamoliUser",
       "otherEntityRelationshipName": "companyDept",

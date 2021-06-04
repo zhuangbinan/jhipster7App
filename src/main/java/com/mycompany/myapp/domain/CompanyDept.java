@@ -101,14 +101,9 @@ public class CompanyDept implements Serializable {
     @Column(name = "last_modify_date")
     private Instant lastModifyDate;
 
-    @OneToMany(mappedBy = "companyDept")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "companyDept" }, allowSetters = true)
-    private Set<CompanyPost> companyPosts = new HashSet<>();
-
     @ManyToMany(mappedBy = "companyDepts")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts", "companyPosts" }, allowSetters = true)
     private Set<WamoliUser> wamoliUsers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -292,37 +287,6 @@ public class CompanyDept implements Serializable {
 
     public void setLastModifyDate(Instant lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
-    }
-
-    public Set<CompanyPost> getCompanyPosts() {
-        return this.companyPosts;
-    }
-
-    public CompanyDept companyPosts(Set<CompanyPost> companyPosts) {
-        this.setCompanyPosts(companyPosts);
-        return this;
-    }
-
-    public CompanyDept addCompanyPost(CompanyPost companyPost) {
-        this.companyPosts.add(companyPost);
-        companyPost.setCompanyDept(this);
-        return this;
-    }
-
-    public CompanyDept removeCompanyPost(CompanyPost companyPost) {
-        this.companyPosts.remove(companyPost);
-        companyPost.setCompanyDept(null);
-        return this;
-    }
-
-    public void setCompanyPosts(Set<CompanyPost> companyPosts) {
-        if (this.companyPosts != null) {
-            this.companyPosts.forEach(i -> i.setCompanyDept(null));
-        }
-        if (companyPosts != null) {
-            companyPosts.forEach(i -> i.setCompanyDept(this));
-        }
-        this.companyPosts = companyPosts;
     }
 
     public Set<WamoliUser> getWamoliUsers() {

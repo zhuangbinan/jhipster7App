@@ -86,6 +86,8 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.CompanyDept.class.getName() + ".companyPosts");
             createCache(cm, com.mycompany.myapp.domain.CompanyDept.class.getName() + ".wamoliUsers");
             createCache(cm, com.mycompany.myapp.domain.CompanyPost.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.CompanyPost.class.getName() + ".wamoliUsers");
+            createCache(cm, com.mycompany.myapp.domain.WamoliUser.class.getName() + ".companyPosts");
             // jhipster-needle-caffeine-add-entry
         };
     }

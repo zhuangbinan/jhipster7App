@@ -133,8 +133,13 @@ public class WamoliUser implements Serializable {
         joinColumns = @JoinColumn(name = "wamoli_user_id"),
         inverseJoinColumns = @JoinColumn(name = "company_dept_id")
     )
-    @JsonIgnoreProperties(value = { "companyPosts", "wamoliUsers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "wamoliUsers" }, allowSetters = true)
     private Set<CompanyDept> companyDepts = new HashSet<>();
+
+    @ManyToMany(mappedBy = "wamoliUsers")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "wamoliUsers" }, allowSetters = true)
+    private Set<CompanyPost> companyPosts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -380,6 +385,37 @@ public class WamoliUser implements Serializable {
 
     public void setCompanyDepts(Set<CompanyDept> companyDepts) {
         this.companyDepts = companyDepts;
+    }
+
+    public Set<CompanyPost> getCompanyPosts() {
+        return this.companyPosts;
+    }
+
+    public WamoliUser companyPosts(Set<CompanyPost> companyPosts) {
+        this.setCompanyPosts(companyPosts);
+        return this;
+    }
+
+    public WamoliUser addCompanyPost(CompanyPost companyPost) {
+        this.companyPosts.add(companyPost);
+        companyPost.getWamoliUsers().add(this);
+        return this;
+    }
+
+    public WamoliUser removeCompanyPost(CompanyPost companyPost) {
+        this.companyPosts.remove(companyPost);
+        companyPost.getWamoliUsers().remove(this);
+        return this;
+    }
+
+    public void setCompanyPosts(Set<CompanyPost> companyPosts) {
+        if (this.companyPosts != null) {
+            this.companyPosts.forEach(i -> i.removeWamoliUser(this));
+        }
+        if (companyPosts != null) {
+            companyPosts.forEach(i -> i.addWamoliUser(this));
+        }
+        this.companyPosts = companyPosts;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -89,6 +89,13 @@
       "otherEntityRelationshipName": "wamoliUser",
       "relationshipName": "companyDept",
       "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "companyPost",
+      "otherEntityRelationshipName": "wamoliUser",
+      "relationshipName": "companyPost",
+      "ownerSide": false
     }
   ],
   "javadoc": "用户信息表",

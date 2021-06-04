@@ -95,6 +95,8 @@ public class WamoliUserCriteria implements Serializable, Criteria {
 
     private LongFilter companyDeptId;
 
+    private LongFilter companyPostId;
+
     public WamoliUserCriteria() {}
 
     public WamoliUserCriteria(WamoliUserCriteria other) {
@@ -115,6 +117,7 @@ public class WamoliUserCriteria implements Serializable, Criteria {
         this.userId = other.userId == null ? null : other.userId.copy();
         this.roomAddrId = other.roomAddrId == null ? null : other.roomAddrId.copy();
         this.companyDeptId = other.companyDeptId == null ? null : other.companyDeptId.copy();
+        this.companyPostId = other.companyPostId == null ? null : other.companyPostId.copy();
     }
 
     @Override
@@ -377,6 +380,21 @@ public class WamoliUserCriteria implements Serializable, Criteria {
         this.companyDeptId = companyDeptId;
     }
 
+    public LongFilter getCompanyPostId() {
+        return companyPostId;
+    }
+
+    public LongFilter companyPostId() {
+        if (companyPostId == null) {
+            companyPostId = new LongFilter();
+        }
+        return companyPostId;
+    }
+
+    public void setCompanyPostId(LongFilter companyPostId) {
+        this.companyPostId = companyPostId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -403,7 +421,8 @@ public class WamoliUserCriteria implements Serializable, Criteria {
             Objects.equals(lastModifiedDate, that.lastModifiedDate) &&
             Objects.equals(userId, that.userId) &&
             Objects.equals(roomAddrId, that.roomAddrId) &&
-            Objects.equals(companyDeptId, that.companyDeptId)
+            Objects.equals(companyDeptId, that.companyDeptId) &&
+            Objects.equals(companyPostId, that.companyPostId)
         );
     }
 
@@ -426,7 +445,8 @@ public class WamoliUserCriteria implements Serializable, Criteria {
             lastModifiedDate,
             userId,
             roomAddrId,
-            companyDeptId
+            companyDeptId,
+            companyPostId
         );
     }
 
@@ -451,6 +471,7 @@ public class WamoliUserCriteria implements Serializable, Criteria {
             (userId != null ? "userId=" + userId + ", " : "") +
             (roomAddrId != null ? "roomAddrId=" + roomAddrId + ", " : "") +
             (companyDeptId != null ? "companyDeptId=" + companyDeptId + ", " : "") +
+            (companyPostId != null ? "companyPostId=" + companyPostId + ", " : "") +
             "}";
     }
 }

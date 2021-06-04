@@ -1512,25 +1512,6 @@ class CommunityResourceIT {
 
     @Test
     @Transactional
-    void getAllCommunitiesByCommunityNoticeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        communityRepository.saveAndFlush(community);
-        CommunityNotice communityNotice = CommunityNoticeResourceIT.createEntity(em);
-        em.persist(communityNotice);
-        em.flush();
-        community.addCommunityNotice(communityNotice);
-        communityRepository.saveAndFlush(community);
-        Long communityNoticeId = communityNotice.getId();
-
-        // Get all the communityList where communityNotice equals to communityNoticeId
-        defaultCommunityShouldBeFound("communityNoticeId.equals=" + communityNoticeId);
-
-        // Get all the communityList where communityNotice equals to (communityNoticeId + 1)
-        defaultCommunityShouldNotBeFound("communityNoticeId.equals=" + (communityNoticeId + 1));
-    }
-
-    @Test
-    @Transactional
     void getAllCommunitiesByCommunityLeaderIsEqualToSomething() throws Exception {
         // Initialize the database
         communityRepository.saveAndFlush(community);
@@ -1546,6 +1527,25 @@ class CommunityResourceIT {
 
         // Get all the communityList where communityLeader equals to (communityLeaderId + 1)
         defaultCommunityShouldNotBeFound("communityLeaderId.equals=" + (communityLeaderId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllCommunitiesByCommunityNoticeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        communityRepository.saveAndFlush(community);
+        CommunityNotice communityNotice = CommunityNoticeResourceIT.createEntity(em);
+        em.persist(communityNotice);
+        em.flush();
+        community.addCommunityNotice(communityNotice);
+        communityRepository.saveAndFlush(community);
+        Long communityNoticeId = communityNotice.getId();
+
+        // Get all the communityList where communityNotice equals to communityNoticeId
+        defaultCommunityShouldBeFound("communityNoticeId.equals=" + communityNoticeId);
+
+        // Get all the communityList where communityNotice equals to (communityNoticeId + 1)
+        defaultCommunityShouldNotBeFound("communityNoticeId.equals=" + (communityNoticeId + 1));
     }
 
     @Test

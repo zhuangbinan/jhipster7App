@@ -25,7 +25,7 @@ public class WamoliFaceLibrary implements Serializable {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts", "companyPosts" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private WamoliUser wamoliUser;

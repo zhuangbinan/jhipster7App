@@ -83,15 +83,15 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "communityNotice",
-      "otherEntityRelationshipName": "community",
-      "relationshipName": "communityNotice"
-    },
-    {
-      "relationshipType": "one-to-many",
       "otherEntityName": "communityLeader",
       "otherEntityRelationshipName": "community",
       "relationshipName": "communityLeader"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "communityNotice",
+      "otherEntityRelationshipName": "community",
+      "relationshipName": "communityNotice"
     },
     {
       "relationshipType": "one-to-many",

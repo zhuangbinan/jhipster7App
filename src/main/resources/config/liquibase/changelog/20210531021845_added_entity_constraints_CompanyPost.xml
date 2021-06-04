@@ -8,10 +8,16 @@
     -->
     <changeSet id="20210531021845-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="company_dept_id"
-                                 baseTableName="wamoli_company_post"
-                                 constraintName="fk_wamoli_company_post__company_dept_id"
+        <addForeignKeyConstraint baseColumnNames="wamoli_company_post_id"
+                                 baseTableName="rel_wamoli_company_post__wamoli_user"
+                                 constraintName="fk_rel_wamoli_company_post__wamoli_user__wamoli_company_post_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="wamoli_company_dept"/>
+                                 referencedTableName="wamoli_company_post"/>
+
+        <addForeignKeyConstraint baseColumnNames="wamoli_user_id"
+                                 baseTableName="rel_wamoli_company_post__wamoli_user"
+                                 constraintName="fk_rel_wamoli_company_post__wamoli_user__wamoli_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_user"/>
     </changeSet>
 </databaseChangeLog>

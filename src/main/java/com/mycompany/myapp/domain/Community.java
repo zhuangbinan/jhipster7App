@@ -133,12 +133,12 @@ public class Community implements Serializable {
     @OneToMany(mappedBy = "community")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "community" }, allowSetters = true)
-    private Set<CommunityNotice> communityNotices = new HashSet<>();
+    private Set<CommunityLeader> communityLeaders = new HashSet<>();
 
     @OneToMany(mappedBy = "community")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "community" }, allowSetters = true)
-    private Set<CommunityLeader> communityLeaders = new HashSet<>();
+    private Set<CommunityNotice> communityNotices = new HashSet<>();
 
     @OneToMany(mappedBy = "community")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -367,37 +367,6 @@ public class Community implements Serializable {
         this.lastModifyBy = lastModifyBy;
     }
 
-    public Set<CommunityNotice> getCommunityNotices() {
-        return this.communityNotices;
-    }
-
-    public Community communityNotices(Set<CommunityNotice> communityNotices) {
-        this.setCommunityNotices(communityNotices);
-        return this;
-    }
-
-    public Community addCommunityNotice(CommunityNotice communityNotice) {
-        this.communityNotices.add(communityNotice);
-        communityNotice.setCommunity(this);
-        return this;
-    }
-
-    public Community removeCommunityNotice(CommunityNotice communityNotice) {
-        this.communityNotices.remove(communityNotice);
-        communityNotice.setCommunity(null);
-        return this;
-    }
-
-    public void setCommunityNotices(Set<CommunityNotice> communityNotices) {
-        if (this.communityNotices != null) {
-            this.communityNotices.forEach(i -> i.setCommunity(null));
-        }
-        if (communityNotices != null) {
-            communityNotices.forEach(i -> i.setCommunity(this));
-        }
-        this.communityNotices = communityNotices;
-    }
-
     public Set<CommunityLeader> getCommunityLeaders() {
         return this.communityLeaders;
     }
@@ -427,6 +396,37 @@ public class Community implements Serializable {
             communityLeaders.forEach(i -> i.setCommunity(this));
         }
         this.communityLeaders = communityLeaders;
+    }
+
+    public Set<CommunityNotice> getCommunityNotices() {
+        return this.communityNotices;
+    }
+
+    public Community communityNotices(Set<CommunityNotice> communityNotices) {
+        this.setCommunityNotices(communityNotices);
+        return this;
+    }
+
+    public Community addCommunityNotice(CommunityNotice communityNotice) {
+        this.communityNotices.add(communityNotice);
+        communityNotice.setCommunity(this);
+        return this;
+    }
+
+    public Community removeCommunityNotice(CommunityNotice communityNotice) {
+        this.communityNotices.remove(communityNotice);
+        communityNotice.setCommunity(null);
+        return this;
+    }
+
+    public void setCommunityNotices(Set<CommunityNotice> communityNotices) {
+        if (this.communityNotices != null) {
+            this.communityNotices.forEach(i -> i.setCommunity(null));
+        }
+        if (communityNotices != null) {
+            communityNotices.forEach(i -> i.setCommunity(this));
+        }
+        this.communityNotices = communityNotices;
     }
 
     public Set<HomelandStation> getHomelandStations() {

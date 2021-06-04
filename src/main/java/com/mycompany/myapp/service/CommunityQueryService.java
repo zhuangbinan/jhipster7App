@@ -129,21 +129,21 @@ public class CommunityQueryService extends QueryService<Community> {
             if (criteria.getLastModifyBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastModifyBy(), Community_.lastModifyBy));
             }
-            if (criteria.getCommunityNoticeId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getCommunityNoticeId(),
-                            root -> root.join(Community_.communityNotices, JoinType.LEFT).get(CommunityNotice_.id)
-                        )
-                    );
-            }
             if (criteria.getCommunityLeaderId() != null) {
                 specification =
                     specification.and(
                         buildSpecification(
                             criteria.getCommunityLeaderId(),
                             root -> root.join(Community_.communityLeaders, JoinType.LEFT).get(CommunityLeader_.id)
+                        )
+                    );
+            }
+            if (criteria.getCommunityNoticeId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getCommunityNoticeId(),
+                            root -> root.join(Community_.communityNotices, JoinType.LEFT).get(CommunityNotice_.id)
                         )
                     );
             }

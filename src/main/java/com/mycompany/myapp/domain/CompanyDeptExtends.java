@@ -183,16 +183,6 @@ public class CompanyDeptExtends extends CompanyDept{
     }
 
     @Override
-    public Set<CompanyPost> getCompanyPosts() {
-        return companyPosts;
-    }
-
-    @Override
-    public void setCompanyPosts(Set<CompanyPost> companyPosts) {
-        this.companyPosts = companyPosts;
-    }
-
-    @Override
     public Set<WamoliUser> getWamoliUsers() {
         return wamoliUsers;
     }

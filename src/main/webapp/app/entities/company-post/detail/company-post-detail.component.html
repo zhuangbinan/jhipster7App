@@ -70,11 +70,12 @@
         <dd>
           <span>{{ companyPost.lastModifyDate | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipster7App.companyPost.companyDept">Company Dept</span></dt>
+        <dt><span jhiTranslate="jhipster7App.companyPost.wamoliUser">Wamoli User</span></dt>
         <dd>
-          <div *ngIf="companyPost.companyDept">
-            <a [routerLink]="['/company-dept', companyPost.companyDept?.id, 'view']">{{ companyPost.companyDept?.id }}</a>
-          </div>
+          <span *ngFor="let wamoliUser of companyPost.wamoliUsers; let last = last">
+            <a [routerLink]="['/wamoli-user', wamoliUser?.id, 'view']">{{ wamoliUser.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
         </dd>
       </dl>
 

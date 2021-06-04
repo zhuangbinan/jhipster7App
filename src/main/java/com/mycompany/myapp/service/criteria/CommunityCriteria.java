@@ -59,9 +59,9 @@ public class CommunityCriteria implements Serializable, Criteria {
 
     private StringFilter lastModifyBy;
 
-    private LongFilter communityNoticeId;
-
     private LongFilter communityLeaderId;
+
+    private LongFilter communityNoticeId;
 
     private LongFilter homelandStationId;
 
@@ -85,8 +85,8 @@ public class CommunityCriteria implements Serializable, Criteria {
         this.orderNum = other.orderNum == null ? null : other.orderNum.copy();
         this.lastModifyDate = other.lastModifyDate == null ? null : other.lastModifyDate.copy();
         this.lastModifyBy = other.lastModifyBy == null ? null : other.lastModifyBy.copy();
-        this.communityNoticeId = other.communityNoticeId == null ? null : other.communityNoticeId.copy();
         this.communityLeaderId = other.communityLeaderId == null ? null : other.communityLeaderId.copy();
+        this.communityNoticeId = other.communityNoticeId == null ? null : other.communityNoticeId.copy();
         this.homelandStationId = other.homelandStationId == null ? null : other.homelandStationId.copy();
     }
 
@@ -350,21 +350,6 @@ public class CommunityCriteria implements Serializable, Criteria {
         this.lastModifyBy = lastModifyBy;
     }
 
-    public LongFilter getCommunityNoticeId() {
-        return communityNoticeId;
-    }
-
-    public LongFilter communityNoticeId() {
-        if (communityNoticeId == null) {
-            communityNoticeId = new LongFilter();
-        }
-        return communityNoticeId;
-    }
-
-    public void setCommunityNoticeId(LongFilter communityNoticeId) {
-        this.communityNoticeId = communityNoticeId;
-    }
-
     public LongFilter getCommunityLeaderId() {
         return communityLeaderId;
     }
@@ -378,6 +363,21 @@ public class CommunityCriteria implements Serializable, Criteria {
 
     public void setCommunityLeaderId(LongFilter communityLeaderId) {
         this.communityLeaderId = communityLeaderId;
+    }
+
+    public LongFilter getCommunityNoticeId() {
+        return communityNoticeId;
+    }
+
+    public LongFilter communityNoticeId() {
+        if (communityNoticeId == null) {
+            communityNoticeId = new LongFilter();
+        }
+        return communityNoticeId;
+    }
+
+    public void setCommunityNoticeId(LongFilter communityNoticeId) {
+        this.communityNoticeId = communityNoticeId;
     }
 
     public LongFilter getHomelandStationId() {
@@ -422,8 +422,8 @@ public class CommunityCriteria implements Serializable, Criteria {
             Objects.equals(orderNum, that.orderNum) &&
             Objects.equals(lastModifyDate, that.lastModifyDate) &&
             Objects.equals(lastModifyBy, that.lastModifyBy) &&
-            Objects.equals(communityNoticeId, that.communityNoticeId) &&
             Objects.equals(communityLeaderId, that.communityLeaderId) &&
+            Objects.equals(communityNoticeId, that.communityNoticeId) &&
             Objects.equals(homelandStationId, that.homelandStationId)
         );
     }
@@ -448,8 +448,8 @@ public class CommunityCriteria implements Serializable, Criteria {
             orderNum,
             lastModifyDate,
             lastModifyBy,
-            communityNoticeId,
             communityLeaderId,
+            communityNoticeId,
             homelandStationId
         );
     }
@@ -475,8 +475,8 @@ public class CommunityCriteria implements Serializable, Criteria {
             (orderNum != null ? "orderNum=" + orderNum + ", " : "") +
             (lastModifyDate != null ? "lastModifyDate=" + lastModifyDate + ", " : "") +
             (lastModifyBy != null ? "lastModifyBy=" + lastModifyBy + ", " : "") +
-            (communityNoticeId != null ? "communityNoticeId=" + communityNoticeId + ", " : "") +
             (communityLeaderId != null ? "communityLeaderId=" + communityLeaderId + ", " : "") +
+            (communityNoticeId != null ? "communityNoticeId=" + communityNoticeId + ", " : "") +
             (homelandStationId != null ? "homelandStationId=" + homelandStationId + ", " : "") +
             "}";
     }

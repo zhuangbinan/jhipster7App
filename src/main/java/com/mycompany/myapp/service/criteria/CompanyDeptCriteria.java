@@ -53,8 +53,6 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
 
     private InstantFilter lastModifyDate;
 
-    private LongFilter companyPostId;
-
     private LongFilter wamoliUserId;
 
     public CompanyDeptCriteria() {}
@@ -74,7 +72,6 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
         this.createDate = other.createDate == null ? null : other.createDate.copy();
         this.lastModifyBy = other.lastModifyBy == null ? null : other.lastModifyBy.copy();
         this.lastModifyDate = other.lastModifyDate == null ? null : other.lastModifyDate.copy();
-        this.companyPostId = other.companyPostId == null ? null : other.companyPostId.copy();
         this.wamoliUserId = other.wamoliUserId == null ? null : other.wamoliUserId.copy();
     }
 
@@ -293,21 +290,6 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
         this.lastModifyDate = lastModifyDate;
     }
 
-    public LongFilter getCompanyPostId() {
-        return companyPostId;
-    }
-
-    public LongFilter companyPostId() {
-        if (companyPostId == null) {
-            companyPostId = new LongFilter();
-        }
-        return companyPostId;
-    }
-
-    public void setCompanyPostId(LongFilter companyPostId) {
-        this.companyPostId = companyPostId;
-    }
-
     public LongFilter getWamoliUserId() {
         return wamoliUserId;
     }
@@ -347,7 +329,6 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(lastModifyBy, that.lastModifyBy) &&
             Objects.equals(lastModifyDate, that.lastModifyDate) &&
-            Objects.equals(companyPostId, that.companyPostId) &&
             Objects.equals(wamoliUserId, that.wamoliUserId)
         );
     }
@@ -369,7 +350,6 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
             createDate,
             lastModifyBy,
             lastModifyDate,
-            companyPostId,
             wamoliUserId
         );
     }
@@ -392,7 +372,6 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
             (createDate != null ? "createDate=" + createDate + ", " : "") +
             (lastModifyBy != null ? "lastModifyBy=" + lastModifyBy + ", " : "") +
             (lastModifyDate != null ? "lastModifyDate=" + lastModifyDate + ", " : "") +
-            (companyPostId != null ? "companyPostId=" + companyPostId + ", " : "") +
             (wamoliUserId != null ? "wamoliUserId=" + wamoliUserId + ", " : "") +
             "}";
     }

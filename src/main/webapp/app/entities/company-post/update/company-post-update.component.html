@@ -124,16 +124,20 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="jhipster7App.companyPost.companyDept" for="field_companyDept">Company Dept</label>
-          <select class="form-control" id="field_companyDept" data-cy="companyDept" name="companyDept" formControlName="companyDept">
-            <option [ngValue]="null"></option>
+          <label jhiTranslate="jhipster7App.companyPost.wamoliUser" for="field_wamoliUsers">Wamoli User</label>
+          <select
+            class="form-control"
+            id="field_wamoliUsers"
+            data-cy="wamoliUser"
+            multiple
+            name="wamoliUsers"
+            formControlName="wamoliUsers"
+          >
             <option
-              [ngValue]="
-                companyDeptOption.id === editForm.get('companyDept')!.value?.id ? editForm.get('companyDept')!.value : companyDeptOption
-              "
-              *ngFor="let companyDeptOption of companyDeptsSharedCollection; trackBy: trackCompanyDeptById"
+              [ngValue]="getSelectedWamoliUser(wamoliUserOption, editForm.get('wamoliUsers')!.value)"
+              *ngFor="let wamoliUserOption of wamoliUsersSharedCollection; trackBy: trackWamoliUserById"
             >
-              {{ companyDeptOption.id }}
+              {{ wamoliUserOption.id }}
             </option>
           </select>
         </div>

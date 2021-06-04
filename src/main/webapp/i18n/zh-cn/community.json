@@ -34,8 +34,8 @@
       "orderNum": "Order Num",
       "lastModifyDate": "Last Modify Date",
       "lastModifyBy": "Last Modify By",
-      "communityNotice": "Community Notice",
       "communityLeader": "Community Leader",
+      "communityNotice": "Community Notice",
       "homelandStation": "Homeland Station",
       "help": {
         "cname": "名称",
