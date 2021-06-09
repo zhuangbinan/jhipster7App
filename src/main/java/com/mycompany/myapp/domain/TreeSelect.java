@@ -19,7 +19,7 @@ public class TreeSelect implements Serializable
     private Long id;
 
     /** 节点名称 */
-    private String label;
+    private String deptName;
 
     /** 子节点 */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -33,7 +33,7 @@ public class TreeSelect implements Serializable
     public TreeSelect(CompanyDeptExtends dept)
     {
         this.id = dept.getId();
-        this.label = dept.getDeptName();
+        this.deptName = dept.getDeptName();
         this.children = dept.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
     }
 
@@ -47,14 +47,14 @@ public class TreeSelect implements Serializable
         this.id = id;
     }
 
-    public String getLabel()
+    public String getDeptName()
     {
-        return label;
+        return deptName;
     }
 
-    public void setLabel(String label)
+    public void setDeptName(String deptName)
     {
-        this.label = label;
+        this.deptName = deptName;
     }
 
     public List<TreeSelect> getChildren()
