@@ -13,6 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ArchTest {
+
+    @Test
+    void t3(){
+
+        String password;
+        String phoneNum = "174000182";
+        password = phoneNum.substring(phoneNum.length()-6);
+        System.out.println(password);
+
+    }
+
+
     @Test
     void t2(){
         String oldStr = "{1,2,3}";

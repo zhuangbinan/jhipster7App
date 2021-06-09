@@ -137,4 +137,20 @@ public class WamoliUserService {
         log.debug("Request to delete WamoliUser : {}", id);
         wamoliUserRepository.deleteById(id);
     }
+
+    public Optional<WamoliUser> bindJhiUser(WamoliUser wamoliUser) {
+        return wamoliUserRepository
+            .findOneByEmailAndPhoneNumAndUserIsNotNullAndEnableIsFalse(
+                wamoliUser.getEmail(),
+                wamoliUser.getPhoneNum()
+            )
+            .map(newWamoliUser -> {
+                newWamoliUser.setEmail(wamoliUser.getEmail());
+                newWamoliUser.setPhoneNum(wamoliUser.getPhoneNum());
+                newWamoliUser.setEnable(wamoliUser.getEnable());
+                newWamoliUser.setIsManager(wamoliUser.getIsManager());
+                newWamoliUser.setUser(wamoliUser.getUser());
+                return newWamoliUser;
+            });
+    }
 }

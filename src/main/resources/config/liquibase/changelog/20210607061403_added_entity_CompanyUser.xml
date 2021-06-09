@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity CompanyUser.
+    -->
+    <changeSet id="20210607061403-1" author="jhipster">
+        <createTable tableName="wamoli_company_user" remarks="用来查表展示物业员工 基本信息, 部门, 岗位, 角色">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(255)" remarks="用户姓名">
+                <constraints nullable="true" />
+            </column>
+            <column name="id_card_num" type="varchar(255)" remarks="身份证号码">
+                <constraints nullable="true" />
+            </column>
+            <column name="gender" type="varchar(255)" remarks="性别">
+                <constraints nullable="true" />
+            </column>
+            <column name="phone_num" type="varchar(255)" remarks="电话">
+                <constraints nullable="true" />
+            </column>
+            <column name="email" type="varchar(255)" remarks="email">
+                <constraints nullable="true" />
+            </column>
+            <column name="dept_name" type="varchar(255)" remarks="部门名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="post_name" type="varchar(255)" remarks="职位名称">
+                <constraints nullable="true" />
+            </column>
+            <column name="enable" type="boolean" remarks="是否可用">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="varchar(255)" remarks="备注">
+                <constraints nullable="true" />
+            </column>
+            <column name="del_flag" type="boolean" remarks="逻辑删除标识">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="varchar(255)" remarks="创建者">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_date" type="${datetimeType}" remarks="创建时间">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_by" type="varchar(255)" remarks="最后修改者">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_date" type="${datetimeType}" remarks="最后修改者">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="wamoli_company_user" columnName="created_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="wamoli_company_user" columnName="last_modified_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210607061403-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/wamoli_company_user.csv"
+                  separator=";"
+                  tableName="wamoli_company_user">
+            <column name="id" type="numeric"/>
+            <column name="user_name" type="string"/>
+            <column name="id_card_num" type="string"/>
+            <column name="gender" type="string"/>
+            <column name="phone_num" type="string"/>
+            <column name="email" type="string"/>
+            <column name="dept_name" type="string"/>
+            <column name="post_name" type="string"/>
+            <column name="enable" type="boolean"/>
+            <column name="remark" type="string"/>
+            <column name="del_flag" type="boolean"/>
+            <column name="created_by" type="string"/>
+            <column name="created_date" type="${datetimeType}"/>
+            <column name="last_modified_by" type="string"/>
+            <column name="last_modified_date" type="${datetimeType}"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

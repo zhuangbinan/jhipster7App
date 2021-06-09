@@ -3,6 +3,8 @@ package com.mycompany.myapp.repository;
 import com.mycompany.myapp.domain.WamoliUser;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.DoubleStream;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -29,4 +31,6 @@ public interface WamoliUserRepository extends JpaRepository<WamoliUser, Long>, J
         "select wamoliUser from WamoliUser wamoliUser left join fetch wamoliUser.roomAddrs left join fetch wamoliUser.companyDepts where wamoliUser.id =:id"
     )
     Optional<WamoliUser> findOneWithEagerRelationships(@Param("id") Long id);
+
+    Optional<WamoliUser> findOneByEmailAndPhoneNumAndUserIsNotNullAndEnableIsFalse(String email, String phoneNum);
 }

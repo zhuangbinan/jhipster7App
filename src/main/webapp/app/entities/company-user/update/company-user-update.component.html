@@ -1,0 +1,219 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-company-user-heading"
+        data-cy="CompanyUserCreateUpdateHeading"
+        jhiTranslate="jhipster7App.companyUser.home.createOrEditLabel"
+      >
+        Create or edit a Company User
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <deptName class="form-control-deptName" jhiTranslate="global.field.id" for="field_id">ID</deptName>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.userName"
+            for="field_userName"
+            [ngbTooltip]="'jhipster7App.companyUser.help.userName' | translate"
+            >User Name</deptName
+          >
+          <input type="text" class="form-control" name="userName" id="field_userName" data-cy="userName" formControlName="userName" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.idCardNum"
+            for="field_idCardNum"
+            [ngbTooltip]="'jhipster7App.companyUser.help.idCardNum' | translate"
+            >Id Card Num</deptName
+          >
+          <input type="text" class="form-control" name="idCardNum" id="field_idCardNum" data-cy="idCardNum" formControlName="idCardNum" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.gender"
+            for="field_gender"
+            [ngbTooltip]="'jhipster7App.companyUser.help.gender' | translate"
+            >Gender</deptName
+          >
+          <input type="text" class="form-control" name="gender" id="field_gender" data-cy="gender" formControlName="gender" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.phoneNum"
+            for="field_phoneNum"
+            [ngbTooltip]="'jhipster7App.companyUser.help.phoneNum' | translate"
+            >Phone Num</deptName
+          >
+          <input type="text" class="form-control" name="phoneNum" id="field_phoneNum" data-cy="phoneNum" formControlName="phoneNum" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.email"
+            for="field_email"
+            [ngbTooltip]="'jhipster7App.companyUser.help.email' | translate"
+            >Email</deptName
+          >
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.deptName"
+            for="field_deptName"
+            [ngbTooltip]="'jhipster7App.companyUser.help.deptName' | translate"
+            >Dept Name</deptName
+          >
+          <input type="text" class="form-control" name="deptName" id="field_deptName" data-cy="deptName" formControlName="deptName" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.postName"
+            for="field_postName"
+            [ngbTooltip]="'jhipster7App.companyUser.help.postName' | translate"
+            >Post Name</deptName
+          >
+          <input type="text" class="form-control" name="postName" id="field_postName" data-cy="postName" formControlName="postName" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.enable"
+            for="field_enable"
+            [ngbTooltip]="'jhipster7App.companyUser.help.enable' | translate"
+            >Enable</deptName
+          >
+          <input type="checkbox" class="form-check" name="enable" id="field_enable" data-cy="enable" formControlName="enable" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.remark"
+            for="field_remark"
+            [ngbTooltip]="'jhipster7App.companyUser.help.remark' | translate"
+            >Remark</deptName
+          >
+          <input type="text" class="form-control" name="remark" id="field_remark" data-cy="remark" formControlName="remark" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.delFlag"
+            for="field_delFlag"
+            [ngbTooltip]="'jhipster7App.companyUser.help.delFlag' | translate"
+            >Del Flag</deptName
+          >
+          <input type="checkbox" class="form-check" name="delFlag" id="field_delFlag" data-cy="delFlag" formControlName="delFlag" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.createdBy"
+            for="field_createdBy"
+            [ngbTooltip]="'jhipster7App.companyUser.help.createdBy' | translate"
+            >Created By</deptName
+          >
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.createdDate"
+            for="field_createdDate"
+            [ngbTooltip]="'jhipster7App.companyUser.help.createdDate' | translate"
+            >Created Date</deptName
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.lastModifiedBy"
+            for="field_lastModifiedBy"
+            [ngbTooltip]="'jhipster7App.companyUser.help.lastModifiedBy' | translate"
+            >Last Modified By</deptName
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <deptName
+            class="form-control-deptName"
+            jhiTranslate="jhipster7App.companyUser.lastModifiedDate"
+            for="field_lastModifiedDate"
+            [ngbTooltip]="'jhipster7App.companyUser.help.lastModifiedDate' | translate"
+            >Last Modified Date</deptName
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

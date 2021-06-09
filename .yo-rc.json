@@ -63,8 +63,9 @@
       "WamoliUser",
       "WamoliUserLocation",
       "CompanyDept",
-      "CompanyPost"
+      "CompanyPost",
+      "CompanyUser"
     ],
-    "lastLiquibaseTimestamp": 1622427525000
+    "lastLiquibaseTimestamp": 1623046443000
   }
 }

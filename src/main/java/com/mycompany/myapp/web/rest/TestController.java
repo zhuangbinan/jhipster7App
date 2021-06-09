@@ -1,10 +1,13 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.CompanyDept;
+import com.mycompany.myapp.domain.CompanyUser;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.service.CompanyUserService;
 import com.mycompany.myapp.service.DataJdbcService;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
+import com.mycompany.myapp.service.dto.CompanyUserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,16 @@ public class TestController {
 
     @Autowired
     private DataJdbcService dataJdbcService;
+
+    @Autowired
+    private CompanyUserService companyUserService;
+
+    @PostMapping("/t3")
+    public void t3(@Valid @RequestBody CompanyUserDTO dto){
+        CompanyUser add = companyUserService.add(dto);
+        System.out.println(dto);
+        System.out.println(add);
+    }
 
     @GetMapping("/testRole")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.TEST + "\")")

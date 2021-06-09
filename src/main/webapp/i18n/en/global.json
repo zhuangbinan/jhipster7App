@@ -27,6 +27,7 @@
         "wamoliUserLocation": "Wamoli User Location",
         "companyDept": "Company Dept",
         "companyPost": "Company Post",
+        "companyUser": "Company User",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

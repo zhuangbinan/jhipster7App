@@ -1,0 +1,142 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="companyUser">
+      <h2 data-cy="companyUserDetailsHeading"><span jhiTranslate="jhipster7App.companyUser.detail.title">Company User</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ companyUser.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.userName" [ngbTooltip]="'jhipster7App.companyUser.help.userName' | translate"
+            >User Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.userName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.idCardNum" [ngbTooltip]="'jhipster7App.companyUser.help.idCardNum' | translate"
+            >Id Card Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.idCardNum }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.gender" [ngbTooltip]="'jhipster7App.companyUser.help.gender' | translate"
+            >Gender</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.gender }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.phoneNum" [ngbTooltip]="'jhipster7App.companyUser.help.phoneNum' | translate"
+            >Phone Num</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.phoneNum }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.email" [ngbTooltip]="'jhipster7App.companyUser.help.email' | translate">Email</span>
+        </dt>
+        <dd>
+          <span>{{ companyUser.email }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.deptName" [ngbTooltip]="'jhipster7App.companyUser.help.deptName' | translate"
+            >Dept Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.deptName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.postName" [ngbTooltip]="'jhipster7App.companyUser.help.postName' | translate"
+            >Post Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.postName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.enable" [ngbTooltip]="'jhipster7App.companyUser.help.enable' | translate"
+            >Enable</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.enable }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.remark" [ngbTooltip]="'jhipster7App.companyUser.help.remark' | translate"
+            >Remark</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.remark }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.delFlag" [ngbTooltip]="'jhipster7App.companyUser.help.delFlag' | translate"
+            >Del Flag</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.delFlag }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.createdBy" [ngbTooltip]="'jhipster7App.companyUser.help.createdBy' | translate"
+            >Created By</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.createdBy }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipster7App.companyUser.createdDate" [ngbTooltip]="'jhipster7App.companyUser.help.createdDate' | translate"
+            >Created Date</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.companyUser.lastModifiedBy"
+            [ngbTooltip]="'jhipster7App.companyUser.help.lastModifiedBy' | translate"
+            >Last Modified By</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.lastModifiedBy }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="jhipster7App.companyUser.lastModifiedDate"
+            [ngbTooltip]="'jhipster7App.companyUser.help.lastModifiedDate' | translate"
+            >Last Modified Date</span
+          >
+        </dt>
+        <dd>
+          <span>{{ companyUser.lastModifiedDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/company-user', companyUser.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

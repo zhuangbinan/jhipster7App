@@ -1,13 +1,16 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.domain.WamoliUser;
+import com.mycompany.myapp.domain.enumeration.CertificateType;
+import com.mycompany.myapp.domain.enumeration.UserType;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.MailService;
 import com.mycompany.myapp.service.UserService;
+import com.mycompany.myapp.service.WamoliUserService;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
 import com.mycompany.myapp.service.dto.PasswordChangeDTO;
-import com.mycompany.myapp.service.dto.UserDTO;
 import com.mycompany.myapp.web.rest.errors.*;
 import com.mycompany.myapp.web.rest.vm.KeyAndPasswordVM;
 import com.mycompany.myapp.web.rest.vm.ManagedUserVM;
@@ -42,10 +45,13 @@ public class AccountResource {
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    private final WamoliUserService wamoliUserService;
+
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, WamoliUserService wamoliUserService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.wamoliUserService = wamoliUserService;
     }
 
     /**
@@ -63,6 +69,24 @@ public class AccountResource {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+
+        WamoliUser wamoliUser = new WamoliUser();
+        wamoliUser.setUserName("");  //真实姓名,现在不允许为空,所以这样写
+        wamoliUser.setEmail(user.getEmail());  //注册时,接收激活账号邮件
+        wamoliUser.setPhoneNum(user.getLogin());  //注册时,手机号做登录时的用户名,
+        wamoliUser.setEnable(false);  //尚未激活
+        wamoliUser.setUser(user);  //wamoli_user 绑定 jhi_user
+
+        wamoliUser.setIdCardNum("");
+        wamoliUser.setGender("男");
+        wamoliUser.setIdCardType(CertificateType.IDCARD);
+        wamoliUser.setUserType(UserType.MEMBER);
+
+        Optional<WamoliUser> isSave = wamoliUserService.bindJhiUser(wamoliUser);  //修改
+        if (isSave.isEmpty()) { //存
+            wamoliUserService.save(wamoliUser);  //save方法是根据id来判断存或改的
+        }
+
         mailService.sendActivationEmail(user);
     }
 

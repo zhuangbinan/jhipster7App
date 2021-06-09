@@ -1,0 +1,53 @@
+{
+  "jhipster7App": {
+    "companyUser": {
+      "home": {
+        "title": "Company Users",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Company User",
+        "createOrEditLabel": "创建或编辑 Company User",
+        "notFound": "No Company Users found"
+      },
+      "created": "Company User {{ param }} 创建成功",
+      "updated": "Company User {{ param }} 更新成功",
+      "deleted": "Company User {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Company User {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Company User"
+      },
+      "id": "ID",
+      "userName": "User Name",
+      "idCardNum": "Id Card Num",
+      "gender": "Gender",
+      "phoneNum": "Phone Num",
+      "email": "Email",
+      "deptName": "Dept Name",
+      "postName": "Post Name",
+      "enable": "Enable",
+      "remark": "Remark",
+      "delFlag": "Del Flag",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "help": {
+        "userName": "用户姓名",
+        "idCardNum": "身份证号码",
+        "gender": "性别",
+        "phoneNum": "电话",
+        "email": "email",
+        "deptName": "部门名称",
+        "postName": "职位名称",
+        "enable": "是否可用",
+        "remark": "备注",
+        "delFlag": "逻辑删除标识",
+        "createdBy": "创建者",
+        "createdDate": "创建时间",
+        "lastModifiedBy": "最后修改者",
+        "lastModifiedDate": "最后修改者"
+      }
+    }
+  }
+}
