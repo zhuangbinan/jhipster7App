@@ -3,6 +3,7 @@ package com.mycompany.myapp.service;
 import com.mycompany.myapp.domain.CommunityImages;
 import com.mycompany.myapp.domain.CompanyDept;
 import com.mycompany.myapp.domain.CompanyPost;
+import com.mycompany.myapp.domain.CompanyUser;
 import com.mycompany.myapp.repository.DataJdbcRepository;
 import io.jsonwebtoken.lang.Assert;
 import org.springframework.stereotype.Service;
@@ -68,8 +69,8 @@ public class DataJdbcService {
     }
 
     /**
-     * 管理物业员工新增用户时 选择部门
-     * @return 筛选后的部门信息集合
+     * 新增用户时 查询可以选择的岗位
+     * @return 获取所有部门信息
      */
     @Transactional(readOnly = true)
     public List<CompanyPost> getAllCompanyPostsSelect() {
@@ -79,6 +80,19 @@ public class DataJdbcService {
 
     public int updateAuthorityById(String oldName, String newName){
         return dataJdbcRepository.updateAuthorityById(oldName,newName);
+    }
+
+    /**
+     * 在物业用户管理页面,点击某个部门时,
+     * @param deptId 点击的部门ID
+     * @param pageNum 页码数
+     * @param pageSize 每页数量
+     * @return 该部门ID下面的所有员工信息并分页
+     */
+    public List<CompanyUser> findCompanyUserByDeptId(Long deptId,int pageNum , int pageSize){
+        pageNum = (pageNum - 1) * pageSize;
+        List<CompanyUser> list = dataJdbcRepository.findCompanyUserByDeptId(deptId,pageNum,pageSize);
+        return list == null ? new ArrayList<>() : list;
     }
 
 }

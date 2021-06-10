@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.domain.CompanyUser;
 import com.mycompany.myapp.repository.CompanyUserRepository;
 import com.mycompany.myapp.service.CompanyUserService;
+import com.mycompany.myapp.service.DataJdbcService;
 import com.mycompany.myapp.service.dto.CompanyUserDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -43,9 +44,12 @@ public class CompanyUserResource {
 
     private final CompanyUserRepository companyUserRepository;
 
-    public CompanyUserResource(CompanyUserService companyUserService, CompanyUserRepository companyUserRepository) {
+    private final DataJdbcService dataJdbcService;
+
+    public CompanyUserResource(CompanyUserService companyUserService, CompanyUserRepository companyUserRepository, DataJdbcService dataJdbcService) {
         this.companyUserService = companyUserService;
         this.companyUserRepository = companyUserRepository;
+        this.dataJdbcService = dataJdbcService;
     }
 
     @PostMapping("/company-users/add")
@@ -158,6 +162,20 @@ public class CompanyUserResource {
         Page<CompanyUser> page = companyUserService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+
+    /**
+     * 在物业用户管理页面,点击某个部门时,
+     * @param deptId 点击的部门ID
+     * @param pageNum 页码数
+     * @param pageSize 每页数量
+     * @return 该部门ID下面的所有员工信息并分页
+     */
+    @GetMapping("/company-users/findCompanyUserByDeptId")
+    public ResponseEntity<List<CompanyUser>> findCompanyUserByDeptId(Long deptId ,int pageNum , int pageSize) {
+        List<CompanyUser> companyUserByDeptId = dataJdbcService.findCompanyUserByDeptId(deptId, pageNum, pageSize);
+        return ResponseEntity.ok(companyUserByDeptId);
     }
 
     /**

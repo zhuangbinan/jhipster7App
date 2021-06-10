@@ -3,6 +3,7 @@ package com.mycompany.myapp.repository;
 import com.mycompany.myapp.domain.CommunityImages;
 import com.mycompany.myapp.domain.CompanyDept;
 import com.mycompany.myapp.domain.CompanyPost;
+import com.mycompany.myapp.domain.CompanyUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -75,5 +76,33 @@ public class DataJdbcRepository {
         String sql = String.format("update jhi_authority set name = '%s' where name = '%s' ", newName , oldName);
         return jdbcTemplate.update(sql);
     }
+
+    /**
+     * 在物业员工管理时
+     * 按部门ID查询部门下所有员工
+     * @param deptId 部门ID
+     * @param pageNum 页码
+     * @param pageSize 每页数量
+     * @return 按部门ID查询部门下所有员工并返回分页集合
+     */
+    public List<CompanyUser> findCompanyUserByDeptId(Long deptId , int pageNum , int pageSize) {
+        String sql = String.format(
+            "SELECT " +
+                "wcu.* " +
+            "FROM " +
+                "wamoli_company_user wcu " +
+            "WHERE " +
+                "wcu.dept_name = ( " +
+                                "SELECT " +
+                                    "wcd.dept_name " +
+                                "FROM " +
+                                    "wamoli_company_dept wcd " +
+                                "WHERE " +
+                                    "wcd.id = %s )" +
+            "LIMIT %s , %s ", deptId, pageNum, pageSize);
+
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(CompanyUser.class));
+    }
+
 
 }
