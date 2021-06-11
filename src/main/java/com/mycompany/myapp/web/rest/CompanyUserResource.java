@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -164,18 +165,30 @@ public class CompanyUserResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/company-users/withDelFlag")
+    public ResponseEntity<List<CompanyUser>> getAllCompanyUsersWithDelFlag(Pageable pageable) {
+        log.debug("REST request to getAllCompanyUsersWithDelFlag");
+        //写自己的分页 withDelFlag 查询
+        List<CompanyUser> all = companyUserService.findAllWithDelFlag(pageable);
+        Page page = new PageImpl(all,pageable,all.size());
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 
     /**
      * 在物业用户管理页面,点击某个部门时,
      * @param deptId 点击的部门ID
-     * @param pageNum 页码数
-     * @param pageSize 每页数量
+     * @param pageable 分页参数
      * @return 该部门ID下面的所有员工信息并分页
      */
     @GetMapping("/company-users/findCompanyUserByDeptId")
-    public ResponseEntity<List<CompanyUser>> findCompanyUserByDeptId(Long deptId ,int pageNum , int pageSize) {
-        List<CompanyUser> companyUserByDeptId = dataJdbcService.findCompanyUserByDeptId(deptId, pageNum, pageSize);
-        return ResponseEntity.ok(companyUserByDeptId);
+    public ResponseEntity<List<CompanyUser>> findCompanyUserByDeptId(Long deptId ,Pageable pageable) {
+        log.debug("按部门查询,部门id: {},分页{}",deptId,pageable);
+        List<CompanyUser> companyUserByDeptId = dataJdbcService.findCompanyUserByDeptId(deptId, pageable.getPageNumber(), pageable.getPageSize());
+        Page page = new PageImpl(companyUserByDeptId,pageable,companyUserByDeptId.size());
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
@@ -191,12 +204,8 @@ public class CompanyUserResource {
         return ResponseUtil.wrapOrNotFound(companyUser);
     }
 
-    /**
-     * {@code DELETE  /company-users/:id} : delete the "id" companyUser.
-     *
-     * @param id the id of the companyUser to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
+    /// 保留自动生成的物理删除方法
+    /*
     @DeleteMapping("/company-users/{id}")
     public ResponseEntity<Void> deleteCompanyUser(@PathVariable Long id) {
         log.debug("REST request to delete CompanyUser : {}", id);
@@ -204,6 +213,21 @@ public class CompanyUserResource {
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
+    }*/
+
+    /**
+     * 逻辑删除
+     * @param ids ids
+     * @return void
+     */
+    @DeleteMapping("/company-users/{ids}")
+    public ResponseEntity<Void> logicDeleteCompanyUser(@PathVariable Long[] ids) {
+        log.debug("REST request to 逻辑删除 CompanyUser : {}", ids);
+        companyUserService.logicDelete(ids);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, ids.toString()))
             .build();
     }
 }

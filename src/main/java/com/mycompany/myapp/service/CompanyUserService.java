@@ -6,10 +6,7 @@ import com.mycompany.myapp.domain.enumeration.UserType;
 import com.mycompany.myapp.repository.*;
 
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
@@ -22,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.jhipster.security.RandomUtil;
 
 /**
  * Service Implementation for managing {@link CompanyUser}.
@@ -49,7 +45,9 @@ public class CompanyUserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public CompanyUserService(CompanyUserRepository companyUserRepository, WamoliUserRepository wamoliUserRepository, UserRepository userRepository, AuthorityRepository authorityRepository, CompanyDeptRepository companyDeptRepository, CompanyPostRepository companyPostRepository, CacheManager cacheManager, PasswordEncoder passwordEncoder) {
+    private final DataJdbcRepository dataJdbcRepository;
+
+    public CompanyUserService(CompanyUserRepository companyUserRepository, WamoliUserRepository wamoliUserRepository, UserRepository userRepository, AuthorityRepository authorityRepository, CompanyDeptRepository companyDeptRepository, CompanyPostRepository companyPostRepository, CacheManager cacheManager, PasswordEncoder passwordEncoder, DataJdbcRepository dataJdbcRepository) {
         this.companyUserRepository = companyUserRepository;
         this.wamoliUserRepository = wamoliUserRepository;
         this.userRepository = userRepository;
@@ -58,6 +56,7 @@ public class CompanyUserService {
         this.companyPostRepository = companyPostRepository;
         this.cacheManager = cacheManager;
         this.passwordEncoder = passwordEncoder;
+        this.dataJdbcRepository = dataJdbcRepository;
     }
 
     /**
@@ -309,5 +308,53 @@ public class CompanyUserService {
     public void delete(Long id) {
         log.debug("Request to delete CompanyUser : {}", id);
         companyUserRepository.deleteById(id);
+    }
+
+    //对CompanyUser逻辑删除,对对应的WamoliUser和JhiUser物理删除
+    public void logicDelete(Long[] ids) {
+
+        //不能修改系统性的用户,这里是暂时指ID为1的用户
+        for (Long id : ids) {
+            if (this.checkUserAllowed(id)){
+                throw new IllegalArgumentException("不允许操作超级管理员用户");
+            }
+        }
+
+        List<CompanyUser> list = new ArrayList<>();
+        //先查询看有没有该id的值
+        for (Long id : ids) {
+            Optional<CompanyUser> byId = companyUserRepository.findByIdAndDelFlagIsFalse(id);
+            if (byId.isEmpty()) {
+                list.clear();
+                throw new IllegalArgumentException("没有找到id为"+id+"的CompanyUser");
+            }
+            list.add(byId.get());
+        }
+
+        //开始执行CompanyUser逻辑删除
+        dataJdbcRepository.logicDeleteCompanyUsers(ids);
+        //开始删除WamoliUser和JhiUser
+        for (CompanyUser companyUser : list) {
+            int wamoliUserDelCount = wamoliUserRepository.deleteByPhoneNum(companyUser.getPhoneNum());
+            if (wamoliUserDelCount != 1) {
+                throw new IllegalArgumentException("删除WamoliUser手机号为:" + companyUser.getPhoneNum() + "失败");
+            }
+            int userDelCount = userRepository.deleteByLogin(companyUser.getPhoneNum());
+            if (userDelCount != 1) {
+                throw new IllegalArgumentException("删除CompanyUser账号为:" + companyUser.getPhoneNum() + "失败");
+            }
+        }
+        list.clear();
+    }
+
+    //超级管理员用户在数据库里的ID是固定的
+    private boolean checkUserAllowed(Long id) {
+        return id != null && 1L == id;
+    }
+
+
+    public List<CompanyUser> findAllWithDelFlag(Pageable pageable) {
+        List<CompanyUser> result = dataJdbcRepository.findCompanyUserAllWithDelFlagIsFalse(pageable);
+        return result == null ? new ArrayList<>() : result;
     }
 }

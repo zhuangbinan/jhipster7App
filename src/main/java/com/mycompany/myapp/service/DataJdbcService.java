@@ -85,14 +85,17 @@ public class DataJdbcService {
     /**
      * 在物业用户管理页面,点击某个部门时,
      * @param deptId 点击的部门ID
-     * @param pageNum 页码数
-     * @param pageSize 每页数量
+     * @param page 页码数
+     * @param size 每页数量
      * @return 该部门ID下面的所有员工信息并分页
      */
-    public List<CompanyUser> findCompanyUserByDeptId(Long deptId,int pageNum , int pageSize){
-        pageNum = (pageNum - 1) * pageSize;
-        List<CompanyUser> list = dataJdbcRepository.findCompanyUserByDeptId(deptId,pageNum,pageSize);
+    public List<CompanyUser> findCompanyUserByDeptId(Long deptId,int page , int size){
+        List<CompanyUser> list = dataJdbcRepository.findCompanyUserByDeptId(deptId,page,size);
         return list == null ? new ArrayList<>() : list;
+    }
+
+    public void logicDeleteCompanyUsers(Long[] ids) {
+        dataJdbcRepository.logicDeleteCompanyUsers(ids);
     }
 
 }

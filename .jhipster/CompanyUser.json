@@ -1,0 +1,87 @@
+{
+  "name": "CompanyUser",
+  "fields": [
+    {
+      "fieldName": "userName",
+      "fieldType": "String",
+      "javadoc": "用户姓名"
+    },
+    {
+      "fieldName": "idCardNum",
+      "fieldType": "String",
+      "javadoc": "身份证号码"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "String",
+      "javadoc": "性别"
+    },
+    {
+      "fieldName": "phoneNum",
+      "fieldType": "String",
+      "javadoc": "电话"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "javadoc": "email"
+    },
+    {
+      "fieldName": "deptName",
+      "fieldType": "String",
+      "javadoc": "部门名称"
+    },
+    {
+      "fieldName": "postName",
+      "fieldType": "String",
+      "javadoc": "职位名称"
+    },
+    {
+      "fieldName": "enable",
+      "fieldType": "Boolean",
+      "javadoc": "是否可用"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String",
+      "javadoc": "备注"
+    },
+    {
+      "fieldName": "delFlag",
+      "fieldType": "Boolean",
+      "javadoc": "逻辑删除标识"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建时间"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "最后修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "最后修改者"
+    }
+  ],
+  "relationships": [],
+  "javadoc": "用来查表展示物业员工 基本信息, 部门, 岗位, 角色",
+  "entityTableName": "wamoli_company_user",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210607061403"
+}
