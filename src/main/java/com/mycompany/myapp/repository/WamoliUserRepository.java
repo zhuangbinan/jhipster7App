@@ -34,5 +34,7 @@ public interface WamoliUserRepository extends JpaRepository<WamoliUser, Long>, J
 
     Optional<WamoliUser> findOneByEmailAndPhoneNumAndUserIsNotNullAndEnableIsFalse(String email, String phoneNum);
 
+    Optional<WamoliUser> findOneByEmailAndPhoneNumAndUserIsNotNullAndEnableIsTrue(String email, String phoneNum);
+
     int deleteByPhoneNum(String phoneNum);
 }

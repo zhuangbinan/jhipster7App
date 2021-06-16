@@ -94,7 +94,7 @@ public class CompanyUserResource {
     @PutMapping("/company-users/{id}")
     public ResponseEntity<CompanyUser> updateCompanyUser(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody CompanyUser companyUser
+        @RequestBody CompanyUserDTO companyUser
     ) throws URISyntaxException {
         log.debug("REST request to update CompanyUser : {}, {}", id, companyUser);
         if (companyUser.getId() == null) {
@@ -104,11 +104,7 @@ public class CompanyUserResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!companyUserRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        CompanyUser result = companyUserService.save(companyUser);
+        CompanyUser result = companyUserService.update(id,companyUser);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, companyUser.getId().toString()))

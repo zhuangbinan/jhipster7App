@@ -11,8 +11,10 @@ import java.util.*;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.service.dto.CompanyUserDTO;
+import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -143,38 +145,14 @@ public class CompanyUserService {
      * @return
      */
     private User addUser(CompanyUserDTO dto){
-        userRepository
-            .findOneByLogin(dto.getPhoneNum().trim())
-            .ifPresent(
-                existingUser -> {
-                    boolean removed = removeNonActivatedUser(existingUser);
-                    if (!removed) {
-                        throw new UsernameAlreadyUsedException();
-                    }
-                }
-            );
-        userRepository
-            .findOneByEmailIgnoreCase(dto.getEmail())
-            .ifPresent(
-                existingUser -> {
-                    boolean removed = removeNonActivatedUser(existingUser);
-                    if (!removed) {
-                        throw new EmailAlreadyUsedException();
-                    }
-                }
-            );
+
+        String encryptedPassword = checkPhoneNumAndEmailAndReturnNewPasswordEncoded(dto);
         User newUser = new User();
-        String password = dto.getPhoneNum().substring(dto.getPhoneNum().length()-6); //设置初始密码,为手机号后6位
-        String encryptedPassword = passwordEncoder.encode(password);
 
         newUser.setLogin(dto.getPhoneNum().trim());
-        // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
-        if (dto.getEmail() != null) {
-            newUser.setEmail(dto.getEmail().toLowerCase());
-        }
+        newUser.setEmail(dto.getEmail().toLowerCase());
         newUser.setLangKey("zh-cn");
-        // new user is active
         newUser.setActivated(true);
         Set<Authority> authorities = new HashSet<>();
         //给到ROLE_MANAGER权限,在AuthoritiesConstants类里要有这个记录,在数据库里也要有一个这个记录
@@ -357,4 +335,115 @@ public class CompanyUserService {
         List<CompanyUser> result = dataJdbcRepository.findCompanyUserAllWithDelFlagIsFalse(pageable);
         return result == null ? new ArrayList<>() : result;
     }
+
+    public CompanyUser update(Long id, CompanyUserDTO companyUser) {
+        log.debug("Request to update CompanyUser : {}", companyUser);
+
+        Optional<String> loginOpt = SecurityUtils.getCurrentUserLogin();
+        if (loginOpt.isEmpty()) {
+            throw new SecurityException("该用户信息有问题!");
+        }
+
+        Optional<CompanyUser> companyUserOptional = companyUserRepository.findById(id);
+        if (companyUserOptional.isEmpty()) {
+            throw new BadRequestAlertException("没找到该对象", "companyUserService", "idnotfound");
+        }
+
+        String login = loginOpt.get();
+        CompanyUser oldCompanyUser = companyUserOptional.get();
+
+        //修改WamoliUser
+        Optional<WamoliUser> wamoliUserOptional =
+            wamoliUserRepository.findOneByEmailAndPhoneNumAndUserIsNotNullAndEnableIsTrue(oldCompanyUser.getEmail(), oldCompanyUser.getPhoneNum());
+        if (wamoliUserOptional.isEmpty()) {
+            throw new IllegalArgumentException("修改时没有找到对应的WamoliUser");
+        }
+
+        Optional<User> userOptional = userRepository.findOneByLogin(oldCompanyUser.getPhoneNum());
+        if (userOptional.isEmpty()) {
+            throw new IllegalArgumentException("修改时没有找到对应的User");
+        }
+
+        Optional<CompanyDept> companyDeptOpt = companyDeptRepository.findById(companyUser.getDeptId());
+        if (companyDeptOpt.isEmpty()) {
+            throw new IllegalArgumentException("没有找到对应的部门");
+        }
+
+        Optional<CompanyPost> companyPostOptional = companyPostRepository.findById(companyUser.getPostId());
+        if (companyPostOptional.isEmpty()) {
+            throw new IllegalArgumentException("没有找到对应的岗位");
+        }
+
+        //构造DeptSet
+        CompanyDept companyDept = companyDeptOpt.get();
+        Set<CompanyDept> deptSet = new HashSet<>();
+        deptSet.add(companyDept);
+        //构造PostSet
+        CompanyPost companyPost = companyPostOptional.get();
+        Set<CompanyPost> postSet = new HashSet<>();
+        postSet.add(companyPost);
+
+        //检验新的手机号或邮箱
+        String passwordEncoded = checkPhoneNumAndEmailAndReturnNewPasswordEncoded(companyUser);
+
+        //修改WamoliUserUser
+        WamoliUser wamoliUser = wamoliUserOptional.get();
+        wamoliUser.setPhoneNum(companyUser.getPhoneNum());   //1.手机号
+        wamoliUser.setEmail(companyUser.getEmail());         //2.邮箱
+        wamoliUser.setCompanyDepts(deptSet);                 //3.部门
+        wamoliUser.setGender(companyUser.getGender());       //4.性别
+        wamoliUser.setEnable(companyUser.getEnable());       //5.账号状态
+        wamoliUser.setCompanyPosts(postSet);                 //6.岗位
+        wamoliUser.setIdCardNum(companyUser.getIdCardNum()); //7.身份证号
+        wamoliUser.setUserName(companyUser.getUserName());   //8.姓名
+
+        //设置其他项
+        wamoliUser.setLastModifiedBy(login);
+        wamoliUser.setLastModifiedDate(Instant.now());
+
+        //修改User
+        User user = userOptional.get();
+        user.setLogin(companyUser.getPhoneNum());
+        user.setEmail(companyUser.getEmail());
+        user.setLastModifiedBy(login);
+        user.setLastModifiedDate(Instant.now());
+        //这里直接修改账号和邮箱,不知道密码还能不能用? 不能
+        //能不能再加个修改密码呢? 所以要在修改手机号时把密码也给改了,密码改为,新手机号的后6位
+        user.setPassword(passwordEncoded);
+
+        CompanyUser dto = new CompanyUser();
+        BeanUtils.copyProperties(companyUser,dto);
+        dto.setDelFlag(false);
+        dto.setCreatedDate(user.getCreatedDate());
+        dto.setCreatedBy(user.getCreatedBy());
+        dto.setLastModifiedBy(SecurityUtils.getCurrentUserLogin().get());
+        dto.setLastModifiedDate(Instant.now());
+        return companyUserRepository.save(dto);
+    }
+
+    private String checkPhoneNumAndEmailAndReturnNewPasswordEncoded(CompanyUserDTO companyUser){
+        userRepository
+            .findOneByLogin(companyUser.getPhoneNum().trim())
+            .ifPresent(
+                existingUser -> {
+                    boolean removed = removeNonActivatedUser(existingUser);
+                    if (!removed) {
+                        throw new UsernameAlreadyUsedException();
+                    }
+                }
+            );
+        userRepository
+            .findOneByEmailIgnoreCase(companyUser.getEmail())
+            .ifPresent(
+                existingUser -> {
+                    boolean removed = removeNonActivatedUser(existingUser);
+                    if (!removed) {
+                        throw new EmailAlreadyUsedException();
+                    }
+                }
+            );
+        String password = companyUser.getPhoneNum().substring(companyUser.getPhoneNum().length()-6); //设置初始密码,为手机号后6位
+        return passwordEncoder.encode(password);
+    }
+
 }

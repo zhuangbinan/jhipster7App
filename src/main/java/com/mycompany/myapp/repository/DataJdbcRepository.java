@@ -67,7 +67,7 @@ public class DataJdbcRepository {
 
     /**
      * 新增用户时 查询可以选择的岗位
-     * @return
+     * @return List<CompanyPost> 但只有 id, post_cod , post_name , order_num 这四个字段,为了json数据量小一些
      */
     public List<CompanyPost> getAllCompanyPostsSelect() {
         String sql = String.format("select wcp.id,wcp.post_code,wcp.post_name,wcp.order_num from wamoli_company_post wcp where wcp.enable = '1' ");
@@ -95,6 +95,8 @@ public class DataJdbcRepository {
             "FROM " +
                 "wamoli_company_user wcu " +
             "WHERE " +
+                "wcu.del_flag = false " +
+            " AND " +
                 "wcu.dept_name = ( " +
                                 "SELECT " +
                                     "wcd.dept_name " +
