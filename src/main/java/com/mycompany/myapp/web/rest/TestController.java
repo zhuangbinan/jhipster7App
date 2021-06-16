@@ -6,6 +6,7 @@ import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.service.CompanyUserService;
 import com.mycompany.myapp.service.DataJdbcService;
+import com.mycompany.myapp.service.MqttService;
 import com.mycompany.myapp.service.dto.AdminUserDTO;
 import com.mycompany.myapp.service.dto.CompanyUserDTO;
 import org.slf4j.Logger;
@@ -33,6 +34,15 @@ public class TestController {
 
     @Autowired
     private CompanyUserService companyUserService;
+
+    @Autowired
+    private MqttService mqttService;
+
+    @GetMapping("/t4")
+    public String t4(){
+        String clientId = mqttService.getClientId();
+        return clientId;
+    }
 
     @PostMapping("/t3")
     public void t3(@Valid @RequestBody CompanyUserDTO dto){
