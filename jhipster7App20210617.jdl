@@ -1,0 +1,700 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName jhipster7App
+    blueprints []
+    buildTool maven
+    cacheProvider caffeine
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme none
+    creationTimestamp 1618377890671
+    databaseType sql
+    devDatabaseType mysql
+    dtoSuffix DTO
+    enableHibernateCache true
+    enableSwaggerCodegen false
+    enableTranslation true
+    jhiPrefix jhi
+    jhipsterVersion "7.0.1"
+    jwtSecretKey "YzVjMmIzMjlhMTdmMWQyN2ZjMGQ4YjAxMmIxZjc0OTE1Y2FlMmRiMGJjMjZjMWJhODJiYzk4MzM4ZWY3YzRmYTU2MTliZGQ0OGJkZjNmYmM5NDk0NjE5ZDIxMmQwNDBiMjhjMjk0ZjM0ZGYzMzFmYmUwMzA1NjhjOGM3OWJjYTQ="
+    languages [zh-cn, en]
+    messageBroker false
+    nativeLanguage zh-cn
+    otherModules []
+    packageName com.mycompany.myapp
+    prodDatabaseType mysql
+    reactive false
+    searchEngine false
+    serverPort 8086
+    serviceDiscoveryType eureka
+    skipClient false
+    skipServer false
+    skipUserManagement false
+    testFrameworks []
+    websocket false
+    withAdminUi true
+  }
+
+  entities Author, Book, Buildings, Community, CommunityImageGroup, CommunityImages, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, CompanyUser, HomelandStation, RoomAddr, Test01, TuYaCmd, TuYaDevice, Visitor, WamoliFaceLibrary, WamoliUser, WamoliUserLocation
+}
+
+entity Author {
+  name String
+  birthDate Instant
+}
+entity Book {
+  title String
+  price BigDecimal
+  publisherName String
+  publisherDate Instant
+}
+/**
+ * 楼栋建筑
+ */
+entity Buildings (wamoli_buildings) {
+  /**
+   * 楼栋名称
+   */
+  name String
+  /**
+   * 编码
+   */
+  longCode String required unique
+  /**
+   * 楼栋层数
+   */
+  floorCount Integer
+  /**
+   * 单元数
+   */
+  unites Integer
+  /**
+   * 经度
+   */
+  longitude String required maxlength(32)
+  /**
+   * 纬度
+   */
+  latitude String required maxlength(32)
+  /**
+   * 是否启用
+   */
+  enable Boolean
+}
+/**
+ * 社区居委会
+ */
+entity Community (wamoli_community) {
+  /**
+   * 名称
+   */
+  cname String
+  /**
+   * 负责人姓名
+   */
+  managerName String
+  /**
+   * 地址
+   */
+  address String
+  /**
+   * 电话号码
+   */
+  tel String
+  /**
+   * 邮箱
+   */
+  email String
+  /**
+   * 办公时间
+   */
+  officeHours String
+  /**
+   * 社区描述
+   */
+  description String
+  /**
+   * 来源
+   */
+  source String
+  /**
+   * 父级ID 为了分管办公室级别
+   */
+  parentId Long
+  /**
+   * 祖籍 示例 0,100
+   */
+  ancestors String
+  /**
+   * 编码
+   */
+  longCode String
+  /**
+   * 是否可用
+   */
+  enable Boolean
+  /**
+   * 逻辑删除标识
+   */
+  delFlag Boolean
+  /**
+   * 排序号
+   */
+  orderNum Integer
+  lastModifyDate Instant
+  lastModifyBy String
+}
+/**
+ * 社区居委会 图片库分组
+ */
+entity CommunityImageGroup (wamoli_community_image_group) {
+  /**
+   * 图片组名
+   */
+  imgGroupName String unique
+  orderNum Integer
+  lastModifyDate Instant
+  lastModifyBy String
+}
+/**
+ * 社区居委会 图片库
+ */
+entity CommunityImages (wamoli_community_images) {
+  imgContent ImageBlob
+  /**
+   * 图片名称
+   */
+  imgTitle String
+  /**
+   * 图片描述
+   */
+  imgDesc String
+  orderNum Integer
+  lastModifyDate Instant
+  lastModifyBy String
+}
+/**
+ * 社区居委会 人员介绍
+ */
+entity CommunityLeader (wamoli_community_leader) {
+  /**
+   * 证件照
+   */
+  avatar ImageBlob
+  /**
+   * 姓名
+   */
+  realName String
+  /**
+   * 电话号码
+   */
+  tel String
+  /**
+   * 职务
+   */
+  jobTitle String
+  /**
+   * 职责简述
+   */
+  jobDesc String
+  /**
+   * 职业生涯简述
+   */
+  jobCareerDesc TextBlob
+  enable Boolean
+  delFlag Boolean
+  orderNum Integer
+  lastModifyDate Instant
+  lastModifyBy String
+}
+/**
+ * 社区居委会 社区通知、公告、新闻 暂时定为 标题 图片+正文 尾部 这样的 模板格式
+ */
+entity CommunityNotice (wamoli_community_notice) {
+  title String
+  img1 ImageBlob
+  img1Title String
+  content1 TextBlob
+  img2 ImageBlob
+  img2Title String
+  content2 TextBlob
+  img3 ImageBlob
+  img3Title String
+  content3 TextBlob
+  img4 ImageBlob
+  img4Title String
+  content4 TextBlob
+  img5 ImageBlob
+  img5Title String
+  content5 TextBlob
+  tail String
+  enable Boolean
+  delFlag Boolean
+  orderNum Integer
+  lastModifyDate Instant
+  lastModifyBy String
+}
+/**
+ * 物业公司
+ */
+entity Company (wamoli_company) {
+  /**
+   * 公司名称
+   */
+  name String required
+  /**
+   * 编码
+   */
+  longCode String required unique
+  /**
+   * 地址
+   */
+  address String
+  /**
+   * 电话
+   */
+  tel String
+  /**
+   * 邮箱
+   */
+  email String
+  /**
+   * 负责人
+   */
+  managerName String
+  /**
+   * 是否生效
+   */
+  enable Boolean
+}
+/**
+ * 物业公司部门
+ */
+entity CompanyDept (wamoli_company_dept) {
+  /**
+   * 父部门id
+   */
+  parentId Long
+  /**
+   * 祖级列表
+   */
+  ancestors String
+  /**
+   * 部门名称
+   */
+  deptName String
+  /**
+   * 排序号
+   */
+  orderNum Integer
+  /**
+   * 负责人名字
+   */
+  leaderName String
+  /**
+   * 电话号码
+   */
+  tel String
+  /**
+   * email
+   */
+  email String
+  /**
+   * 是否可用
+   */
+  enable Boolean
+  /**
+   * 逻辑删除标识
+   */
+  delFlag Boolean
+  createBy String
+  createDate Instant
+  lastModifyBy String
+  lastModifyDate Instant
+}
+/**
+ * 物业公司岗位
+ */
+entity CompanyPost (wamoli_company_post) {
+  /**
+   * 岗位英文缩写 如 CEO CTO HR
+   */
+  postCode String
+  /**
+   * 岗位名称
+   */
+  postName String
+  /**
+   * 排序号
+   */
+  orderNum Integer
+  /**
+   * 备注
+   */
+  remark String
+  /**
+   * 是否可用
+   */
+  enable Boolean
+  createBy String
+  createDate Instant
+  lastModifyBy String
+  lastModifyDate Instant
+}
+/**
+ * 用来查表展示物业员工 基本信息, 部门, 岗位, 角色
+ */
+entity CompanyUser (wamoli_company_user) {
+  /**
+   * 用户姓名
+   */
+  userName String
+  /**
+   * 身份证号码
+   */
+  idCardNum String
+  /**
+   * 性别
+   */
+  gender String
+  /**
+   * 电话
+   */
+  phoneNum String
+  /**
+   * email
+   */
+  email String
+  /**
+   * 部门名称
+   */
+  deptName String
+  /**
+   * 职位名称
+   */
+  postName String
+  /**
+   * 是否可用
+   */
+  enable Boolean
+  /**
+   * 备注
+   */
+  remark String
+  /**
+   * 逻辑删除标识
+   */
+  delFlag Boolean
+  /**
+   * 创建者
+   */
+  createdBy String
+  /**
+   * 创建时间
+   */
+  createdDate Instant
+  /**
+   * 最后修改者
+   */
+  lastModifiedBy String
+  /**
+   * 最后修改者
+   */
+  lastModifiedDate Instant
+}
+/**
+ * 小区站点
+ */
+entity HomelandStation (wamoli_homeland_station) {
+  /**
+   * 小区名称
+   */
+  name String required
+  /**
+   * 编码
+   */
+  longCode String required unique
+  /**
+   * 小区地址
+   */
+  address String
+  /**
+   * 小区入住人数
+   */
+  livingPopulation Integer
+  /**
+   * 小区楼栋
+   */
+  buildingCount Integer
+  /**
+   * 小区入口数
+   */
+  entranceCount Integer
+  /**
+   * 小区图片
+   */
+  logo ImageBlob maxbytes(512000)
+  /**
+   * 经度
+   */
+  longitude String required maxlength(32)
+  /**
+   * 纬度
+   */
+  latitude String required maxlength(32)
+}
+/**
+ * 门牌地址
+ */
+entity RoomAddr (wamoli_room_addr) {
+  /**
+   * 门牌名称
+   */
+  roomNum String required
+  /**
+   * 单元
+   */
+  unit String
+  /**
+   * 户型
+   */
+  roomType String
+  /**
+   * 面积
+   */
+  roomArea Float
+  /**
+   * 是否入住
+   */
+  used Boolean
+  /**
+   * 是否启用自动控制
+   */
+  autoControl Boolean
+  /**
+   * 编码
+   */
+  longCode String required unique
+}
+entity Test01 {
+  jobCareerDesc TextBlob
+}
+entity TuYaCmd {
+  /**
+   * 名称
+   */
+  cmdName String
+  /**
+   * 命令code
+   */
+  cmdCode String
+  /**
+   * 值
+   */
+  value Boolean
+  /**
+   * 类型
+   */
+  cmdType CmdType
+  /**
+   * 创建时间
+   */
+  createTime Instant
+  /**
+   * 是否有效
+   */
+  enable Boolean
+}
+entity TuYaDevice {
+  /**
+   * 设备名称
+   */
+  deviceName String
+  /**
+   * 设备编号longCode
+   */
+  longCode Long unique
+  /**
+   * tuya设备ID
+   */
+  tyDeviceId String unique
+  /**
+   * 设备类型 0-网关 1-通断启 2-开关 3-温湿度燃气 4-报警器
+   */
+  deviceType Integer
+  /**
+   * 命令编码
+   */
+  cmdCode String
+  /**
+   * 创建时间
+   */
+  createTime Instant
+  /**
+   * 是否有效
+   */
+  enable Boolean
+}
+/**
+ * 访客信息
+ */
+entity Visitor (wamoli_visitor) {
+  /**
+   * 姓名
+   */
+  name String required
+  /**
+   * 电话
+   */
+  phoneNum String required
+  /**
+   * 车牌号码
+   */
+  carPlateNum String
+  /**
+   * 生效时间
+   */
+  startTime Instant required
+  /**
+   * 失效时间
+   */
+  endTime Instant required
+  /**
+   * 密码密钥
+   */
+  passwd String
+  /**
+   * 人脸
+   */
+  faceImage ImageBlob maxbytes(512000)
+  /**
+   * 远程开启选择的门,进小区或楼栋入口
+   */
+  whichEntrance String
+}
+entity WamoliFaceLibrary {
+  content TextBlob required
+}
+/**
+ * 用户信息表
+ */
+entity WamoliUser {
+  /**
+   * 用户姓名
+   */
+  userName String required
+  /**
+   * 性别
+   */
+  gender String
+  /**
+   * 电话
+   */
+  phoneNum String required
+  /**
+   * 邮箱
+   */
+  email String
+  /**
+   * 单元
+   */
+  unitAddr String
+  /**
+   * 门牌
+   */
+  roomAddr Long
+  /**
+   * 证件号码
+   */
+  idCardNum String
+  /**
+   * 证件类型
+   */
+  idCardType CertificateType
+  /**
+   * 用户类型
+   */
+  userType UserType
+  /**
+   * 是否生效
+   */
+  enable Boolean
+  isManager Boolean
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+/**
+ * 用户位置表\n@author yifeng
+ */
+entity WamoliUserLocation {
+  /**
+   * 用户位置状态
+   */
+  state Integer required
+  /**
+   * 用户唯一标识
+   */
+  cardNum String required
+  /**
+   * 过期时间
+   */
+  expireTime Instant
+  /**
+   * 延期时间，单位为分钟
+   */
+  delayTime Integer
+  lastModifiedBy String
+  lastModifiedDate Instant
+}
+enum CmdType {
+  ON,
+  OFF,
+  TIMEON,
+  TIMEOFF
+}
+enum CertificateType {
+  IDCARD,
+  DRIVINGLICENSE,
+  PASSPORT
+}
+enum UserType {
+  OWNER,
+  MANAGER,
+  MEMBER,
+  TOURIST,
+  LONELY,
+  TENANT
+}
+
+relationship OneToOne {
+  WamoliFaceLibrary{wamoliUser} to WamoliUser
+  WamoliUser{user} to User
+  WamoliUserLocation{wamoliUser} to WamoliUser
+}
+relationship OneToMany {
+  Author{book} to Book{author}
+  HomelandStation{buildings} to Buildings{homelandStation}
+  CommunityImageGroup{communityImages} to CommunityImages{communityImageGroup}
+  Community{communityLeader} to CommunityLeader{community}
+  Community{communityNotice} to CommunityNotice{community}
+  Community{homelandStation} to HomelandStation{community}
+  Company{homelandStation} to HomelandStation{company}
+  Buildings{roomAddr} to RoomAddr{buildings}
+  TuYaDevice{tuYaCmd} to TuYaCmd{tuYaDevice}
+  RoomAddr{visitor} to Visitor{roomAddr}
+}
+relationship ManyToOne {
+  TuYaDevice{roomAddr} to RoomAddr
+}
+relationship ManyToMany {
+  CompanyPost{wamoliUser} to WamoliUser{companyPost}
+  WamoliUser{roomAddr} to RoomAddr{wamoliUser}
+  WamoliUser{companyDept} to CompanyDept{wamoliUser}
+}
+
+paginate Author, Book, Buildings, Community, CommunityImageGroup, CommunityImages, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, CompanyUser, HomelandStation, RoomAddr, Test01, TuYaCmd, TuYaDevice, Visitor, WamoliUser, WamoliUserLocation with pagination
+service Author, Book, Buildings, Community, CommunityImageGroup, CommunityImages, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, CompanyUser, HomelandStation, RoomAddr, Test01, TuYaCmd, TuYaDevice, Visitor, WamoliFaceLibrary, WamoliUser, WamoliUserLocation with serviceClass
+filter Author, Book, Buildings, Community, CommunityImageGroup, CommunityImages, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, HomelandStation, RoomAddr, Test01, TuYaCmd, TuYaDevice, Visitor, WamoliUser
+dto Test01 with mapstruct
