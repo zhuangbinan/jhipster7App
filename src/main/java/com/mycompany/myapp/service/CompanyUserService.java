@@ -354,7 +354,7 @@ public class CompanyUserService {
 
         //修改WamoliUser
         Optional<WamoliUser> wamoliUserOptional =
-            wamoliUserRepository.findOneByEmailAndPhoneNumAndUserIsNotNullAndEnableIsTrue(oldCompanyUser.getEmail(), oldCompanyUser.getPhoneNum());
+            wamoliUserRepository.findOneByEmailAndPhoneNumAndUserIsNotNull(oldCompanyUser.getEmail(), oldCompanyUser.getPhoneNum());
         if (wamoliUserOptional.isEmpty()) {
             throw new IllegalArgumentException("修改时没有找到对应的WamoliUser");
         }
