@@ -70,13 +70,6 @@
         <dd>
           <span>{{ companyPost.lastModifyDate | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipster7App.companyPost.wamoliUser">Wamoli User</span></dt>
-        <dd>
-          <span *ngFor="let wamoliUser of companyPost.wamoliUsers; let last = last">
-            <a [routerLink]="['/wamoli-user', wamoliUser?.id, 'view']">{{ wamoliUser.id }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

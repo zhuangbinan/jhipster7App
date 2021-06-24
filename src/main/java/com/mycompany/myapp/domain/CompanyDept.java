@@ -103,8 +103,8 @@ public class CompanyDept implements Serializable {
 
     @ManyToMany(mappedBy = "companyDepts")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "roomAddrs", "companyDepts", "companyPosts" }, allowSetters = true)
-    private Set<WamoliUser> wamoliUsers = new HashSet<>();
+    @JsonIgnoreProperties(value = { "companyDepts", "companyPosts" }, allowSetters = true)
+    private Set<CompanyUser> companyUsers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -289,35 +289,35 @@ public class CompanyDept implements Serializable {
         this.lastModifyDate = lastModifyDate;
     }
 
-    public Set<WamoliUser> getWamoliUsers() {
-        return this.wamoliUsers;
+    public Set<CompanyUser> getCompanyUsers() {
+        return this.companyUsers;
     }
 
-    public CompanyDept wamoliUsers(Set<WamoliUser> wamoliUsers) {
-        this.setWamoliUsers(wamoliUsers);
+    public CompanyDept companyUsers(Set<CompanyUser> companyUsers) {
+        this.setCompanyUsers(companyUsers);
         return this;
     }
 
-    public CompanyDept addWamoliUser(WamoliUser wamoliUser) {
-        this.wamoliUsers.add(wamoliUser);
-        wamoliUser.getCompanyDepts().add(this);
+    public CompanyDept addCompanyUser(CompanyUser companyUser) {
+        this.companyUsers.add(companyUser);
+        companyUser.getCompanyDepts().add(this);
         return this;
     }
 
-    public CompanyDept removeWamoliUser(WamoliUser wamoliUser) {
-        this.wamoliUsers.remove(wamoliUser);
-        wamoliUser.getCompanyDepts().remove(this);
+    public CompanyDept removeCompanyUser(CompanyUser companyUser) {
+        this.companyUsers.remove(companyUser);
+        companyUser.getCompanyDepts().remove(this);
         return this;
     }
 
-    public void setWamoliUsers(Set<WamoliUser> wamoliUsers) {
-        if (this.wamoliUsers != null) {
-            this.wamoliUsers.forEach(i -> i.removeCompanyDept(this));
+    public void setCompanyUsers(Set<CompanyUser> companyUsers) {
+        if (this.companyUsers != null) {
+            this.companyUsers.forEach(i -> i.removeCompanyDept(this));
         }
-        if (wamoliUsers != null) {
-            wamoliUsers.forEach(i -> i.addCompanyDept(this));
+        if (companyUsers != null) {
+            companyUsers.forEach(i -> i.addCompanyDept(this));
         }
-        this.wamoliUsers = wamoliUsers;
+        this.companyUsers = companyUsers;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

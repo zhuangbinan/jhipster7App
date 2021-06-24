@@ -1,9 +1,12 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -120,6 +123,26 @@ public class CompanyUser implements Serializable {
     @ApiModelProperty(value = "最后修改者")
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(
+        name = "rel_wamoli_company_user__company_dept",
+        joinColumns = @JoinColumn(name = "wamoli_company_user_id"),
+        inverseJoinColumns = @JoinColumn(name = "company_dept_id")
+    )
+    @JsonIgnoreProperties(value = { "companyUsers" }, allowSetters = true)
+    private Set<CompanyDept> companyDepts = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(
+        name = "rel_wamoli_company_user__company_post",
+        joinColumns = @JoinColumn(name = "wamoli_company_user_id"),
+        inverseJoinColumns = @JoinColumn(name = "company_post_id")
+    )
+    @JsonIgnoreProperties(value = { "companyUsers" }, allowSetters = true)
+    private Set<CompanyPost> companyPosts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -315,6 +338,56 @@ public class CompanyUser implements Serializable {
 
     public void setLastModifiedDate(Instant lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Set<CompanyDept> getCompanyDepts() {
+        return this.companyDepts;
+    }
+
+    public CompanyUser companyDepts(Set<CompanyDept> companyDepts) {
+        this.setCompanyDepts(companyDepts);
+        return this;
+    }
+
+    public CompanyUser addCompanyDept(CompanyDept companyDept) {
+        this.companyDepts.add(companyDept);
+        companyDept.getCompanyUsers().add(this);
+        return this;
+    }
+
+    public CompanyUser removeCompanyDept(CompanyDept companyDept) {
+        this.companyDepts.remove(companyDept);
+        companyDept.getCompanyUsers().remove(this);
+        return this;
+    }
+
+    public void setCompanyDepts(Set<CompanyDept> companyDepts) {
+        this.companyDepts = companyDepts;
+    }
+
+    public Set<CompanyPost> getCompanyPosts() {
+        return this.companyPosts;
+    }
+
+    public CompanyUser companyPosts(Set<CompanyPost> companyPosts) {
+        this.setCompanyPosts(companyPosts);
+        return this;
+    }
+
+    public CompanyUser addCompanyPost(CompanyPost companyPost) {
+        this.companyPosts.add(companyPost);
+        companyPost.getCompanyUsers().add(this);
+        return this;
+    }
+
+    public CompanyUser removeCompanyPost(CompanyPost companyPost) {
+        this.companyPosts.remove(companyPost);
+        companyPost.getCompanyUsers().remove(this);
+        return this;
+    }
+
+    public void setCompanyPosts(Set<CompanyPost> companyPosts) {
+        this.companyPosts = companyPosts;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

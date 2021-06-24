@@ -25,17 +25,5 @@
                                  constraintName="fk_rel_wamoli_user__room_addr__room_addr_id"
                                  referencedColumnNames="id"
                                  referencedTableName="wamoli_room_addr"/>
-
-        <addForeignKeyConstraint baseColumnNames="wamoli_user_id"
-                                 baseTableName="rel_wamoli_user__company_dept"
-                                 constraintName="fk_rel_wamoli_user__company_dept__wamoli_user_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="wamoli_user"/>
-
-        <addForeignKeyConstraint baseColumnNames="company_dept_id"
-                                 baseTableName="rel_wamoli_user__company_dept"
-                                 constraintName="fk_rel_wamoli_user__company_dept__company_dept_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="wamoli_company_dept"/>
     </changeSet>
 </databaseChangeLog>

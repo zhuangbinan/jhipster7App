@@ -185,52 +185,12 @@ public class CompanyDeptExtends extends CompanyDept{
         this.lastModifyDate = lastModifyDate;
     }
 
-    @Override
-    public Set<WamoliUser> getWamoliUsers() {
-        return wamoliUsers;
-    }
-
-    @Override
-    public void setWamoliUsers(Set<WamoliUser> wamoliUsers) {
-        this.wamoliUsers = wamoliUsers;
-    }
-
     public List<CompanyDeptExtends> getChildren() {
         return children;
     }
 
     public void setChildren(List<CompanyDeptExtends> children) {
         this.children = children;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        CompanyDeptExtends that = (CompanyDeptExtends) o;
-        return Objects.equals(id, that.id) &&
-            Objects.equals(parentId, that.parentId) &&
-            Objects.equals(ancestors, that.ancestors) &&
-            Objects.equals(deptName, that.deptName) &&
-            Objects.equals(orderNum, that.orderNum) &&
-            Objects.equals(leaderName, that.leaderName) &&
-            Objects.equals(tel, that.tel) &&
-            Objects.equals(email, that.email) &&
-            Objects.equals(enable, that.enable) &&
-            Objects.equals(delFlag, that.delFlag) &&
-            Objects.equals(createBy, that.createBy) &&
-            Objects.equals(createDate, that.createDate) &&
-            Objects.equals(lastModifyBy, that.lastModifyBy) &&
-            Objects.equals(lastModifyDate, that.lastModifyDate) &&
-            Objects.equals(companyPosts, that.companyPosts) &&
-            Objects.equals(wamoliUsers, that.wamoliUsers) &&
-            Objects.equals(children, that.children);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id, parentId, ancestors, deptName, orderNum, leaderName, tel, email, enable, delFlag, createBy, createDate, lastModifyBy, lastModifyDate, companyPosts, wamoliUsers, children);
     }
 
     @Override

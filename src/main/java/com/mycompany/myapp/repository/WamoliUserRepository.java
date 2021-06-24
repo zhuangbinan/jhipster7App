@@ -17,19 +17,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WamoliUserRepository extends JpaRepository<WamoliUser, Long>, JpaSpecificationExecutor<WamoliUser> {
     @Query(
-        value = "select distinct wamoliUser from WamoliUser wamoliUser left join fetch wamoliUser.roomAddrs left join fetch wamoliUser.companyDepts",
+        value = "select distinct wamoliUser from WamoliUser wamoliUser left join fetch wamoliUser.roomAddrs",
         countQuery = "select count(distinct wamoliUser) from WamoliUser wamoliUser"
     )
     Page<WamoliUser> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(
-        "select distinct wamoliUser from WamoliUser wamoliUser left join fetch wamoliUser.roomAddrs left join fetch wamoliUser.companyDepts"
-    )
+    @Query("select distinct wamoliUser from WamoliUser wamoliUser left join fetch wamoliUser.roomAddrs")
     List<WamoliUser> findAllWithEagerRelationships();
 
-    @Query(
-        "select wamoliUser from WamoliUser wamoliUser left join fetch wamoliUser.roomAddrs left join fetch wamoliUser.companyDepts where wamoliUser.id =:id"
-    )
+    @Query("select wamoliUser from WamoliUser wamoliUser left join fetch wamoliUser.roomAddrs where wamoliUser.id =:id")
     Optional<WamoliUser> findOneWithEagerRelationships(@Param("id") Long id);
 
     Optional<WamoliUser> findOneByEmailAndPhoneNumAndUserIsNotNullAndEnableIsFalse(String email, String phoneNum);

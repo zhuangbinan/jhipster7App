@@ -14,8 +14,6 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IRoomAddr } from 'app/entities/room-addr/room-addr.model';
 import { RoomAddrService } from 'app/entities/room-addr/service/room-addr.service';
-import { ICompanyDept } from 'app/entities/company-dept/company-dept.model';
-import { CompanyDeptService } from 'app/entities/company-dept/service/company-dept.service';
 
 import { WamoliUserUpdateComponent } from './wamoli-user-update.component';
 
@@ -27,7 +25,6 @@ describe('Component Tests', () => {
     let wamoliUserService: WamoliUserService;
     let userService: UserService;
     let roomAddrService: RoomAddrService;
-    let companyDeptService: CompanyDeptService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -43,7 +40,6 @@ describe('Component Tests', () => {
       wamoliUserService = TestBed.inject(WamoliUserService);
       userService = TestBed.inject(UserService);
       roomAddrService = TestBed.inject(RoomAddrService);
-      companyDeptService = TestBed.inject(CompanyDeptService);
 
       comp = fixture.componentInstance;
     });
@@ -87,36 +83,12 @@ describe('Component Tests', () => {
         expect(comp.roomAddrsSharedCollection).toEqual(expectedCollection);
       });
 
-      it('Should call CompanyDept query and add missing value', () => {
-        const wamoliUser: IWamoliUser = { id: 456 };
-        const companyDepts: ICompanyDept[] = [{ id: 24805 }];
-        wamoliUser.companyDepts = companyDepts;
-
-        const companyDeptCollection: ICompanyDept[] = [{ id: 29938 }];
-        spyOn(companyDeptService, 'query').and.returnValue(of(new HttpResponse({ body: companyDeptCollection })));
-        const additionalCompanyDepts = [...companyDepts];
-        const expectedCollection: ICompanyDept[] = [...additionalCompanyDepts, ...companyDeptCollection];
-        spyOn(companyDeptService, 'addCompanyDeptToCollectionIfMissing').and.returnValue(expectedCollection);
-
-        activatedRoute.data = of({ wamoliUser });
-        comp.ngOnInit();
-
-        expect(companyDeptService.query).toHaveBeenCalled();
-        expect(companyDeptService.addCompanyDeptToCollectionIfMissing).toHaveBeenCalledWith(
-          companyDeptCollection,
-          ...additionalCompanyDepts
-        );
-        expect(comp.companyDeptsSharedCollection).toEqual(expectedCollection);
-      });
-
       it('Should update editForm', () => {
         const wamoliUser: IWamoliUser = { id: 456 };
         const user: IUser = { id: 47918 };
         wamoliUser.user = user;
         const roomAddrs: IRoomAddr = { id: 30150 };
         wamoliUser.roomAddrs = [roomAddrs];
-        const companyDepts: ICompanyDept = { id: 24264 };
-        wamoliUser.companyDepts = [companyDepts];
 
         activatedRoute.data = of({ wamoliUser });
         comp.ngOnInit();
@@ -124,7 +96,6 @@ describe('Component Tests', () => {
         expect(comp.editForm.value).toEqual(expect.objectContaining(wamoliUser));
         expect(comp.usersSharedCollection).toContain(user);
         expect(comp.roomAddrsSharedCollection).toContain(roomAddrs);
-        expect(comp.companyDeptsSharedCollection).toContain(companyDepts);
       });
     });
 
@@ -208,14 +179,6 @@ describe('Component Tests', () => {
           expect(trackResult).toEqual(entity.id);
         });
       });
-
-      describe('trackCompanyDeptById', () => {
-        it('Should return tracked CompanyDept primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackCompanyDeptById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
-      });
     });
 
     describe('Getting selected relationships', () => {
@@ -240,32 +203,6 @@ describe('Component Tests', () => {
           const option = { id: 123 };
           const selected = { id: 456 };
           const result = comp.getSelectedRoomAddr(option, [selected]);
-          expect(result === option).toEqual(true);
-          expect(result === selected).toEqual(false);
-        });
-      });
-
-      describe('getSelectedCompanyDept', () => {
-        it('Should return option if no CompanyDept is selected', () => {
-          const option = { id: 123 };
-          const result = comp.getSelectedCompanyDept(option);
-          expect(result === option).toEqual(true);
-        });
-
-        it('Should return selected CompanyDept for according option', () => {
-          const option = { id: 123 };
-          const selected = { id: 123 };
-          const selected2 = { id: 456 };
-          const result = comp.getSelectedCompanyDept(option, [selected2, selected]);
-          expect(result === selected).toEqual(true);
-          expect(result === selected2).toEqual(false);
-          expect(result === option).toEqual(false);
-        });
-
-        it('Should return option if this CompanyDept is not selected', () => {
-          const option = { id: 123 };
-          const selected = { id: 456 };
-          const result = comp.getSelectedCompanyDept(option, [selected]);
           expect(result === option).toEqual(true);
           expect(result === selected).toEqual(false);
         });

@@ -27,7 +27,7 @@
       "createDate": "Create Date",
       "lastModifyBy": "Last Modify By",
       "lastModifyDate": "Last Modify Date",
-      "wamoliUser": "Wamoli User",
+      "companyUser": "Company User",
       "help": {
         "postCode": "岗位英文缩写 如 CEO CTO HR",
         "postName": "岗位名称",

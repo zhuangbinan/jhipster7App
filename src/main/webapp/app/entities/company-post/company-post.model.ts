@@ -1,5 +1,5 @@
 import * as dayjs from 'dayjs';
-import { IWamoliUser } from 'app/entities/wamoli-user/wamoli-user.model';
+import { ICompanyUser } from 'app/entities/company-user/company-user.model';
 
 export interface ICompanyPost {
   id?: number;
@@ -12,7 +12,7 @@ export interface ICompanyPost {
   createDate?: dayjs.Dayjs | null;
   lastModifyBy?: string | null;
   lastModifyDate?: dayjs.Dayjs | null;
-  wamoliUsers?: IWamoliUser[] | null;
+  companyUsers?: ICompanyUser[] | null;
 }
 
 export class CompanyPost implements ICompanyPost {
@@ -27,7 +27,7 @@ export class CompanyPost implements ICompanyPost {
     public createDate?: dayjs.Dayjs | null,
     public lastModifyBy?: string | null,
     public lastModifyDate?: dayjs.Dayjs | null,
-    public wamoliUsers?: IWamoliUser[] | null
+    public companyUsers?: ICompanyUser[] | null
   ) {
     this.enable = this.enable ?? false;
   }

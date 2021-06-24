@@ -1,55 +1,4 @@
-application {
-  config {
-    applicationType monolith
-    authenticationType jwt
-    baseName jhipster7App
-    blueprints []
-    buildTool maven
-    cacheProvider caffeine
-    clientFramework angularX
-    clientPackageManager npm
-    clientTheme none
-    creationTimestamp 1618377890671
-    databaseType sql
-    devDatabaseType mysql
-    dtoSuffix DTO
-    enableHibernateCache true
-    enableSwaggerCodegen false
-    enableTranslation true
-    jhiPrefix jhi
-    jhipsterVersion "7.0.1"
-    jwtSecretKey "YzVjMmIzMjlhMTdmMWQyN2ZjMGQ4YjAxMmIxZjc0OTE1Y2FlMmRiMGJjMjZjMWJhODJiYzk4MzM4ZWY3YzRmYTU2MTliZGQ0OGJkZjNmYmM5NDk0NjE5ZDIxMmQwNDBiMjhjMjk0ZjM0ZGYzMzFmYmUwMzA1NjhjOGM3OWJjYTQ="
-    languages [zh-cn, en]
-    messageBroker false
-    nativeLanguage zh-cn
-    otherModules []
-    packageName com.mycompany.myapp
-    prodDatabaseType mysql
-    reactive false
-    searchEngine false
-    serverPort 8086
-    serviceDiscoveryType eureka
-    skipClient false
-    skipServer false
-    skipUserManagement false
-    testFrameworks []
-    websocket false
-    withAdminUi true
-  }
 
-  entities Author, Book, Buildings, Community, CommunityImageGroup, CommunityImages, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, HomelandStation, RoomAddr, Test01, TuYaCmd, TuYaDevice, Visitor, WamoliFaceLibrary, WamoliUser, WamoliUserLocation
-}
-
-entity Author {
-  name String
-  birthDate Instant
-}
-entity Book {
-  title String
-  price BigDecimal
-  publisherName String
-  publisherDate Instant
-}
 /**
  * 楼栋建筑
  */
@@ -146,35 +95,7 @@ entity Community (wamoli_community) {
   lastModifyDate Instant
   lastModifyBy String
 }
-/**
- * 社区居委会 图片库分组
- */
-entity CommunityImageGroup (wamoli_community_image_group) {
-  /**
-   * 图片组名
-   */
-  imgGroupName String unique
-  orderNum Integer
-  lastModifyDate Instant
-  lastModifyBy String
-}
-/**
- * 社区居委会 图片库
- */
-entity CommunityImages (wamoli_community_images) {
-  imgContent ImageBlob
-  /**
-   * 图片名称
-   */
-  imgTitle String
-  /**
-   * 图片描述
-   */
-  imgDesc String
-  orderNum Integer
-  lastModifyDate Instant
-  lastModifyBy String
-}
+
 /**
  * 社区居委会 人员介绍
  */
@@ -344,6 +265,67 @@ entity CompanyPost (wamoli_company_post) {
   lastModifyDate Instant
 }
 /**
+ * 用来查表展示物业员工 基本信息, 部门, 岗位, 角色
+ */
+entity CompanyUser (wamoli_company_user) {
+  /**
+   * 用户姓名
+   */
+  userName String
+  /**
+   * 身份证号码
+   */
+  idCardNum String
+  /**
+   * 性别
+   */
+  gender String
+  /**
+   * 电话
+   */
+  phoneNum String
+  /**
+   * email
+   */
+  email String
+  /**
+   * 部门名称
+   */
+  deptName String
+  /**
+   * 职位名称
+   */
+  postName String
+  /**
+   * 是否可用
+   */
+  enable Boolean
+  /**
+   * 备注
+   */
+  remark String
+  /**
+   * 逻辑删除标识
+   */
+  delFlag Boolean
+  /**
+   * 创建者
+   */
+  createdBy String
+  /**
+   * 创建时间
+   */
+  createdDate Instant
+  /**
+   * 最后修改者
+   */
+  lastModifiedBy String
+  /**
+   * 最后修改者
+   */
+  lastModifiedDate Instant
+}
+/**
  * 小区站点
  */
 entity HomelandStation (wamoli_homeland_station) {
@@ -417,9 +399,7 @@ entity RoomAddr (wamoli_room_addr) {
    */
   longCode String required unique
 }
-entity Test01 {
-  jobCareerDesc TextBlob
-}
+
 entity TuYaCmd {
   /**
    * 名称
@@ -613,12 +593,9 @@ relationship OneToOne {
   WamoliUserLocation{wamoliUser} to WamoliUser
 }
 relationship OneToMany {
-  Author{book} to Book{author}
   HomelandStation{buildings} to Buildings{homelandStation}
-  CommunityImageGroup{communityImages} to CommunityImages{communityImageGroup}
   Community{communityLeader} to CommunityLeader{community}
   Community{communityNotice} to CommunityNotice{community}
-  CompanyDept{companyPost} to CompanyPost{companyDept}
   Community{homelandStation} to HomelandStation{community}
   Company{homelandStation} to HomelandStation{company}
   Buildings{roomAddr} to RoomAddr{buildings}
@@ -629,11 +606,13 @@ relationship ManyToOne {
   TuYaDevice{roomAddr} to RoomAddr
 }
 relationship ManyToMany {
+
   WamoliUser{roomAddr} to RoomAddr{wamoliUser}
-  WamoliUser{companyDept} to CompanyDept{wamoliUser}
+  CompanyUser{companyDept} to CompanyDept{companyUser}
+  CompanyUser{companyPost} to CompanyPost{companyUser}
 }
 
-paginate Author, Book, Buildings, Community, CommunityImageGroup, CommunityImages, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, HomelandStation, RoomAddr, Test01, TuYaCmd, TuYaDevice, Visitor, WamoliUser, WamoliUserLocation with pagination
-service Author, Book, Buildings, Community, CommunityImageGroup, CommunityImages, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, HomelandStation, RoomAddr, Test01, TuYaCmd, TuYaDevice, Visitor, WamoliFaceLibrary, WamoliUser, WamoliUserLocation with serviceClass
-filter Author, Book, Buildings, Community, CommunityImageGroup, CommunityImages, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, HomelandStation, RoomAddr, Test01, TuYaCmd, TuYaDevice, Visitor, WamoliUser
-dto Test01 with mapstruct
+paginate  Buildings, Community, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, CompanyUser, HomelandStation, RoomAddr, TuYaCmd, TuYaDevice, Visitor, WamoliUser, WamoliUserLocation with pagination
+service  Buildings, Community, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, CompanyUser, HomelandStation, RoomAddr, TuYaCmd, TuYaDevice, Visitor, WamoliFaceLibrary, WamoliUser, WamoliUserLocation with serviceClass
+filter  Buildings, Community, CommunityLeader, CommunityNotice, Company, CompanyDept, CompanyPost, HomelandStation, RoomAddr, TuYaCmd, TuYaDevice, Visitor, WamoliUser
+

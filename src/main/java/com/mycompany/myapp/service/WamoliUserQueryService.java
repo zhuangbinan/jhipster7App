@@ -135,24 +135,6 @@ public class WamoliUserQueryService extends QueryService<WamoliUser> {
                         )
                     );
             }
-            if (criteria.getCompanyDeptId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getCompanyDeptId(),
-                            root -> root.join(WamoliUser_.companyDepts, JoinType.LEFT).get(CompanyDept_.id)
-                        )
-                    );
-            }
-            if (criteria.getCompanyPostId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getCompanyPostId(),
-                            root -> root.join(WamoliUser_.companyPosts, JoinType.LEFT).get(CompanyPost_.id)
-                        )
-                    );
-            }
         }
         return specification;
     }

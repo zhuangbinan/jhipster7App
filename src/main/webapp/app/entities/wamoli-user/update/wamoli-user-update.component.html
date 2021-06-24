@@ -218,25 +218,6 @@
             </option>
           </select>
         </div>
-
-        <div class="form-group">
-          <label jhiTranslate="jhipster7App.wamoliUser.companyDept" for="field_companyDepts">Company Dept</label>
-          <select
-            class="form-control"
-            id="field_companyDepts"
-            data-cy="companyDept"
-            multiple
-            name="companyDepts"
-            formControlName="companyDepts"
-          >
-            <option
-              [ngValue]="getSelectedCompanyDept(companyDeptOption, editForm.get('companyDepts')!.value)"
-              *ngFor="let companyDeptOption of companyDeptsSharedCollection; trackBy: trackCompanyDeptById"
-            >
-              {{ companyDeptOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>

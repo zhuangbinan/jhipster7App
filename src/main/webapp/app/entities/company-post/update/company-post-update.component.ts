@@ -3,15 +3,13 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { ICompanyPost, CompanyPost } from '../company-post.model';
 import { CompanyPostService } from '../service/company-post.service';
-import { IWamoliUser } from 'app/entities/wamoli-user/wamoli-user.model';
-import { WamoliUserService } from 'app/entities/wamoli-user/service/wamoli-user.service';
 
 @Component({
   selector: 'jhi-company-post-update',
@@ -19,8 +17,6 @@ import { WamoliUserService } from 'app/entities/wamoli-user/service/wamoli-user.
 })
 export class CompanyPostUpdateComponent implements OnInit {
   isSaving = false;
-
-  wamoliUsersSharedCollection: IWamoliUser[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -33,15 +29,9 @@ export class CompanyPostUpdateComponent implements OnInit {
     createDate: [],
     lastModifyBy: [],
     lastModifyDate: [],
-    wamoliUsers: [],
   });
 
-  constructor(
-    protected companyPostService: CompanyPostService,
-    protected wamoliUserService: WamoliUserService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
+  constructor(protected companyPostService: CompanyPostService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ companyPost }) => {
@@ -52,8 +42,6 @@ export class CompanyPostUpdateComponent implements OnInit {
       }
 
       this.updateForm(companyPost);
-
-      this.loadRelationshipsOptions();
     });
   }
 
@@ -69,21 +57,6 @@ export class CompanyPostUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.companyPostService.create(companyPost));
     }
-  }
-
-  trackWamoliUserById(index: number, item: IWamoliUser): number {
-    return item.id!;
-  }
-
-  getSelectedWamoliUser(option: IWamoliUser, selectedVals?: IWamoliUser[]): IWamoliUser {
-    if (selectedVals) {
-      for (const selectedVal of selectedVals) {
-        if (option.id === selectedVal.id) {
-          return selectedVal;
-        }
-      }
-    }
-    return option;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICompanyPost>>): void {
@@ -117,25 +90,7 @@ export class CompanyPostUpdateComponent implements OnInit {
       createDate: companyPost.createDate ? companyPost.createDate.format(DATE_TIME_FORMAT) : null,
       lastModifyBy: companyPost.lastModifyBy,
       lastModifyDate: companyPost.lastModifyDate ? companyPost.lastModifyDate.format(DATE_TIME_FORMAT) : null,
-      wamoliUsers: companyPost.wamoliUsers,
     });
-
-    this.wamoliUsersSharedCollection = this.wamoliUserService.addWamoliUserToCollectionIfMissing(
-      this.wamoliUsersSharedCollection,
-      ...(companyPost.wamoliUsers ?? [])
-    );
-  }
-
-  protected loadRelationshipsOptions(): void {
-    this.wamoliUserService
-      .query()
-      .pipe(map((res: HttpResponse<IWamoliUser[]>) => res.body ?? []))
-      .pipe(
-        map((wamoliUsers: IWamoliUser[]) =>
-          this.wamoliUserService.addWamoliUserToCollectionIfMissing(wamoliUsers, ...(this.editForm.get('wamoliUsers')!.value ?? []))
-        )
-      )
-      .subscribe((wamoliUsers: IWamoliUser[]) => (this.wamoliUsersSharedCollection = wamoliUsers));
   }
 
   protected createFromForm(): ICompanyPost {
@@ -153,7 +108,6 @@ export class CompanyPostUpdateComponent implements OnInit {
       lastModifyDate: this.editForm.get(['lastModifyDate'])!.value
         ? dayjs(this.editForm.get(['lastModifyDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      wamoliUsers: this.editForm.get(['wamoliUsers'])!.value,
     };
   }
 }

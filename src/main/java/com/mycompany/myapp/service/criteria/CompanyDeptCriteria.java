@@ -53,7 +53,7 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
 
     private InstantFilter lastModifyDate;
 
-    private LongFilter wamoliUserId;
+    private LongFilter companyUserId;
 
     public CompanyDeptCriteria() {}
 
@@ -72,7 +72,7 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
         this.createDate = other.createDate == null ? null : other.createDate.copy();
         this.lastModifyBy = other.lastModifyBy == null ? null : other.lastModifyBy.copy();
         this.lastModifyDate = other.lastModifyDate == null ? null : other.lastModifyDate.copy();
-        this.wamoliUserId = other.wamoliUserId == null ? null : other.wamoliUserId.copy();
+        this.companyUserId = other.companyUserId == null ? null : other.companyUserId.copy();
     }
 
     @Override
@@ -290,19 +290,19 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
         this.lastModifyDate = lastModifyDate;
     }
 
-    public LongFilter getWamoliUserId() {
-        return wamoliUserId;
+    public LongFilter getCompanyUserId() {
+        return companyUserId;
     }
 
-    public LongFilter wamoliUserId() {
-        if (wamoliUserId == null) {
-            wamoliUserId = new LongFilter();
+    public LongFilter companyUserId() {
+        if (companyUserId == null) {
+            companyUserId = new LongFilter();
         }
-        return wamoliUserId;
+        return companyUserId;
     }
 
-    public void setWamoliUserId(LongFilter wamoliUserId) {
-        this.wamoliUserId = wamoliUserId;
+    public void setCompanyUserId(LongFilter companyUserId) {
+        this.companyUserId = companyUserId;
     }
 
     @Override
@@ -329,7 +329,7 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
             Objects.equals(createDate, that.createDate) &&
             Objects.equals(lastModifyBy, that.lastModifyBy) &&
             Objects.equals(lastModifyDate, that.lastModifyDate) &&
-            Objects.equals(wamoliUserId, that.wamoliUserId)
+            Objects.equals(companyUserId, that.companyUserId)
         );
     }
 
@@ -350,7 +350,7 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
             createDate,
             lastModifyBy,
             lastModifyDate,
-            wamoliUserId
+            companyUserId
         );
     }
 
@@ -372,7 +372,7 @@ public class CompanyDeptCriteria implements Serializable, Criteria {
             (createDate != null ? "createDate=" + createDate + ", " : "") +
             (lastModifyBy != null ? "lastModifyBy=" + lastModifyBy + ", " : "") +
             (lastModifyDate != null ? "lastModifyDate=" + lastModifyDate + ", " : "") +
-            (wamoliUserId != null ? "wamoliUserId=" + wamoliUserId + ", " : "") +
+            (companyUserId != null ? "companyUserId=" + companyUserId + ", " : "") +
             "}";
     }
 }

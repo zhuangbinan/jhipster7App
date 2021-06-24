@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.mycompany.myapp.IntegrationTest;
 import com.mycompany.myapp.domain.CompanyDept;
-import com.mycompany.myapp.domain.WamoliUser;
+import com.mycompany.myapp.domain.CompanyUser;
 import com.mycompany.myapp.repository.CompanyDeptRepository;
 import com.mycompany.myapp.service.criteria.CompanyDeptCriteria;
 import java.time.Instant;
@@ -1226,21 +1226,21 @@ class CompanyDeptResourceIT {
 
     @Test
     @Transactional
-    void getAllCompanyDeptsByWamoliUserIsEqualToSomething() throws Exception {
+    void getAllCompanyDeptsByCompanyUserIsEqualToSomething() throws Exception {
         // Initialize the database
         companyDeptRepository.saveAndFlush(companyDept);
-        WamoliUser wamoliUser = WamoliUserResourceIT.createEntity(em);
-        em.persist(wamoliUser);
+        CompanyUser companyUser = CompanyUserResourceIT.createEntity(em);
+        em.persist(companyUser);
         em.flush();
-        companyDept.addWamoliUser(wamoliUser);
+        companyDept.addCompanyUser(companyUser);
         companyDeptRepository.saveAndFlush(companyDept);
-        Long wamoliUserId = wamoliUser.getId();
+        Long companyUserId = companyUser.getId();
 
-        // Get all the companyDeptList where wamoliUser equals to wamoliUserId
-        defaultCompanyDeptShouldBeFound("wamoliUserId.equals=" + wamoliUserId);
+        // Get all the companyDeptList where companyUser equals to companyUserId
+        defaultCompanyDeptShouldBeFound("companyUserId.equals=" + companyUserId);
 
-        // Get all the companyDeptList where wamoliUser equals to (wamoliUserId + 1)
-        defaultCompanyDeptShouldNotBeFound("wamoliUserId.equals=" + (wamoliUserId + 1));
+        // Get all the companyDeptList where companyUser equals to (companyUserId + 1)
+        defaultCompanyDeptShouldNotBeFound("companyUserId.equals=" + (companyUserId + 1));
     }
 
     /**

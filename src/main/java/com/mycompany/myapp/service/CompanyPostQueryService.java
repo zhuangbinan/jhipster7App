@@ -108,12 +108,12 @@ public class CompanyPostQueryService extends QueryService<CompanyPost> {
             if (criteria.getLastModifyDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifyDate(), CompanyPost_.lastModifyDate));
             }
-            if (criteria.getWamoliUserId() != null) {
+            if (criteria.getCompanyUserId() != null) {
                 specification =
                     specification.and(
                         buildSpecification(
-                            criteria.getWamoliUserId(),
-                            root -> root.join(CompanyPost_.wamoliUsers, JoinType.LEFT).get(WamoliUser_.id)
+                            criteria.getCompanyUserId(),
+                            root -> root.join(CompanyPost_.companyUsers, JoinType.LEFT).get(CompanyUser_.id)
                         )
                     );
             }

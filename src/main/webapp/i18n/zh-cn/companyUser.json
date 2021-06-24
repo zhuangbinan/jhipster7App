@@ -32,6 +32,8 @@
       "createdDate": "Created Date",
       "lastModifiedBy": "Last Modified By",
       "lastModifiedDate": "Last Modified Date",
+      "companyDept": "Company Dept",
+      "companyPost": "Company Post",
       "help": {
         "userName": "用户姓名",
         "idCardNum": "身份证号码",

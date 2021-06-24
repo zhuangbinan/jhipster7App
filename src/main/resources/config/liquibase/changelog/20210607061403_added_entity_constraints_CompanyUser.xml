@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity CompanyUser.
+    -->
+    <changeSet id="20210607061403-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="wamoli_company_user_id"
+                                 baseTableName="rel_wamoli_company_user__company_dept"
+                                 constraintName="fk_rel_wamoli_company_user__com__wamoli_company_user_89_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_company_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="company_dept_id"
+                                 baseTableName="rel_wamoli_company_user__company_dept"
+                                 constraintName="fk_rel_wamoli_company_user__company_dept__company_dept_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_company_dept"/>
+
+        <addForeignKeyConstraint baseColumnNames="wamoli_company_user_id"
+                                 baseTableName="rel_wamoli_company_user__company_post"
+                                 constraintName="fk_rel_wamoli_company_user__com__wamoli_company_user_78_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_company_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="company_post_id"
+                                 baseTableName="rel_wamoli_company_user__company_post"
+                                 constraintName="fk_rel_wamoli_company_user__company_post__company_post_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wamoli_company_post"/>
+    </changeSet>
+</databaseChangeLog>

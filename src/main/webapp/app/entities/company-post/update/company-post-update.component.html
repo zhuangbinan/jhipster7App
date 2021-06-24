@@ -122,25 +122,6 @@
             />
           </div>
         </div>
-
-        <div class="form-group">
-          <label jhiTranslate="jhipster7App.companyPost.wamoliUser" for="field_wamoliUsers">Wamoli User</label>
-          <select
-            class="form-control"
-            id="field_wamoliUsers"
-            data-cy="wamoliUser"
-            multiple
-            name="wamoliUsers"
-            formControlName="wamoliUsers"
-          >
-            <option
-              [ngValue]="getSelectedWamoliUser(wamoliUserOption, editForm.get('wamoliUsers')!.value)"
-              *ngFor="let wamoliUserOption of wamoliUsersSharedCollection; trackBy: trackWamoliUserById"
-            >
-              {{ wamoliUserOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>

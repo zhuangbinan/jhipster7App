@@ -104,6 +104,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'jhipster7App.companyPost.home.title' },
         loadChildren: () => import('./company-post/company-post.module').then(m => m.CompanyPostModule),
       },
+      {
+        path: 'company-user',
+        data: { pageTitle: 'jhipster7App.companyUser.home.title' },
+        loadChildren: () => import('./company-user/company-user.module').then(m => m.CompanyUserModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

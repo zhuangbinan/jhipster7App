@@ -3,13 +3,17 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { ICompanyUser, CompanyUser } from '../company-user.model';
 import { CompanyUserService } from '../service/company-user.service';
+import { ICompanyDept } from 'app/entities/company-dept/company-dept.model';
+import { CompanyDeptService } from 'app/entities/company-dept/service/company-dept.service';
+import { ICompanyPost } from 'app/entities/company-post/company-post.model';
+import { CompanyPostService } from 'app/entities/company-post/service/company-post.service';
 
 @Component({
   selector: 'jhi-company-user-update',
@@ -17,6 +21,9 @@ import { CompanyUserService } from '../service/company-user.service';
 })
 export class CompanyUserUpdateComponent implements OnInit {
   isSaving = false;
+
+  companyDeptsSharedCollection: ICompanyDept[] = [];
+  companyPostsSharedCollection: ICompanyPost[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -34,9 +41,17 @@ export class CompanyUserUpdateComponent implements OnInit {
     createdDate: [],
     lastModifiedBy: [],
     lastModifiedDate: [],
+    companyDepts: [],
+    companyPosts: [],
   });
 
-  constructor(protected companyUserService: CompanyUserService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected companyUserService: CompanyUserService,
+    protected companyDeptService: CompanyDeptService,
+    protected companyPostService: CompanyPostService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ companyUser }) => {
@@ -47,6 +62,8 @@ export class CompanyUserUpdateComponent implements OnInit {
       }
 
       this.updateForm(companyUser);
+
+      this.loadRelationshipsOptions();
     });
   }
 
@@ -62,6 +79,36 @@ export class CompanyUserUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.companyUserService.create(companyUser));
     }
+  }
+
+  trackCompanyDeptById(index: number, item: ICompanyDept): number {
+    return item.id!;
+  }
+
+  trackCompanyPostById(index: number, item: ICompanyPost): number {
+    return item.id!;
+  }
+
+  getSelectedCompanyDept(option: ICompanyDept, selectedVals?: ICompanyDept[]): ICompanyDept {
+    if (selectedVals) {
+      for (const selectedVal of selectedVals) {
+        if (option.id === selectedVal.id) {
+          return selectedVal;
+        }
+      }
+    }
+    return option;
+  }
+
+  getSelectedCompanyPost(option: ICompanyPost, selectedVals?: ICompanyPost[]): ICompanyPost {
+    if (selectedVals) {
+      for (const selectedVal of selectedVals) {
+        if (option.id === selectedVal.id) {
+          return selectedVal;
+        }
+      }
+    }
+    return option;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICompanyUser>>): void {
@@ -100,7 +147,40 @@ export class CompanyUserUpdateComponent implements OnInit {
       createdDate: companyUser.createdDate ? companyUser.createdDate.format(DATE_TIME_FORMAT) : null,
       lastModifiedBy: companyUser.lastModifiedBy,
       lastModifiedDate: companyUser.lastModifiedDate ? companyUser.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      companyDepts: companyUser.companyDepts,
+      companyPosts: companyUser.companyPosts,
     });
+
+    this.companyDeptsSharedCollection = this.companyDeptService.addCompanyDeptToCollectionIfMissing(
+      this.companyDeptsSharedCollection,
+      ...(companyUser.companyDepts ?? [])
+    );
+    this.companyPostsSharedCollection = this.companyPostService.addCompanyPostToCollectionIfMissing(
+      this.companyPostsSharedCollection,
+      ...(companyUser.companyPosts ?? [])
+    );
+  }
+
+  protected loadRelationshipsOptions(): void {
+    this.companyDeptService
+      .query()
+      .pipe(map((res: HttpResponse<ICompanyDept[]>) => res.body ?? []))
+      .pipe(
+        map((companyDepts: ICompanyDept[]) =>
+          this.companyDeptService.addCompanyDeptToCollectionIfMissing(companyDepts, ...(this.editForm.get('companyDepts')!.value ?? []))
+        )
+      )
+      .subscribe((companyDepts: ICompanyDept[]) => (this.companyDeptsSharedCollection = companyDepts));
+
+    this.companyPostService
+      .query()
+      .pipe(map((res: HttpResponse<ICompanyPost[]>) => res.body ?? []))
+      .pipe(
+        map((companyPosts: ICompanyPost[]) =>
+          this.companyPostService.addCompanyPostToCollectionIfMissing(companyPosts, ...(this.editForm.get('companyPosts')!.value ?? []))
+        )
+      )
+      .subscribe((companyPosts: ICompanyPost[]) => (this.companyPostsSharedCollection = companyPosts));
   }
 
   protected createFromForm(): ICompanyUser {
@@ -125,6 +205,8 @@ export class CompanyUserUpdateComponent implements OnInit {
       lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
         ? dayjs(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
+      companyDepts: this.editForm.get(['companyDepts'])!.value,
+      companyPosts: this.editForm.get(['companyPosts'])!.value,
     };
   }
 }

@@ -51,7 +51,7 @@
     <include file="config/liquibase/changelog/20210528073922_added_entity_constraints_WamoliFaceLibrary.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210528073923_added_entity_constraints_WamoliUser.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210528073924_added_entity_constraints_WamoliUserLocation.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20210531021845_added_entity_constraints_CompanyPost.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210607061403_added_entity_constraints_CompanyUser.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

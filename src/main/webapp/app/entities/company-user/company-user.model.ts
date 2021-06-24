@@ -1,4 +1,6 @@
 import * as dayjs from 'dayjs';
+import { ICompanyDept } from 'app/entities/company-dept/company-dept.model';
+import { ICompanyPost } from 'app/entities/company-post/company-post.model';
 
 export interface ICompanyUser {
   id?: number;
@@ -16,6 +18,8 @@ export interface ICompanyUser {
   createdDate?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
   lastModifiedDate?: dayjs.Dayjs | null;
+  companyDepts?: ICompanyDept[] | null;
+  companyPosts?: ICompanyPost[] | null;
 }
 
 export class CompanyUser implements ICompanyUser {
@@ -34,7 +38,9 @@ export class CompanyUser implements ICompanyUser {
     public createdBy?: string | null,
     public createdDate?: dayjs.Dayjs | null,
     public lastModifiedBy?: string | null,
-    public lastModifiedDate?: dayjs.Dayjs | null
+    public lastModifiedDate?: dayjs.Dayjs | null,
+    public companyDepts?: ICompanyDept[] | null,
+    public companyPosts?: ICompanyPost[] | null
   ) {
     this.enable = this.enable ?? false;
     this.delFlag = this.delFlag ?? false;

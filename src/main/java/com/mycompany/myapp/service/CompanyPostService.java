@@ -96,15 +96,6 @@ public class CompanyPostService {
     }
 
     /**
-     * Get all the companyPosts with eager load of many-to-many relationships.
-     *
-     * @return the list of entities.
-     */
-    public Page<CompanyPost> findAllWithEagerRelationships(Pageable pageable) {
-        return companyPostRepository.findAllWithEagerRelationships(pageable);
-    }
-
-    /**
      * Get one companyPost by id.
      *
      * @param id the id of the entity.
@@ -113,7 +104,7 @@ public class CompanyPostService {
     @Transactional(readOnly = true)
     public Optional<CompanyPost> findOne(Long id) {
         log.debug("Request to get CompanyPost : {}", id);
-        return companyPostRepository.findOneWithEagerRelationships(id);
+        return companyPostRepository.findById(id);
     }
 
     /**

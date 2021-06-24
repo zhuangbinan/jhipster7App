@@ -31,7 +31,7 @@
       "createDate": "Create Date",
       "lastModifyBy": "Last Modify By",
       "lastModifyDate": "Last Modify Date",
-      "wamoliUser": "Wamoli User",
+      "companyUser": "Company User",
       "help": {
         "parentId": "父部门id",
         "ancestors": "祖级列表",

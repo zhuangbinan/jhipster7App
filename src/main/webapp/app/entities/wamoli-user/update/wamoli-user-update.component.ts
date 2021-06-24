@@ -14,8 +14,6 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IRoomAddr } from 'app/entities/room-addr/room-addr.model';
 import { RoomAddrService } from 'app/entities/room-addr/service/room-addr.service';
-import { ICompanyDept } from 'app/entities/company-dept/company-dept.model';
-import { CompanyDeptService } from 'app/entities/company-dept/service/company-dept.service';
 
 @Component({
   selector: 'jhi-wamoli-user-update',
@@ -26,7 +24,6 @@ export class WamoliUserUpdateComponent implements OnInit {
 
   usersSharedCollection: IUser[] = [];
   roomAddrsSharedCollection: IRoomAddr[] = [];
-  companyDeptsSharedCollection: ICompanyDept[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -45,14 +42,12 @@ export class WamoliUserUpdateComponent implements OnInit {
     lastModifiedDate: [],
     user: [],
     roomAddrs: [],
-    companyDepts: [],
   });
 
   constructor(
     protected wamoliUserService: WamoliUserService,
     protected userService: UserService,
     protected roomAddrService: RoomAddrService,
-    protected companyDeptService: CompanyDeptService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -92,22 +87,7 @@ export class WamoliUserUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  trackCompanyDeptById(index: number, item: ICompanyDept): number {
-    return item.id!;
-  }
-
   getSelectedRoomAddr(option: IRoomAddr, selectedVals?: IRoomAddr[]): IRoomAddr {
-    if (selectedVals) {
-      for (const selectedVal of selectedVals) {
-        if (option.id === selectedVal.id) {
-          return selectedVal;
-        }
-      }
-    }
-    return option;
-  }
-
-  getSelectedCompanyDept(option: ICompanyDept, selectedVals?: ICompanyDept[]): ICompanyDept {
     if (selectedVals) {
       for (const selectedVal of selectedVals) {
         if (option.id === selectedVal.id) {
@@ -155,17 +135,12 @@ export class WamoliUserUpdateComponent implements OnInit {
       lastModifiedDate: wamoliUser.lastModifiedDate ? wamoliUser.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
       user: wamoliUser.user,
       roomAddrs: wamoliUser.roomAddrs,
-      companyDepts: wamoliUser.companyDepts,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, wamoliUser.user);
     this.roomAddrsSharedCollection = this.roomAddrService.addRoomAddrToCollectionIfMissing(
       this.roomAddrsSharedCollection,
       ...(wamoliUser.roomAddrs ?? [])
-    );
-    this.companyDeptsSharedCollection = this.companyDeptService.addCompanyDeptToCollectionIfMissing(
-      this.companyDeptsSharedCollection,
-      ...(wamoliUser.companyDepts ?? [])
     );
   }
 
@@ -185,16 +160,6 @@ export class WamoliUserUpdateComponent implements OnInit {
         )
       )
       .subscribe((roomAddrs: IRoomAddr[]) => (this.roomAddrsSharedCollection = roomAddrs));
-
-    this.companyDeptService
-      .query()
-      .pipe(map((res: HttpResponse<ICompanyDept[]>) => res.body ?? []))
-      .pipe(
-        map((companyDepts: ICompanyDept[]) =>
-          this.companyDeptService.addCompanyDeptToCollectionIfMissing(companyDepts, ...(this.editForm.get('companyDepts')!.value ?? []))
-        )
-      )
-      .subscribe((companyDepts: ICompanyDept[]) => (this.companyDeptsSharedCollection = companyDepts));
   }
 
   protected createFromForm(): IWamoliUser {
@@ -218,7 +183,6 @@ export class WamoliUserUpdateComponent implements OnInit {
         : undefined,
       user: this.editForm.get(['user'])!.value,
       roomAddrs: this.editForm.get(['roomAddrs'])!.value,
-      companyDepts: this.editForm.get(['companyDepts'])!.value,
     };
   }
 }

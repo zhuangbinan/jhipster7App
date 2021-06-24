@@ -7,8 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.mycompany.myapp.IntegrationTest;
-import com.mycompany.myapp.domain.CompanyDept;
-import com.mycompany.myapp.domain.CompanyPost;
 import com.mycompany.myapp.domain.RoomAddr;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.domain.WamoliUser;
@@ -1262,44 +1260,6 @@ class WamoliUserResourceIT {
         defaultWamoliUserShouldNotBeFound("userId.equals=" + (userId + 1));
     }
 
-
-    @Test
-    @Transactional
-    void getAllWamoliUsersByCompanyDeptIsEqualToSomething() throws Exception {
-        // Initialize the database
-        wamoliUserRepository.saveAndFlush(wamoliUser);
-        CompanyDept companyDept = CompanyDeptResourceIT.createEntity(em);
-        em.persist(companyDept);
-        em.flush();
-        wamoliUser.addCompanyDept(companyDept);
-        wamoliUserRepository.saveAndFlush(wamoliUser);
-        Long companyDeptId = companyDept.getId();
-
-        // Get all the wamoliUserList where companyDept equals to companyDeptId
-        defaultWamoliUserShouldBeFound("companyDeptId.equals=" + companyDeptId);
-
-        // Get all the wamoliUserList where companyDept equals to (companyDeptId + 1)
-        defaultWamoliUserShouldNotBeFound("companyDeptId.equals=" + (companyDeptId + 1));
-    }
-
-    @Test
-    @Transactional
-    void getAllWamoliUsersByCompanyPostIsEqualToSomething() throws Exception {
-        // Initialize the database
-        wamoliUserRepository.saveAndFlush(wamoliUser);
-        CompanyPost companyPost = CompanyPostResourceIT.createEntity(em);
-        em.persist(companyPost);
-        em.flush();
-        wamoliUser.addCompanyPost(companyPost);
-        wamoliUserRepository.saveAndFlush(wamoliUser);
-        Long companyPostId = companyPost.getId();
-
-        // Get all the wamoliUserList where companyPost equals to companyPostId
-        defaultWamoliUserShouldBeFound("companyPostId.equals=" + companyPostId);
-
-        // Get all the wamoliUserList where companyPost equals to (companyPostId + 1)
-        defaultWamoliUserShouldNotBeFound("companyPostId.equals=" + (companyPostId + 1));
-    }
 
     /**
      * Executes the search, and checks that the default entity is returned.

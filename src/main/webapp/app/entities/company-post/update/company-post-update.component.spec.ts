@@ -9,8 +9,6 @@ import { of, Subject } from 'rxjs';
 
 import { CompanyPostService } from '../service/company-post.service';
 import { ICompanyPost, CompanyPost } from '../company-post.model';
-import { IWamoliUser } from 'app/entities/wamoli-user/wamoli-user.model';
-import { WamoliUserService } from 'app/entities/wamoli-user/service/wamoli-user.service';
 
 import { CompanyPostUpdateComponent } from './company-post-update.component';
 
@@ -20,7 +18,6 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<CompanyPostUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let companyPostService: CompanyPostService;
-    let wamoliUserService: WamoliUserService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -34,41 +31,18 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(CompanyPostUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       companyPostService = TestBed.inject(CompanyPostService);
-      wamoliUserService = TestBed.inject(WamoliUserService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call WamoliUser query and add missing value', () => {
-        const companyPost: ICompanyPost = { id: 456 };
-        const wamoliUsers: IWamoliUser[] = [{ id: 56017 }];
-        companyPost.wamoliUsers = wamoliUsers;
-
-        const wamoliUserCollection: IWamoliUser[] = [{ id: 77967 }];
-        spyOn(wamoliUserService, 'query').and.returnValue(of(new HttpResponse({ body: wamoliUserCollection })));
-        const additionalWamoliUsers = [...wamoliUsers];
-        const expectedCollection: IWamoliUser[] = [...additionalWamoliUsers, ...wamoliUserCollection];
-        spyOn(wamoliUserService, 'addWamoliUserToCollectionIfMissing').and.returnValue(expectedCollection);
-
-        activatedRoute.data = of({ companyPost });
-        comp.ngOnInit();
-
-        expect(wamoliUserService.query).toHaveBeenCalled();
-        expect(wamoliUserService.addWamoliUserToCollectionIfMissing).toHaveBeenCalledWith(wamoliUserCollection, ...additionalWamoliUsers);
-        expect(comp.wamoliUsersSharedCollection).toEqual(expectedCollection);
-      });
-
       it('Should update editForm', () => {
         const companyPost: ICompanyPost = { id: 456 };
-        const wamoliUsers: IWamoliUser = { id: 72709 };
-        companyPost.wamoliUsers = [wamoliUsers];
 
         activatedRoute.data = of({ companyPost });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(companyPost));
-        expect(comp.wamoliUsersSharedCollection).toContain(wamoliUsers);
       });
     });
 
@@ -133,44 +107,6 @@ describe('Component Tests', () => {
         expect(companyPostService.update).toHaveBeenCalledWith(companyPost);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('Tracking relationships identifiers', () => {
-      describe('trackWamoliUserById', () => {
-        it('Should return tracked WamoliUser primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackWamoliUserById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
-      });
-    });
-
-    describe('Getting selected relationships', () => {
-      describe('getSelectedWamoliUser', () => {
-        it('Should return option if no WamoliUser is selected', () => {
-          const option = { id: 123 };
-          const result = comp.getSelectedWamoliUser(option);
-          expect(result === option).toEqual(true);
-        });
-
-        it('Should return selected WamoliUser for according option', () => {
-          const option = { id: 123 };
-          const selected = { id: 123 };
-          const selected2 = { id: 456 };
-          const result = comp.getSelectedWamoliUser(option, [selected2, selected]);
-          expect(result === selected).toEqual(true);
-          expect(result === selected2).toEqual(false);
-          expect(result === option).toEqual(false);
-        });
-
-        it('Should return option if this WamoliUser is not selected', () => {
-          const option = { id: 123 };
-          const selected = { id: 456 };
-          const result = comp.getSelectedWamoliUser(option, [selected]);
-          expect(result === option).toEqual(true);
-          expect(result === selected).toEqual(false);
-        });
       });
     });
   });

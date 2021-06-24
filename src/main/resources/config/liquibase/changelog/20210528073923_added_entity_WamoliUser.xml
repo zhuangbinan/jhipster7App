@@ -73,17 +73,6 @@
         </createTable>
 
         <addPrimaryKey columnNames="wamoli_user_id, room_addr_id" tableName="rel_wamoli_user__room_addr"/>
-
-        <createTable tableName="rel_wamoli_user__company_dept">
-            <column name="company_dept_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="wamoli_user_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="wamoli_user_id, company_dept_id" tableName="rel_wamoli_user__company_dept"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

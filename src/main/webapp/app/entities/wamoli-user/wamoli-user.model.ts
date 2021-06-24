@@ -1,8 +1,6 @@
 import * as dayjs from 'dayjs';
 import { IUser } from 'app/entities/user/user.model';
 import { IRoomAddr } from 'app/entities/room-addr/room-addr.model';
-import { ICompanyDept } from 'app/entities/company-dept/company-dept.model';
-import { ICompanyPost } from 'app/entities/company-post/company-post.model';
 import { CertificateType } from 'app/entities/enumerations/certificate-type.model';
 import { UserType } from 'app/entities/enumerations/user-type.model';
 
@@ -23,8 +21,6 @@ export interface IWamoliUser {
   lastModifiedDate?: dayjs.Dayjs | null;
   user?: IUser | null;
   roomAddrs?: IRoomAddr[] | null;
-  companyDepts?: ICompanyDept[] | null;
-  companyPosts?: ICompanyPost[] | null;
 }
 
 export class WamoliUser implements IWamoliUser {
@@ -44,9 +40,7 @@ export class WamoliUser implements IWamoliUser {
     public lastModifiedBy?: string | null,
     public lastModifiedDate?: dayjs.Dayjs | null,
     public user?: IUser | null,
-    public roomAddrs?: IRoomAddr[] | null,
-    public companyDepts?: ICompanyDept[] | null,
-    public companyPosts?: ICompanyPost[] | null
+    public roomAddrs?: IRoomAddr[] | null
   ) {
     this.enable = this.enable ?? false;
     this.isManager = this.isManager ?? false;

@@ -128,6 +128,20 @@
         <dd>
           <span>{{ companyUser.lastModifiedDate | formatMediumDatetime }}</span>
         </dd>
+        <dt><span jhiTranslate="jhipster7App.companyUser.companyDept">Company Dept</span></dt>
+        <dd>
+          <span *ngFor="let companyDept of companyUser.companyDepts; let last = last">
+            <a [routerLink]="['/company-dept', companyDept?.id, 'view']">{{ companyDept.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="jhipster7App.companyUser.companyPost">Company Post</span></dt>
+        <dd>
+          <span *ngFor="let companyPost of companyUser.companyPosts; let last = last">
+            <a [routerLink]="['/company-post', companyPost?.id, 'view']">{{ companyPost.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

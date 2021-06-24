@@ -111,13 +111,6 @@
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
-        <dt><span jhiTranslate="jhipster7App.wamoliUser.companyDept">Company Dept</span></dt>
-        <dd>
-          <span *ngFor="let companyDept of wamoliUser.companyDepts; let last = last">
-            <a [routerLink]="['/company-dept', companyDept?.id, 'view']">{{ companyDept.id }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

@@ -62,6 +62,31 @@
         <dropDefaultValue tableName="wamoli_company_user" columnName="last_modified_date" columnDataType="${datetimeType}"/>
     </changeSet>
 
+    <changeSet id="20210607061403-1-relations" author="jhipster">
+
+        <createTable tableName="rel_wamoli_company_user__company_dept">
+            <column name="company_dept_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wamoli_company_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="wamoli_company_user_id, company_dept_id" tableName="rel_wamoli_company_user__company_dept"/>
+
+        <createTable tableName="rel_wamoli_company_user__company_post">
+            <column name="company_post_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wamoli_company_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="wamoli_company_user_id, company_post_id" tableName="rel_wamoli_company_user__company_post"/>
+    </changeSet>
+
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--

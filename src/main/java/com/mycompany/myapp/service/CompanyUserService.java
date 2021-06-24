@@ -133,8 +133,8 @@ public class CompanyUserService {
 
         wamoliUser.setUser(user);                    //  和User关联
 
-        wamoliUser.setCompanyPosts(postSet);         //  职位,岗位
-        wamoliUser.setCompanyDepts(deptSet);         //  部门
+//        wamoliUser.setCompanyPosts(postSet);         //  职位,岗位
+//        wamoliUser.setCompanyDepts(deptSet);         //  部门
 
         return wamoliUserRepository.save(wamoliUser);
     }
@@ -275,7 +275,7 @@ public class CompanyUserService {
     @Transactional(readOnly = true)
     public Optional<CompanyUser> findOne(Long id) {
         log.debug("Request to get CompanyUser : {}", id);
-        return companyUserRepository.findById(id);
+        return companyUserRepository.findOneWithEagerRelationships(id);
     }
 
     /**
@@ -390,10 +390,10 @@ public class CompanyUserService {
         WamoliUser wamoliUser = wamoliUserOptional.get();
         wamoliUser.setPhoneNum(companyUser.getPhoneNum());   //1.手机号
         wamoliUser.setEmail(companyUser.getEmail());         //2.邮箱
-        wamoliUser.setCompanyDepts(deptSet);                 //3.部门
+//        wamoliUser.setCompanyDepts(deptSet);                 //3.部门
         wamoliUser.setGender(companyUser.getGender());       //4.性别
         wamoliUser.setEnable(companyUser.getEnable());       //5.账号状态
-        wamoliUser.setCompanyPosts(postSet);                 //6.岗位
+//        wamoliUser.setCompanyPosts(postSet);                 //6.岗位
         wamoliUser.setIdCardNum(companyUser.getIdCardNum()); //7.身份证号
         wamoliUser.setUserName(companyUser.getUserName());   //8.姓名
 

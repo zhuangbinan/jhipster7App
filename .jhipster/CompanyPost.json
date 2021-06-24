@@ -46,10 +46,10 @@
   "relationships": [
     {
       "relationshipType": "many-to-many",
-      "otherEntityName": "wamoliUser",
+      "otherEntityName": "companyUser",
       "otherEntityRelationshipName": "companyPost",
-      "relationshipName": "wamoliUser",
-      "ownerSide": true
+      "relationshipName": "companyUser",
+      "ownerSide": false
     }
   ],
   "javadoc": "物业公司岗位",

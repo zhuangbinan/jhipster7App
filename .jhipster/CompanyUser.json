@@ -72,7 +72,22 @@
       "javadoc": "最后修改者"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "companyDept",
+      "otherEntityRelationshipName": "companyUser",
+      "relationshipName": "companyDept",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "companyPost",
+      "otherEntityRelationshipName": "companyUser",
+      "relationshipName": "companyPost",
+      "ownerSide": true
+    }
+  ],
   "javadoc": "用来查表展示物业员工 基本信息, 部门, 岗位, 角色",
   "entityTableName": "wamoli_company_user",
   "dto": "no",

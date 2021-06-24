@@ -33,8 +33,6 @@
       "lastModifiedDate": "Last Modified Date",
       "user": "User",
       "roomAddr": "Room Addr",
-      "companyDept": "Company Dept",
-      "companyPost": "Company Post",
       "help": {
         "userName": "用户姓名",
         "gender": "性别",

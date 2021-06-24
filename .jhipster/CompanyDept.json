@@ -66,9 +66,9 @@
   "relationships": [
     {
       "relationshipType": "many-to-many",
-      "otherEntityName": "wamoliUser",
+      "otherEntityName": "companyUser",
       "otherEntityRelationshipName": "companyDept",
-      "relationshipName": "wamoliUser",
+      "relationshipName": "companyUser",
       "ownerSide": false
     }
   ],
